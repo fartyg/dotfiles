@@ -38,24 +38,24 @@ fontsize = 14
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 # Colors
-bgcolor = '1e2127'
+bgcolor = '2d2a2e'
 bordercolor = '746a62'
-gray = '454545'
+gray = '404040'
 anothergray = '606060'
 
-yellow = 'd19a66'
-red = 'e06c75'
-green = '98c379'
-magenta = 'c678dd'
-blue = '61afef'
-cyan = '56b6c2'
-white = 'abb2bf'
+yellow = 'e5c463'
+red = 'f85e84'
+green = '9ecd6f'
+magenta = 'ab9df2'
+blue = '7accd7'
+cyan = 'ef9062'
+white = 'e3e1e4'
 
 layout_theme = {
-    'border_width': 1,
-    'margin': 8,
+    'border_width': 2,
+    'margin': 6,
     'border_focus': bordercolor,
-    'border_normal': bgcolor,
+    'border_normal': gray,
     'font=': font
 }
 
@@ -229,8 +229,8 @@ groups.append(
             'term',
             'alacritty',
             opacity=1,
-            height=0.40,
-            width=0.50,
+            height=0.50,
+            width=0.60,
             x=0.23,
             y=0.32
         )
@@ -247,7 +247,7 @@ keys.extend([
 ])
 
 layouts = [
-    layout.MonadTall(**layout_theme, ratio=0.7),
+    layout.MonadTall(**layout_theme, ratio=0.67),
    # layout.Max(**layout_theme),
     layout.Stack(num_stacks=2, **layout_theme),
    # layout.TreeTab(
@@ -293,11 +293,11 @@ screens = [
                      borderwidth=3,
                      rounded=False,
                      active = yellow,
-                     inactive = gray,
+                     inactive = anothergray,
                      highlight_color = red,
                      this_current_screen_border = gray,
-                     this_screen_border = gray,
-                     foreground = anothergray,
+                     this_screen_border = anothergray,
+                     foreground = white,
                      background = bgcolor
                 ),
                 widget.Prompt(),
@@ -338,21 +338,21 @@ screens = [
                     stop_pause_text=''
                 ),
                 widget.PulseVolume(
-                    foreground=magenta,
+                    foreground=blue,
                     mouse_callbacks = {
                         'Button3': lambda qtile:
                         qtile.cmd_spawn('pavucontrol')
                     }
                 ),
                 widget.Backlight(
-                        foreground=blue,
+                        foreground=yellow,
                         backlight_name='intel_backlight',
                         change_command='brightnessctl s {0}'
                 ),
                 widget.Systray(icon_size=18),
                 widget.Clock(
                     format='%a %H:%M',
-                    foreground = yellow,
+                    foreground = cyan,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn('alacritty -e calcurse')
@@ -366,7 +366,7 @@ screens = [
                 ),
             ],
             20,
-            opacity=0.9
+            opacity=1
         ),
     ),
 ]

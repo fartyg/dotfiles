@@ -45,8 +45,8 @@ nmap <F5> <Esc>:w<CR>:!clear;python %<CR> " exectute python
 map <C-n> :NERDTreeToggle<CR>
 nnoremap x "_x
 
-nnoremap <leader><leader> :GFiles<CR>
-nnoremap <leader>fi       :Files<CR>
+nnoremap <leader>git :GFiles<CR>
+nnoremap <leader><leader> :Files<CR>
 nnoremap <leader>C        :Colors<CR>
 nnoremap <leader><CR>     :Buffers<CR>
 nnoremap <leader>fl       :Lines<CR>
@@ -63,28 +63,30 @@ call plug#begin()
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
 "    Plug 'patstockwell/vim-monokai-tasty'
     Plug 'joshdick/onedark.vim'
+    Plug 'sainnhe/edge'
+    Plug 'sainnhe/forest-night'
+    Plug 'sainnhe/sonokai'
 	Plug 'vim-python/python-syntax'
 call plug#end()
 
+let g:sonokai_disable_italic_comment = 1
+
 function! CustomColors()
-    colorscheme onedark
+    colorscheme sonokai
     set background=dark
+    highlight HighlightedyankRegion cterm=reverse guibg=#505050
     hi CursorLine guibg=NONE
-    hi CursorLineNr gui=bold
+    hi CursorLineNr gui=bold guibg=NONE
     "hi LineNr guifg=#3f3f3f
     hi Normal guibg=NONE
     hi NonText guibg=NONE
-    highlight HighlightedyankRegion cterm=reverse guibg=#505050
 endfunction
-call CustomColors()
-
-let g:onedark_hide_endofbuffer=1
 
 " Change Color when entering Insert Mode
-autocmd InsertEnter * highlight  CursorLineNr guifg=#d19a66
+autocmd InsertEnter * highlight  CursorLineNr guifg=#ef9062
 
 " Revert Color to default when leaving Insert Mode
-autocmd InsertLeave * highlight  CursorLineNr guifg=#abb2bf
+autocmd InsertLeave * highlight  CursorLineNr guifg=#e3e1e4
 
 "Goyo and Limelight
 "let g:limelight_conceal_guifg='#565656'
@@ -130,3 +132,5 @@ let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
 let g:highlightedyank_highlight_duration = 500
+
+call CustomColors()
