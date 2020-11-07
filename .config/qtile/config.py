@@ -169,11 +169,6 @@ keys = [
     ),
     Key(
         [mod], 't',
-        lazy.spawn('thunar'),
-        desc='Launch thunar'
-    ),
-    Key(
-        [mod, 'shift'], 't',
         lazy.spawn('alacritty -e vifm'),
         desc='Launch vifm'
     ),
