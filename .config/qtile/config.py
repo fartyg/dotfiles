@@ -52,7 +52,7 @@ cyan = 'ef9062'
 white = 'e3e1e4'
 
 layout_theme = {
-    'border_width': 1,
+    'border_width': 2,
     'margin': 9,
     'border_focus': bordercolor,
     'border_normal': gray,
@@ -190,8 +190,8 @@ keys = [
 ]
 
 groups = [
-    Group('a', spawn='alacritty'),
-    Group('s', spawn='alacritty'),
+    Group('a', spawn=terminal),
+    Group('s', spawn=terminal),
     Group('d', spawn='alacritty -e vifm'),
     Group('f', spawn='env MOZ_X11_EGL=1 firefox'),
     Group('u'),

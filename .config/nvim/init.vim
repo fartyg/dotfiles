@@ -63,9 +63,9 @@ call plug#begin()
     Plug 'machakann/vim-highlightedyank'
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
 "    Plug 'patstockwell/vim-monokai-tasty'
-    Plug 'joshdick/onedark.vim'
-    Plug 'sainnhe/edge'
-    Plug 'sainnhe/forest-night'
+"    Plug 'joshdick/onedark.vim'
+"    Plug 'sainnhe/edge'
+"    Plug 'sainnhe/forest-night'
     Plug 'sainnhe/sonokai'
 	Plug 'vim-python/python-syntax'
 call plug#end()
@@ -84,7 +84,7 @@ function! CustomColors()
 endfunction
 
 " Change Color when entering Insert Mode
-autocmd InsertEnter * highlight  CursorLineNr guifg=#ef9062
+autocmd InsertEnter * highlight  CursorLineNr guifg=#f85e84
 
 " Revert Color to default when leaving Insert Mode
 autocmd InsertLeave * highlight  CursorLineNr guifg=#e3e1e4
