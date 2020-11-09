@@ -198,7 +198,6 @@ groups = [
     Group('i')
 
 ]
-
 for i in groups:
     keys.extend([
         # mod1 + letter of group = switch to group
