@@ -38,7 +38,7 @@ fontsize = 14
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 # Colors
-bgcolor = '2d2a2e'
+bgcolor = '262626'
 bordercolor = '746a62'
 gray = '404040'
 anothergray = '606060'
@@ -52,8 +52,8 @@ cyan = 'ef9062'
 white = 'e3e1e4'
 
 layout_theme = {
-    'border_width': 2,
-    'margin': 6,
+    'border_width': 1,
+    'margin': 9,
     'border_focus': bordercolor,
     'border_normal': gray,
     'font=': font
@@ -174,8 +174,8 @@ keys = [
     ),
     Key(
         [mod], 'm',
-        lazy.spawn('/home/aj/.scripts/spotify_toggle.sh'),
-        desc='Launch or switch to spotify'
+        lazy.spawn('alacritty -e ncspot'),
+        desc='Launch ncspot'
     ),
     Key(
         [mod, 'shift'], 'm',
@@ -184,16 +184,16 @@ keys = [
     ),
     Key(
         [mod], 'b',
-        lazy.spawn('firefox'),
+        lazy.spawn('env MOZ_X11_EGL=1 firefox'),
         desc='Launch firefox'
     )
 ]
 
 groups = [
     Group('a', spawn='alacritty'),
-    Group('s', spawn='alacritty', matches=[Match(wm_class=['spotify.Spotify'])]),
+    Group('s', spawn='alacritty'),
     Group('d', spawn='alacritty -e vifm'),
-    Group('f', spawn='firefox'),
+    Group('f', spawn='env MOZ_X11_EGL=1 firefox'),
     Group('u'),
     Group('i')
 
@@ -207,7 +207,6 @@ for i in groups:
             lazy.group[i.name].toscreen(),
             desc='Switch to group {}'.format(i.name)
         ),
-
         # mod1 + shift + letter of group
         # = switch to & move focused window to group
         Key(
@@ -248,32 +247,8 @@ keys.extend([
 
 layouts = [
     layout.MonadTall(**layout_theme, ratio=0.67),
-   # layout.Max(**layout_theme),
-    layout.Stack(num_stacks=2, **layout_theme),
-   # layout.TreeTab(
-   #      font = font,
-   #      fontsize = fontsize-1,
-   #      sections = [''],
-   #      section_fg = bgcolor,
-   #      section_fontsize=0,
-   #      section_padding=0,
-   #      section_top=0,
-   #      section_bottom=0,
-   #      bg_color = bgcolor,
-   #      active_bg = gray,
-   #      active_fg = yellow,
-   #      inactive_bg = anothergray,
-   #      inactive_fg = 'ffffff',
-   #      #section_top = 1,
-   #      panel_width = 240,
-   #      padding_y=2,
-   #      vspace=2,
-   #      padding_left=0,
-   #      margin_left=0,
-   #      margin_y=0
-   # )
+    layout.Stack(num_stacks=2, **layout_theme)
 ]
-
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,

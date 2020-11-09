@@ -28,8 +28,9 @@ set updatetime=300
 set conceallevel=0
 set laststatus=0
 set noshowcmd
-"set noshowmode " hide mode text at the bottom
+set noshowmode " hide mode text at the bottom
 set cmdheight=1
+set noruler
 
 "terminal colors
 if exists('+termguicolors')
@@ -45,7 +46,7 @@ nmap <F5> <Esc>:w<CR>:!clear;python %<CR> " exectute python
 map <C-n> :NERDTreeToggle<CR>
 nnoremap x "_x
 
-nnoremap <leader>git :GFiles<CR>
+nnoremap <leader>git      :GFiles<CR>
 nnoremap <leader><leader> :Files<CR>
 nnoremap <leader>C        :Colors<CR>
 nnoremap <leader><CR>     :Buffers<CR>
@@ -69,17 +70,17 @@ call plug#begin()
 	Plug 'vim-python/python-syntax'
 call plug#end()
 
-let g:sonokai_disable_italic_comment = 1
-
 function! CustomColors()
     colorscheme sonokai
     set background=dark
     highlight HighlightedyankRegion cterm=reverse guibg=#505050
     hi CursorLine guibg=NONE
     hi CursorLineNr gui=bold guibg=NONE
-    "hi LineNr guifg=#3f3f3f
+    hi LineNr guifg=#454545
     hi Normal guibg=NONE
+    hi EndOfBuffer guibg=NONE
     hi NonText guibg=NONE
+    hi StatusLine guifg=#454545
 endfunction
 
 " Change Color when entering Insert Mode
@@ -90,7 +91,6 @@ autocmd InsertLeave * highlight  CursorLineNr guifg=#e3e1e4
 
 "Goyo and Limelight
 "let g:limelight_conceal_guifg='#565656'
-
 function! s:goyo_enter()
   if has('gui_running')
     set fullscreen
@@ -100,6 +100,7 @@ function! s:goyo_enter()
     silent !tmux set status off
   endif
 endfunction
+
 function! s:goyo_leave()
   if has('gui_running')
     set nofullscreen
@@ -116,7 +117,6 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 "        \   | Limelight!
         \   | call CustomColors()
 
-let g:python_highlight_all = 1
 
 "NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -131,6 +131,7 @@ let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
-let g:highlightedyank_highlight_duration = 500
-
+let g:sonokai_disable_italic_comment = 1
+let g:highlightedyank_highlight_duration = 350
+let g:python_highlight_all = 1
 call CustomColors()

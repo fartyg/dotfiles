@@ -21,22 +21,22 @@ window:
     lines: 80
 
   padding:
-    x: 10
-    y: 10
+    x: 8
+    y: 8 
       #decorations: "none"
   # Background opacity
   # #
   # # Window opacity as a floating point number from `0.0` to `1.0`.
  # # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
+background_opacity: 0.92
 
 unfocused_hollow: true 
 
 # The FreeType rasterizer needs to know the device DPI for best results
 # (changes require restart)
-#dpi:
-#  x: 100
-#  y: 100
+dpi:
+  x: 96
+  y: 96
 
 
 cursor:
@@ -59,7 +59,7 @@ font:
     family: BitstreamVeraSansMono
     # Style can be specified to pick a specific face.
   style: Regular
-  size: 6
+  size: 7
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -79,7 +79,7 @@ font:
 
 colors:
   primary:
-    background: "0x2d2a2e"
+    background: "0x262626"
     foreground: "0xe3e1e4"
 
   normal:

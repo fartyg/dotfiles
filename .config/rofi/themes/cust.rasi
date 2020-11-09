@@ -5,20 +5,20 @@
  *******************************************************************************/
 
 * {
-    selected-normal-foreground:  #d19a66;
-    foreground:                  #abb2bf;
+    selected-normal-foreground:  #e5c463;
+    foreground:                  #e3e1e4;
     normal-foreground:           @foreground;
     alternate-normal-background: rgba ( 39, 50, 56, 100 % );
     red:                         rgba ( 220, 50, 47, 100 % );
     selected-urgent-foreground:  rgba ( 255, 24, 68, 100 % );
-    blue:                        rgba ( 38, 139, 210, 100 % );
+    blue:                        #7accd7;
     urgent-foreground:           rgba ( 255, 24, 68, 100 % );
     alternate-urgent-background: rgba ( 39, 50, 56, 100 % );
-    active-foreground:           rgba ( 128, 203, 196, 100 % );
+    active-foreground:           @blue;
     lightbg:                     rgba ( 238, 232, 213, 100 % );
     selected-active-foreground:  rgba ( 128, 203, 196, 100 % );
     alternate-active-background: rgba ( 39, 50, 56, 100 % );
-    background:                  #1e2127;
+    background:                  #262626;
     bordercolor:                 rgba ( 39, 50, 56, 100 % );
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 39, 50, 56, 100 % );
