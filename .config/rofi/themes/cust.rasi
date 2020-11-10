@@ -26,9 +26,9 @@
     selected-normal-background:  rgba ( 57, 66, 73, 100 % );
     border-color:                @foreground;
     spacing:                     2;
-    separatorcolor:              #746a62;
+    separatorcolor:              @background;
     urgent-background:           rgba ( 39, 50, 56, 100 % );
-    selected-urgent-background:  rgba ( 57, 66, 73, 100 % );
+    selected-urgent-background:  rgba ( 57,66, 73, 100 % );
     alternate-urgent-foreground: @urgent-foreground;
     background-color:            rgba ( 0, 0, 0, 0 % );
     alternate-active-foreground: @active-foreground;

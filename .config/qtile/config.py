@@ -39,7 +39,7 @@ music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 # Colors
 bgcolor = '262626'
-bordercolor = '746a62'
+bordercolor = '868276'
 gray = '404040'
 anothergray = '606060'
 
@@ -51,13 +51,7 @@ blue = '7accd7'
 cyan = 'ef9062'
 white = 'e3e1e4'
 
-layout_theme = {
-    'border_width': 2,
-    'margin': 9,
-    'border_focus': bordercolor,
-    'border_normal': gray,
-    'font=': font
-}
+
 
 keys = [
     # Switch between windows in current stack pane
@@ -174,15 +168,10 @@ keys = [
     ),
     Key(
         [mod], 'm',
-        lazy.spawn('alacritty -e ncspot'),
-        desc='Launch ncspot'
+        lazy.spawn('thunderbird'),
+        desc='Launch thunderbird'
     ),
-    Key(
-        [mod, 'shift'], 'm',
-        lazy.spawn('alacritty -e mocp'),
-        desc='Launch mocp'
-    ),
-    Key(
+   Key(
         [mod], 'b',
         lazy.spawn('env MOZ_X11_EGL=1 firefox'),
         desc='Launch firefox'
@@ -191,8 +180,8 @@ keys = [
 
 groups = [
     Group('a', spawn=terminal),
-    Group('s', spawn=terminal),
-    Group('d', spawn='alacritty -e vifm'),
+    Group('s', layout='monadwide', spawn=terminal),
+    Group('d', layout='monadwide', spawn='alacritty -e vifm'),
     Group('f', spawn='env MOZ_X11_EGL=1 firefox'),
     Group('u'),
     Group('i')
@@ -244,10 +233,26 @@ keys.extend([
     )
 ])
 
+layout_theme = {
+    'border_width': 1,
+    'border_focus': bordercolor,
+    'border_normal': bgcolor,
+    'single_margin': 0,
+    'single_border_width': 0,
+    'margin': 8,
+    'font=': font
+}
+
 layouts = [
-    layout.MonadTall(**layout_theme, ratio=0.67),
-    layout.Stack(num_stacks=2, **layout_theme)
+    layout.MonadTall(
+        **layout_theme,
+        ratio=0.67
+    ),
+    layout.MonadWide(
+        **layout_theme
+    )
 ]
+
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
@@ -336,11 +341,11 @@ screens = [
                         foreground=red,
                         default_text='X',
                         countdown_format='{}',
-                        fontsize=12
+                        fontsize=10
                 ),
             ],
             20,
-            opacity=1
+            opacity=0.95
         ),
     ),
 ]
