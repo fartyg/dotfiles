@@ -1,6 +1,6 @@
 [theme]
 primary = "#abb2bf"
-secondary = "default"
+secondary = "yellow"
 title = "blue"
 playing = "green"
 playing_selected = "yellow"
@@ -13,3 +13,6 @@ statusbar_bg = "default"
 cmdline = "default"
 cmdline_bg = "default"
 search_match = "light red"
+
+[saved_state]
+volume = 70

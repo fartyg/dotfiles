@@ -78,7 +78,7 @@ bar_spacing = 3
 ; interactable = true
 
 # Create an taskbar icon
-; taskbar_icon = true
+taskbar_icon = false
 
 # Draw directly on the root window (or wallpaper) itself (Xorg ONLY), VERY UNPREDICTABLE
 # You need to stop any form of compositing for this to even work properly
@@ -156,19 +156,19 @@ channels = mono
 # Under Windows it uses your system accent color
 # And on SDL2 it's just black and cyan (default colorscheme)
 background = '#262626'
-foreground = '#e5c463'
+#foreground = '#e5c463'
 
 # This adjusts the opacity of the bars (must have transparency and OpenGL in order for it to work)
 foreground_opacity = 1
 
 # And this does the same but for the background (previous rule applies here as well) 
-background_opacity = 0.95
+background_opacity = 0.90
 
 # Gradient mode, only hex defined colors are supported, background must also be defined in hex
 # or remain commented out.
 # To enable gradients, just change gradient_count to the number of colors you have specified
 # (0 = disabled)
-gradient_count = 4
+gradient_count = 4 
 gradient_color_1 = '#262626'
 gradient_color_2 = '#e5c463'
 gradient_color_3 = '#ef9062'

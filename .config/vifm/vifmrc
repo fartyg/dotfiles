@@ -122,6 +122,7 @@ mark d ~/Downloads
 mark i ~/Pictures
 mark p ~/code
 mark r ~/random
+mark w ~/Pictures/wp_rotation
 
 " ------------------------------------------------------------------------------
 

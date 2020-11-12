@@ -62,10 +62,6 @@ call plug#begin()
     Plug 'junegunn/goyo.vim'
     Plug 'machakann/vim-highlightedyank'
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
-"    Plug 'patstockwell/vim-monokai-tasty'
-"    Plug 'joshdick/onedark.vim'
-"    Plug 'sainnhe/edge'
-"    Plug 'sainnhe/forest-night'
     Plug 'sainnhe/sonokai'
 	Plug 'vim-python/python-syntax'
 call plug#end()

@@ -39,9 +39,10 @@ music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 # Colors
 bgcolor = '262626'
-bordercolor = '868276'
 gray = '404040'
 anothergray = '606060'
+finalgray = '909090'
+bordercolor = finalgray
 
 yellow = 'e5c463'
 red = 'f85e84'
@@ -50,7 +51,6 @@ magenta = 'ab9df2'
 blue = '7accd7'
 cyan = 'ef9062'
 white = 'e3e1e4'
-
 
 
 keys = [
@@ -234,7 +234,7 @@ keys.extend([
 ])
 
 layout_theme = {
-    'border_width': 1,
+    'border_width': 2,
     'border_focus': bordercolor,
     'border_normal': bgcolor,
     'single_margin': 0,
@@ -246,10 +246,11 @@ layout_theme = {
 layouts = [
     layout.MonadTall(
         **layout_theme,
-        ratio=0.67
+        ratio=0.60
     ),
     layout.MonadWide(
-        **layout_theme
+        **layout_theme,
+        ratio=0.60
     )
 ]
 
@@ -258,7 +259,7 @@ widget_defaults = {
         'fontsize': fontsize,
         'padding': 9,
         'background': bgcolor,
-        'highlight_method': 'block'
+        'highlight_method': 'text'
 }
 extension_defaults = widget_defaults.copy()
 
@@ -269,18 +270,18 @@ screens = [
                 widget.GroupBox(
                      margin_y=3,
                      margin_x=0,
-                     borderwidth=3,
+                     borderwidth=0,
                      rounded=False,
-                     active = yellow,
-                     inactive = anothergray,
+                     active = anothergray,
+                     inactive = bgcolor,
                      highlight_color = red,
-                     this_current_screen_border = gray,
+                     this_current_screen_border = yellow,
                      this_screen_border = anothergray,
                      foreground = white,
                      background = bgcolor
                 ),
                 widget.Prompt(),
-                widget.WindowName(foreground=yellow),
+                widget.Spacer(),
                 widget.CPU(
                     format='{load_percent}%',
                     foreground=white,
@@ -292,12 +293,12 @@ screens = [
                     }
                 ),
                 widget.Memory(
-                    format='{MemUsed}MB',
+                    format='{MemUsed} MB',
                     foreground=white
                 ),
                 widget.DF(
                     visible_on_warn=False,
-                    format='{uf}{m}B',
+                    format='{uf} {m}B',
                     foreground=white
                 ),
                 widget.Mpris2(
@@ -341,11 +342,11 @@ screens = [
                         foreground=red,
                         default_text='X',
                         countdown_format='{}',
-                        fontsize=10
+                        fontsize=fontsize
                 ),
             ],
-            20,
-            opacity=0.95
+            18,
+            opacity=1
         ),
     ),
 ]
