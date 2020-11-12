@@ -53,7 +53,7 @@ function! CustomColors()
 endfunction
 
 " Change Color when entering Insert Mode
-autocmd InsertEnter * highlight  CursorLineNr guifg=#f85e84
+autocmd InsertEnter * highlight  CursorLineNr guifg=#e5c463
 
 " Revert Color to default when leaving Insert Mode
 autocmd InsertLeave * highlight  CursorLineNr guifg=#e3e1e4

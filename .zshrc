@@ -83,7 +83,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -111,11 +111,6 @@ source $ZSH/oh-my-zsh.sh
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' 
---color=fg:#c5cdd9,hl:#6cb6eb 
---color=fg+:#c5cdd9,hl+:#5dbbc1 
---color=info:#88909f,prompt:#ec7279,pointer:#d38aea 
---color=marker:#a0c980,spinner:#ec7279,header:#5dbbc1'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
 
@@ -124,5 +119,4 @@ alias vim='nvim'
 alias båt='newsboat'
 alias open='handlr open'
 alias ls='LC_COLLATE=C ls -h --group-directories-first --color=auto'
-export LC_ALL=en_US.UTF-8
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

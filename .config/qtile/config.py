@@ -43,7 +43,6 @@ gray = '404040'
 anothergray = '606060'
 finalgray = '909090'
 bordercolor = finalgray
-
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -185,8 +184,8 @@ groups = [
     Group('f', spawn='env MOZ_X11_EGL=1 firefox'),
     Group('u'),
     Group('i')
-
 ]
+
 for i in groups:
     keys.extend([
         # mod1 + letter of group = switch to group
@@ -240,17 +239,16 @@ layout_theme = {
     'single_margin': 0,
     'single_border_width': 0,
     'margin': 8,
+    'ratio': 0.6,
     'font=': font
 }
 
 layouts = [
     layout.MonadTall(
-        **layout_theme,
-        ratio=0.60
+        **layout_theme
     ),
     layout.MonadWide(
-        **layout_theme,
-        ratio=0.60
+        **layout_theme
     )
 ]
 
@@ -329,7 +327,7 @@ screens = [
                         backlight_name='intel_backlight',
                         change_command='brightnessctl s {0}'
                 ),
-                widget.Systray(icon_size=18),
+                # widget.Systray(icon_size=18),
                 widget.Clock(
                     format='%a %H:%M',
                     foreground = cyan,
@@ -340,7 +338,7 @@ screens = [
                 ),
                 widget.QuickExit(
                         foreground=red,
-                        default_text='X',
+                        default_text='x',
                         countdown_format='{}',
                         fontsize=fontsize
                 ),
