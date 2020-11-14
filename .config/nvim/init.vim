@@ -75,15 +75,15 @@ nnoremap <leader>m        :History<CR>
 
 call plug#begin()
     Plug 'Yggdroot/indentLine'
-	Plug 'justinmk/vim-sneak'
-	Plug 'preservim/nerdtree'
-	Plug 'junegunn/fzf.vim'
+    Plug 'justinmk/vim-sneak'
+    Plug 'preservim/nerdtree'
+    Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'machakann/vim-highlightedyank'
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
     Plug 'sainnhe/sonokai'
-	Plug 'vim-python/python-syntax'
+    Plug 'vim-python/python-syntax'
 call plug#end()
 
 "Goyo and Limelight
