@@ -28,7 +28,7 @@ window:
   # #
   # # Window opacity as a floating point number from `0.0` to `1.0`.
  # # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.94
+background_opacity: 0.95
 
 unfocused_hollow: true 
 
@@ -57,10 +57,10 @@ font:
   # The normal (roman) font face to use.
   normal:
     #    family: Terminus
-    family: BitstreamVeraSansMono
+    family: FiraCode Nerd Font
     # Style can be specified to pick a specific face.
   style: Regular
-  size: 7.5
+  size: 6
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -77,31 +77,54 @@ font:
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
-
 colors:
   primary:
-    background: "0x262626"
-    foreground: "0xe3e1e4"
+    background: "0x2c2e34"
+    foreground: "0xe2e2e3"
 
   normal:
-    black: "0x606060"
-    red: "0xf85e84"
-    green: "0x9ecd6f"
-    yellow: "0xe5c463"
-    blue: "0x7accd7"
-    magenta: "0xab9df2"
-    cyan: "0xef9062"
-    white: "0xe3e1e4"
+    black: "0x383838"
+    red: "0xfc5d7c"
+    green: "0x9ed072"
+    yellow: "0xe7c664"
+    blue: "0x76cce0"
+    magenta: "0xb39df3"
+    cyan: "0xf39660"
+    white: "0xe2e2e3"
 
   bright:
-    black: "0x606060"
-    red: "0xf85e84"
-    green: "0x9ecd6f"
-    yellow: "0xe5c463"
-    blue: "0x7accd7"
-    magenta: "0xab9df2"
-    cyan: "0xef9062"
-    white: "0xe3e1e4"
+    black: "0x383838"
+    red: "0xfc5d7c"
+    green: "0x9ed072"
+    yellow: "0xe7c664"
+    blue: "0x76cce0"
+    magenta: "0xb39df3"
+    cyan: "0xf39660"
+    white: "0xe2e2e3"
+  #colors:
+  #  primary:
+  #    background: "0x2c2e34"
+  #    foreground: "0xe3e1e4"
+  #
+  #  normal:
+  #    black: "0x606060"
+  #    red: "0xf85e84"
+  #    green: "0x9ecd6f"
+  #    yellow: "0xe5c463"
+  #    blue: "0x7accd7"
+  #    magenta: "0xab9df2"
+  #    cyan: "0xef9062"
+  #    white: "0xe3e1e4"
+  #
+  #  bright:
+  #    black: "0x606060"
+  #    red: "0xf85e84"
+  #    green: "0x9ecd6f"
+  #    yellow: "0xe5c463"
+  #    blue: "0x7accd7"
+  #    magenta: "0xab9df2"
+  #    cyan: "0xef9062"
+  #    white: "0xe3e1e4"
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
 # rung, the terminal background will be set to white and transition back to the
 # default background color. You can control the rate of this transition by

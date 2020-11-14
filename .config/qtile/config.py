@@ -38,17 +38,17 @@ fontsize = 14
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 # Colors
-bgcolor = '262626'
+bgcolor = '2c2e34'
 gray = '404040'
 anothergray = '606060'
-finalgray = '909090'
-bordercolor = finalgray
+finalgray = '757575'
+bordercolor = 'a49b80'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
 magenta = 'ab9df2'
 blue = '7accd7'
-cyan = 'ef9062'
+orange = 'ef9062'
 white = 'e3e1e4'
 
 
@@ -115,11 +115,11 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key(
-        [mod, 'shift'], 'Return',
-        lazy.layout.toggle_split(),
-        desc='Toggle between split and unsplit sides of stack'
-    ),
+   # Key(
+   #     [mod, 'shift'], 'Return',
+   #     lazy.layout.toggle_split(),
+   #     desc='Toggle between split and unsplit sides of stack'
+   # ),
     Key(
         [mod], 'Return',
         lazy.spawn(terminal),
@@ -178,9 +178,9 @@ keys = [
 ]
 
 groups = [
-    Group('a', spawn=terminal),
-    Group('s', layout='monadwide', spawn=terminal),
-    Group('d', layout='monadwide', spawn='alacritty -e vifm'),
+    Group('a', layout='monadtall', spawn=terminal),
+    Group('s', spawn=terminal),
+    Group('d', spawn='alacritty -e vifm'),
     Group('f', spawn='env MOZ_X11_EGL=1 firefox'),
     Group('u'),
     Group('i')
@@ -239,16 +239,17 @@ layout_theme = {
     'single_margin': 0,
     'single_border_width': 0,
     'margin': 8,
-    'ratio': 0.6,
     'font=': font
 }
 
 layouts = [
-    layout.MonadTall(
-        **layout_theme
-    ),
     layout.MonadWide(
-        **layout_theme
+        **layout_theme,
+        ratio=0.55
+    ),
+    layout.MonadTall(
+        **layout_theme,
+        ratio=0.63
     )
 ]
 
@@ -315,22 +316,15 @@ screens = [
                     },
                     stop_pause_text=''
                 ),
-                widget.PulseVolume(
-                    foreground=blue,
-                    mouse_callbacks = {
-                        'Button3': lambda qtile:
-                        qtile.cmd_spawn('pavucontrol')
-                    }
-                ),
+                widget.PulseVolume(foreground=blue),
                 widget.Backlight(
                         foreground=yellow,
                         backlight_name='intel_backlight',
                         change_command='brightnessctl s {0}'
                 ),
-                # widget.Systray(icon_size=18),
                 widget.Clock(
                     format='%a %H:%M',
-                    foreground = cyan,
+                    foreground = orange,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn('alacritty -e calcurse')
@@ -409,6 +403,7 @@ def autostart():
     processes = [
         ['/usr/bin/setxkbmap', '-layout', 'se'],
         ['nitrogen', '--restore'],
+        ['picom', '--experimental-backends'],
         ['/home/aj/.scripts/xbindkeys_startup.sh'],
         ['redshift']
     ]

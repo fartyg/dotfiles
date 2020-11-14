@@ -45,18 +45,18 @@ function! CustomColors()
     highlight HighlightedyankRegion cterm=reverse guibg=#505050
     hi CursorLine guibg=NONE
     hi CursorLineNr gui=bold guibg=NONE
-    hi LineNr guifg=#454545
+    hi LineNr guifg=#505050
     hi Normal guibg=NONE
     hi EndOfBuffer guibg=NONE
     hi NonText guibg=NONE
-    hi StatusLine guifg=#454545
+"    hi StatusLine guifg=#454545
 endfunction
 
 " Change Color when entering Insert Mode
 autocmd InsertEnter * highlight  CursorLineNr guifg=#e5c463
 
 " Revert Color to default when leaving Insert Mode
-autocmd InsertLeave * highlight  CursorLineNr guifg=#e3e1e4
+autocmd InsertLeave * highlight  CursorLineNr guifg=#e2e2e3
 
 " keybindings
 inoremap jj <Esc>

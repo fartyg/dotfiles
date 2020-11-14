@@ -155,14 +155,14 @@ channels = mono
 # It can also be 'default' at which point under X11 it reads the color off of Xrdb
 # Under Windows it uses your system accent color
 # And on SDL2 it's just black and cyan (default colorscheme)
-background = '#262626'
+background = '#2c2e34'
 #foreground = '#e5c463'
 
 # This adjusts the opacity of the bars (must have transparency and OpenGL in order for it to work)
 foreground_opacity = 1
 
 # And this does the same but for the background (previous rule applies here as well) 
-background_opacity = 0.90
+background_opacity = 0.96
 
 # Gradient mode, only hex defined colors are supported, background must also be defined in hex
 # or remain commented out.
@@ -213,7 +213,7 @@ oddoneout = true
 
 # Fake shadow effect (works with transparency only)
 # To disable shadows, set size to 0
-size = 7
+size = 0 
 
 # Color format is #aarrggbb
 color = "#ff000000"
