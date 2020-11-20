@@ -43,22 +43,23 @@ function! CustomColors()
     colorscheme sonokai
     set background=dark
     highlight HighlightedyankRegion cterm=reverse guibg=#505050
-    hi CursorLine guibg=NONE
-    hi CursorLineNr gui=bold guibg=NONE
-    hi LineNr guifg=#505050
-    hi Normal guibg=NONE
-    hi EndOfBuffer guibg=NONE
-    hi NonText guibg=NONE
-"    hi StatusLine guifg=#454545
+"    hi CursorLine guibg=NONE
+"    hi CursorLineNr guibg=NONE
+"    hi LineNr guifg=#505050
+    "hi Normal guibg=NONE
+    "hi EndOfBuffer guibg=NONE
+    "hi NonText guibg=NONE
+    "hi StatusLine guibg=NONE
 endfunction
 
 " Change Color when entering Insert Mode
-autocmd InsertEnter * highlight  CursorLineNr guifg=#e5c463
+autocmd InsertEnter * highlight  CursorLineNr guifg=#f39660
 
 " Revert Color to default when leaving Insert Mode
 autocmd InsertLeave * highlight  CursorLineNr guifg=#e2e2e3
 
 " keybindings
+noremap <Leader>s :update<CR>
 inoremap jj <Esc>
 nnoremap <Leader>g :Goyo<CR>
 nmap <F5> <Esc>:w<CR>:!clear;python %<CR> " exectute python
@@ -66,12 +67,10 @@ map <C-n> :NERDTreeToggle<CR>
 nnoremap x "_x
 
 nnoremap <leader>git      :GFiles<CR>
-nnoremap <leader><leader> :Files<CR>
-nnoremap <leader>C        :Colors<CR>
-nnoremap <leader><CR>     :Buffers<CR>
-nnoremap <leader>fl       :Lines<CR>
-nnoremap <leader>ag       :Ag! <C-R><C-W><CR>
-nnoremap <leader>m        :History<CR>
+nnoremap <leader>t        :Files<CR>
+nnoremap <leader>f        :Lines<CR>
+nnoremap <leader><leader> :Buffers<CR>
+nnoremap <leader>r        :History<CR>
 
 call plug#begin()
     Plug 'Yggdroot/indentLine'
@@ -109,9 +108,9 @@ function! s:goyo_leave()
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
-        \   | Limelight
+    "    \   | Limelight
 autocmd! User GoyoLeave nested call <SID>goyo_leave() 
-        \   | Limelight!
+    "    \   | Limelight!
         \   | call CustomColors()
 
 
@@ -128,7 +127,9 @@ let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
+let g:fzf_preview_window = []
 let g:sonokai_disable_italic_comment = 1
+let g:sonokai_transparent_background = 1
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:highlightedyank_highlight_duration = 350
 let g:python_highlight_all = 1

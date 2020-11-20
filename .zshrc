@@ -108,7 +108,8 @@ export LANG=en_US.UTF-8
 #  * -e is for exact matching
 #  * ':' is mapped to "abort", mostly to use with vim.
 #  * for a full list of available actions to bind to, see "man fzf" and search for "action"
-export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_ALT_C_COMMAND="fd --type d --color=never"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -120,3 +121,4 @@ alias båt='newsboat'
 alias open='handlr open'
 alias ls='LC_COLLATE=C ls -h --group-directories-first --color=auto'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias sudo='sudo '

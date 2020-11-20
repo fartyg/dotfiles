@@ -41,8 +41,7 @@ music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot '
 bgcolor = '2c2e34'
 gray = '404040'
 anothergray = '606060'
-finalgray = '757575'
-bordercolor = 'a49b80'
+bordercolor = '606060'#'a49b80'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -88,7 +87,7 @@ keys = [
         lazy.layout.normalize()
     ),
     Key(
-        [mod], "o",
+        [mod], "m",
         lazy.layout.maximize()
     ),
     Key(
@@ -146,29 +145,19 @@ keys = [
         desc='Shutdown qtile'
     ),
     Key(
-        [mod], 'r',
-        lazy.spawncmd(),
-        desc='Spawn a command using a prompt widget'
-    ),
-    Key(
         [], "Print",
         lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'"),
         desc='Take a screenshot'
     ),
     Key(
-        [mod], 'comma',
+        [mod], 'r',
         lazy.spawn('/usr/bin/rofi -combi-modi window,drun -show combi -modi combi'),
         desc='Launch rofi'
     ),
     Key(
         [mod], 't',
-        lazy.spawn('alacritty -e vifm'),
-        desc='Launch vifm'
-    ),
-    Key(
-        [mod], 'm',
-        lazy.spawn('thunderbird'),
-        desc='Launch thunderbird'
+        lazy.spawn('thunar'),
+        desc='Launch thunar'
     ),
    Key(
         [mod], 'b',
@@ -180,10 +169,11 @@ keys = [
 groups = [
     Group('a', layout='monadtall', spawn=terminal),
     Group('s', spawn=terminal),
-    Group('d', spawn='alacritty -e vifm'),
+    Group('d', spawn=terminal),
     Group('f', spawn='env MOZ_X11_EGL=1 firefox'),
     Group('u'),
-    Group('i')
+    Group('i'),
+    Group('o')
 ]
 
 for i in groups:
@@ -215,10 +205,10 @@ groups.append(
             'term',
             'alacritty',
             opacity=1,
-            height=0.50,
-            width=0.60,
-            x=0.23,
-            y=0.32
+            height=0.80,
+            width=0.33,
+            x=0.66,
+            y=0.18
         )
     ])
 )
@@ -238,7 +228,7 @@ layout_theme = {
     'border_normal': bgcolor,
     'single_margin': 0,
     'single_border_width': 0,
-    'margin': 8,
+    'margin': 6,
     'font=': font
 }
 
@@ -249,7 +239,7 @@ layouts = [
     ),
     layout.MonadTall(
         **layout_theme,
-        ratio=0.63
+        ratio=0.5
     )
 ]
 
@@ -271,6 +261,7 @@ screens = [
                      margin_x=0,
                      borderwidth=0,
                      rounded=False,
+                     disable_drag=True,
                      active = anothergray,
                      inactive = bgcolor,
                      highlight_color = red,
@@ -279,7 +270,6 @@ screens = [
                      foreground = white,
                      background = bgcolor
                 ),
-                widget.Prompt(),
                 widget.Spacer(),
                 widget.CPU(
                     format='{load_percent}%',

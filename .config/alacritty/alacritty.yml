@@ -57,10 +57,10 @@ font:
   # The normal (roman) font face to use.
   normal:
     #    family: Terminus
-    family: FiraCode Nerd Font
+    family: LiterationMono Nerd Font
     # Style can be specified to pick a specific face.
   style: Regular
-  size: 6
+  size: 7
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.

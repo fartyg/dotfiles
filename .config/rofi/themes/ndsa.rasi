@@ -1,42 +1,33 @@
-/*******************************************************************************
+/**
  * ROFI Color theme
- * User: Rasi
- * Copyright: Rasmus Steinke
- *******************************************************************************/
+ * User: fartyg
+ */
 
 * {
-    selected-normal-foreground:  #e5c463;
-    foreground:                  #e3e1e4;
+    selected-normal-foreground:  rgba ( 229, 196, 99, 100 % );
+    foreground:                  rgba ( 227, 225, 228, 100 % );
     normal-foreground:           @foreground;
-    alternate-normal-background: rgba ( 39, 50, 56, 100 % );
     red:                         rgba ( 220, 50, 47, 100 % );
-    selected-urgent-foreground:  rgba ( 255, 24, 68, 100 % );
-    blue:                        #7accd7;
-    urgent-foreground:           rgba ( 255, 24, 68, 100 % );
-    alternate-urgent-background: rgba ( 39, 50, 56, 100 % );
-    active-foreground:           @blue;
+    selected-urgent-foreground:  rgba ( 51, 51, 51, 100 % );
+    blue:                        rgba ( 38, 139, 210, 100 % );
+    urgent-foreground:           rgba ( 255, 153, 153, 100 % );
+    active-foreground:           rgba ( 158, 205, 111, 100 % );
     lightbg:                     rgba ( 238, 232, 213, 100 % );
-    selected-active-foreground:  rgba ( 128, 203, 196, 100 % );
-    alternate-active-background: rgba ( 39, 50, 56, 100 % );
-    background:                  #262626;
-    bordercolor:                 rgba ( 39, 50, 56, 100 % );
+    selected-active-foreground:  @active-foreground;
+    background:                  rgba ( 44, 46, 52, 93 % );
+    bordercolor:                 rgba ( 17, 170, 170, 100 % );
     alternate-normal-foreground: @foreground;
-    normal-background:           rgba ( 39, 50, 56, 100 % );
+    normal-background:           rgba ( 0, 0, 0, 0 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
-    selected-normal-background:  rgba ( 57, 66, 73, 100 % );
     border-color:                @foreground;
     spacing:                     2;
-    separatorcolor:              @background;
-    urgent-background:           rgba ( 39, 50, 56, 100 % );
-    selected-urgent-background:  rgba ( 57,66, 73, 100 % );
-    alternate-urgent-foreground: @urgent-foreground;
+    separatorcolor:              rgba ( 164, 155, 128, 100 % );
+    urgent-background:           rgba ( 0, 0, 0, 0 % );
     background-color:            rgba ( 0, 0, 0, 0 % );
     alternate-active-foreground: @active-foreground;
-    active-background:           rgba ( 39, 50, 56, 100 % );
-    selected-active-background:  rgba ( 57, 66, 73, 100 % );
+    active-background:           rgba ( 0, 0, 0, 0 % );
 }
 window {
-    transparency: "real";
     background-color: @background;
     border:           1;
     padding:          5;
@@ -66,39 +57,39 @@ element {
     padding: 1px ;
 }
 element.normal.normal {
-    background-color: @background;
+    background-color: @normal-background;
     text-color:       @normal-foreground;
 }
 element.normal.urgent {
-    background-color: @background;
+    background-color: @urgent-background;
     text-color:       @urgent-foreground;
 }
 element.normal.active {
-    background-color: @background;
+    background-color: @active-background;
     text-color:       @active-foreground;
 }
 element.selected.normal {
-    background-color: @background;
+    background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
 }
 element.selected.urgent {
-    background-color: @background;
+    background-color: @selected-urgent-background;
     text-color:       @selected-urgent-foreground;
 }
 element.selected.active {
-    background-color: @background;
+    background-color: @selected-active-background;
     text-color:       @selected-active-foreground;
 }
 element.alternate.normal {
-    background-color: @background;
+    background-color: @alternate-normal-background;
     text-color:       @alternate-normal-foreground;
 }
 element.alternate.urgent {
-    background-color: @background;
+    background-color: @alternate-urgent-background;
     text-color:       @alternate-urgent-foreground;
 }
 element.alternate.active {
-    background-color: @background;
+    background-color: @alternate-active-background;
     text-color:       @alternate-active-foreground;
 }
 scrollbar {
@@ -137,7 +128,7 @@ inputbar {
 }
 textbox-prompt-colon {
     expand:     false;
-    str:        "";
+    str:        ":";
     margin:     0px 0.3em 0em 0em ;
     text-color: @normal-foreground;
 }
