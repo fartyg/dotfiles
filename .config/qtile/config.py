@@ -35,13 +35,13 @@ mod = 'mod1'
 terminal = 'alacritty'
 font = 'Noto Sans'
 fontsize = 14
-music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.ncspot '
+music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 # Colors
 bgcolor = '2c2e34'
 gray = '404040'
 anothergray = '606060'
-bordercolor = '606060'#'a49b80'
+bordercolor = '808080'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -145,6 +145,11 @@ keys = [
         desc='Shutdown qtile'
     ),
     Key(
+        [mod, 'control'], "l",
+        lazy.spawn("/home/aj/.scripts/lock.sh"),
+        desc='Lock session'
+    ),
+     Key(
         [], "Print",
         lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'"),
         desc='Take a screenshot'
@@ -167,10 +172,10 @@ keys = [
 ]
 
 groups = [
-    Group('a', layout='monadtall', spawn=terminal),
-    Group('s', spawn=terminal),
-    Group('d', spawn=terminal),
-    Group('f', spawn='env MOZ_X11_EGL=1 firefox'),
+    Group('a', layout='monadtall'),
+    Group('s'),
+    Group('d'),
+    Group('f', layout='monadtall'),
     Group('u'),
     Group('i'),
     Group('o')
@@ -226,9 +231,9 @@ layout_theme = {
     'border_width': 2,
     'border_focus': bordercolor,
     'border_normal': bgcolor,
-    'single_margin': 0,
+    #'single_margin': 20,
     'single_border_width': 0,
-    'margin': 6,
+    'margin': 8,
     'font=': font
 }
 
@@ -292,8 +297,8 @@ screens = [
                 ),
                 widget.Mpris2(
                     foreground=green,
-                    name='ncspot',
-                    objname='org.mpris.MediaPlayer2.ncspot',
+                    name='spotify',
+                    objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
                     scroll_chars=None,
                     mouse_callbacks = {

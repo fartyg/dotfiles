@@ -41,11 +41,11 @@ endif
 
 function! CustomColors()
     colorscheme sonokai
-    set background=dark
-    highlight HighlightedyankRegion cterm=reverse guibg=#505050
-"    hi CursorLine guibg=NONE
-"    hi CursorLineNr guibg=NONE
-"    hi LineNr guifg=#505050
+    highlight HighlightedyankRegion cterm=reverse gui=reverse
+    hi CursorLine guibg=#373a45
+    hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
+    hi LineNr guibg=NONE guifg=#909090
+    hi Comment guifg=#909090
     "hi Normal guibg=NONE
     "hi EndOfBuffer guibg=NONE
     "hi NonText guibg=NONE
@@ -53,35 +53,50 @@ function! CustomColors()
 endfunction
 
 " Change Color when entering Insert Mode
-autocmd InsertEnter * highlight  CursorLineNr guifg=#f39660
+autocmd InsertEnter * highlight  CursorLineNr guifg=#e5c463
 
 " Revert Color to default when leaving Insert Mode
-autocmd InsertLeave * highlight  CursorLineNr guifg=#e2e2e3
+autocmd InsertLeave * highlight  CursorLineNr guifg=#e3e1e4
 
 " keybindings
 noremap <Leader>s :update<CR>
+noremap <Leader>q :bd<CR>
+noremap <silent> <Leader><Leader> :bn<CR>
+noremap <silent> <Leader>p :bp<CR>
+noremap <silent> <Leader>l :noh<CR>
 inoremap jj <Esc>
-nnoremap <Leader>g :Goyo<CR>
+nnoremap <silent> <Leader>g :Goyo<CR>
 nmap <F5> <Esc>:w<CR>:!clear;python %<CR> " exectute python
-map <C-n> :NERDTreeToggle<CR>
 nnoremap x "_x
 
 nnoremap <leader>git      :GFiles<CR>
 nnoremap <leader>t        :Files<CR>
 nnoremap <leader>f        :Lines<CR>
-nnoremap <leader><leader> :Buffers<CR>
+nnoremap <leader>b        :Buffers<CR>
 nnoremap <leader>r        :History<CR>
+
+function! g:BuffetSetCustomColors()
+  hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
+  hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
+  hi! BuffetActiveBuffer guibg=NONE guifg=#909090
+  hi! BuffetBuffer guibg=NONE guifg=#909090
+  hi! BuffetTrunc guibg=NONE guifg=#909090
+  hi! BuffetTab guibg=NONE guifg=#909090
+  hi! BuffetModActiveBuffer guibg=NONE guifg=#e5c463
+  hi! BuffetModBuffer guibg=NONE guifg=#909090
+endfunction
 
 call plug#begin()
     Plug 'Yggdroot/indentLine'
     Plug 'justinmk/vim-sneak'
-    Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf.vim'
+    Plug 'mhinz/vim-startify'
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'machakann/vim-highlightedyank'
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
     Plug 'sainnhe/sonokai'
+    Plug 'bagrat/vim-buffet'
     Plug 'vim-python/python-syntax'
 call plug#end()
 
@@ -108,19 +123,10 @@ function! s:goyo_leave()
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
-    "    \   | Limelight
+        \   | Limelight
 autocmd! User GoyoLeave nested call <SID>goyo_leave() 
-    "    \   | Limelight!
+        \   | Limelight!
         \   | call CustomColors()
-
-
-"NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in")
-        \ | NERDTree | endif
-autocmd BufEnter * if (winnr("$") == 1 
-        \ && exists("b:NERDTree") 
-        \ && b:NERDTree.isTabTree()) | q | endif
 
 "sneak
 let g:sneak#label = 1
@@ -131,6 +137,9 @@ let g:fzf_preview_window = []
 let g:sonokai_disable_italic_comment = 1
 let g:sonokai_transparent_background = 1
 let g:limelight_conceal_guifg = 'DarkGray'
-let g:highlightedyank_highlight_duration = 350
+let g:highlightedyank_highlight_duration = 500
 let g:python_highlight_all = 1
+let g:buffet_always_show_tabline = 0
+let g:buffet_tab_icon = ''
+let g:buffet_separator = ''
 call CustomColors()

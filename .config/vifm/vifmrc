@@ -19,7 +19,7 @@ set vicmd=nvim
 " standard utilities like `cp`.  While using `cp` and alike is a more universal
 " solution, it's also much slower when processing large amounts of files and
 " doesn't support progress measuring.
-
+only
 set syscalls
 
 " Trash Directory

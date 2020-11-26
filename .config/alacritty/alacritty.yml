@@ -28,7 +28,7 @@ window:
   # #
   # # Window opacity as a floating point number from `0.0` to `1.0`.
  # # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
+background_opacity: 0.96
 
 unfocused_hollow: true 
 
@@ -48,19 +48,26 @@ cursor:
           #           # - Beam
           #             style: Block
           #
-        style: Block
+    style: Beam
 
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    # blinking: On
 # When true, bold text is drawn using the bright variant of colors.
 
 # Font configuration (changes require restart)
 font:
   # The normal (roman) font face to use.
   normal:
-    #    family: Terminus
-    family: LiterationMono Nerd Font
+        family: FiraCode Nerd Font
     # Style can be specified to pick a specific face.
   style: Regular
-  size: 7
+  size: 6.5
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
