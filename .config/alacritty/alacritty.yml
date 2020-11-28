@@ -28,7 +28,7 @@ window:
   # #
   # # Window opacity as a floating point number from `0.0` to `1.0`.
  # # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.96
+background_opacity: 0.90
 
 unfocused_hollow: true 
 
@@ -59,16 +59,34 @@ cursor:
     #   - Always: Force the cursor to always blink
     # blinking: On
 # When true, bold text is drawn using the bright variant of colors.
+draw_bold_text_with_bright_colors: true
 
 # Font configuration (changes require restart)
 font:
-  # The normal (roman) font face to use.
+  # Normal (roman) font face
   normal:
-        family: FiraCode Nerd Font
-    # Style can be specified to pick a specific face.
-  style: Regular
-  size: 6.5
+    # Font family
+    #
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux/BSD) monospace
+    #   - (Windows) Consolas
+    family: Terminus
 
+    # The `style` can be specified to pick a specific face.
+    style: Regular
+
+  # Bold font face
+  bold:
+    # Font family
+    #
+    # If the bold family is not specified, it will fall back to the
+    # value specified for the normal font.
+    family: Terminus
+
+    # The `style` can be specified to pick a specific face.
+    style: Bold
+  size: 6.5
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
    # x: 2.0
@@ -84,13 +102,14 @@ font:
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
+
 colors:
   primary:
     background: "0x2c2e34"
     foreground: "0xe2e2e3"
 
   normal:
-    black: "0x383838"
+    black: "0x505050"
     red: "0xfc5d7c"
     green: "0x9ed072"
     yellow: "0xe7c664"
@@ -100,7 +119,7 @@ colors:
     white: "0xe2e2e3"
 
   bright:
-    black: "0x383838"
+    black: "0x505050"
     red: "0xfc5d7c"
     green: "0x9ed072"
     yellow: "0xe7c664"

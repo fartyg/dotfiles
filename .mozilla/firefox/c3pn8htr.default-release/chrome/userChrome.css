@@ -1,0 +1,65 @@
+/* Hide blue stripe on active tab */
+.tab-line[selected="true"] {
+  opacity: 0 !important;
+}
+
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-bottom-line {
+height: 0 !important;
+}
+
+/*** BEGIN Firefox 77 (June 2, 2020) Override URL bar enlargement ***/
+
+  /* Compute new position, width, and padding */
+
+#urlbar[breakout][breakout-extend] {
+  top: 5px !important;
+  left: 0px !important;
+  width: 100% !important;
+  padding: 0px !important;
+}
+/* for alternate Density settings */
+[uidensity="compact"] #urlbar[breakout][breakout-extend] {
+  top: 3px !important;
+}
+[uidensity="touch"] #urlbar[breakout][breakout-extend] {
+  top: 4px !important;
+}
+
+/* Prevent shift of URL bar contents */
+
+#urlbar[breakout][breakout-extend] > #urlbar-input-container {
+  height: var(--urlbar-height) !important;
+  padding: 0 !important;
+}
+
+/* Do not animate */
+
+#urlbar[breakout][breakout-extend] > #urlbar-background {
+  animation: none !important;;
+}
+
+/* Remove shadows */
+
+#urlbar[breakout][breakout-extend] > #urlbar-background {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+tabs {
+  counter-reset: tab-counter;
+}
+
+tab:nth-child(1) .tab-label::before,
+tab:nth-child(2) .tab-label::before,
+tab:nth-child(3) .tab-label::before,
+tab:nth-child(4) .tab-label::before,
+tab:nth-child(5) .tab-label::before,
+tab:nth-child(6) .tab-label::before,
+tab:nth-child(7) .tab-label::before,
+tab:nth-child(8) .tab-label::before {
+  counter-increment: tab-counter;
+  content: counter(tab-counter) "";
+  position: relative;
+  top: -0.5rem;
+  font-weight: bold;
+}

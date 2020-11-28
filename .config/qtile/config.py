@@ -149,7 +149,27 @@ keys = [
         lazy.spawn("/home/aj/.scripts/lock.sh"),
         desc='Lock session'
     ),
-     Key(
+        Key(
+        [], "XF86AudioRaiseVolume",
+        lazy.spawn("pactl set-sink-volume 0 +5%")
+    ),
+    Key(
+        [], "XF86AudioLowerVolume",
+        lazy.spawn("pactl set-sink-volume 0 -5%")
+    ),
+    Key(
+        [], "XF86AudioMute",
+        lazy.spawn("pactl set-sink-mute 0 toggle")
+    ),
+    Key(
+        [], "XF86MonBrightnessUp",
+        lazy.spawn("brightnessctl s +100")
+    ),
+    Key(
+        [], "XF86MonBrightnessDown",
+        lazy.spawn("brightnessctl s 100-")
+    ),
+    Key(
         [], "Print",
         lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'"),
         desc='Take a screenshot'
@@ -211,8 +231,8 @@ groups.append(
             'alacritty',
             opacity=1,
             height=0.80,
-            width=0.33,
-            x=0.66,
+            width=0.28,
+            x=0.71,
             y=0.18
         )
     ])
@@ -228,12 +248,12 @@ keys.extend([
 ])
 
 layout_theme = {
-    'border_width': 2,
+    'border_width': 1,
     'border_focus': bordercolor,
     'border_normal': bgcolor,
     #'single_margin': 20,
     'single_border_width': 0,
-    'margin': 8,
+    'margin': 5,
     'font=': font
 }
 
@@ -244,14 +264,16 @@ layouts = [
     ),
     layout.MonadTall(
         **layout_theme,
-        ratio=0.5
+        change_ratio = 0.025,
+        min_secondary_size=220,
+        ratio=0.68
     )
 ]
 
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 9,
+        'padding': 6,
         'background': bgcolor,
         'highlight_method': 'text'
 }

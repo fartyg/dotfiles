@@ -66,8 +66,10 @@ noremap <silent> <Leader>p :bp<CR>
 noremap <silent> <Leader>l :noh<CR>
 inoremap jj <Esc>
 nnoremap <silent> <Leader>g :Goyo<CR>
-nmap <F5> <Esc>:w<CR>:!clear;python %<CR> " exectute python
 nnoremap x "_x
+nmap <F6> :TagbarToggle<CR>
+autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 nnoremap <leader>git      :GFiles<CR>
 nnoremap <leader>t        :Files<CR>
@@ -92,6 +94,7 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'mhinz/vim-startify'
     Plug 'junegunn/goyo.vim'
+    Plug 'preservim/tagbar'
     Plug 'junegunn/limelight.vim'
     Plug 'machakann/vim-highlightedyank'
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
@@ -134,6 +137,7 @@ let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
 let g:fzf_preview_window = []
+let g:tagbar_autoclose = 1
 let g:sonokai_disable_italic_comment = 1
 let g:sonokai_transparent_background = 1
 let g:limelight_conceal_guifg = 'DarkGray'

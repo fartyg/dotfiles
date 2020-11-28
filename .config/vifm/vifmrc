@@ -121,6 +121,7 @@ set statusline="  %t%= %A %10u:%-7g %15s %20d %{&sort} "
 mark d ~/Downloads
 mark i ~/Pictures
 mark p ~/code
+mark x /run/media/aj/3de5aed2-8a03-40e7-9451-64b090f0f1d0/
 mark r ~/random
 mark w ~/Pictures/wp_rotation
 
@@ -183,8 +184,6 @@ fileviewer *.pdf pdftotext -nopgbrk %c -
 filextype *.ps,*.eps,*.ps.gz
         \ {View in zathura}
         \ zathura %f,
-        \ {View in gv}
-        \ gv %c %i &,
 
 
 " epub
@@ -196,15 +195,13 @@ filextype *.epub
 filextype *.djvu
         \ {View in zathura}
         \ zathura %f,
-        \ {View in apvlv}
-        \ apvlv %f,
 
 " Audio
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
        \ {Play using ffplay}
        \ ffplay -nodisp -autoexit %c,
        \ {Play using MPlayer}
-       \ mplayer %f,
+       \ mpv %f,
 fileviewer *.mp3 mp3info
 fileviewer *.flac soxi
 
@@ -271,7 +268,7 @@ filetype *.asc
        \ !!gpg --verify %c,
 
 " Torrent
-filetype *.torrent ktorrent %f &
+filetype *.torrent rtorrent %f &
 fileviewer *.torrent dumptorrent -v %c
 
 " FuseZipMount
@@ -361,7 +358,7 @@ filextype */
 " uncommenting one of lines below will result in ignoring 'vi[x]cmd' option
 " for unknown file types.
 " For *nix:
-filetype * handlr open
+" filetype * handlr open
 " For OS X:
 " filetype * open
 " For Windows:
