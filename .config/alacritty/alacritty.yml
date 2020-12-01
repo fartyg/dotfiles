@@ -28,7 +28,7 @@ window:
   # #
   # # Window opacity as a floating point number from `0.0` to `1.0`.
  # # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.90
+background_opacity: 0.93
 
 unfocused_hollow: true 
 
@@ -71,7 +71,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Terminus
+    family: LiterationMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -82,11 +82,11 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Terminus
+    family: LiterationMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
-  size: 6.5
+  size: 5.5
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
    # x: 2.0
@@ -102,7 +102,11 @@ font:
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
+# Base16 Zenburn 256 - alacritty color config
+# elnawe
 
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  # Normal colors
 colors:
   primary:
     background: "0x2c2e34"
@@ -133,7 +137,7 @@ colors:
   #    foreground: "0xe3e1e4"
   #
   #  normal:
-  #    black: "0x606060"
+  #    black: "0x757575"
   #    red: "0xf85e84"
   #    green: "0x9ecd6f"
   #    yellow: "0xe5c463"
@@ -143,7 +147,7 @@ colors:
   #    white: "0xe3e1e4"
   #
   #  bright:
-  #    black: "0x606060"
+  #    black: "0x757575"
   #    red: "0xf85e84"
   #    green: "0x9ecd6f"
   #    yellow: "0xe5c463"

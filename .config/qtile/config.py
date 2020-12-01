@@ -41,7 +41,7 @@ music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
 bgcolor = '2c2e34'
 gray = '404040'
 anothergray = '606060'
-bordercolor = '808080'
+bordercolor = '606060'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -114,11 +114,11 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-   # Key(
-   #     [mod, 'shift'], 'Return',
-   #     lazy.layout.toggle_split(),
-   #     desc='Toggle between split and unsplit sides of stack'
-   # ),
+    # Key(
+    #     [mod, 'shift'], 'Return',
+    #     lazy.layout.toggle_split(),
+    #     desc='Toggle between split and unsplit sides of stack'
+    # ),
     Key(
         [mod], 'Return',
         lazy.spawn(terminal),
@@ -149,7 +149,11 @@ keys = [
         lazy.spawn("/home/aj/.scripts/lock.sh"),
         desc='Lock session'
     ),
-        Key(
+    Key(
+        [mod, 'control'], 'g',
+        lazy.hide_show_bar("bottom")
+    ),
+    Key(
         [], "XF86AudioRaiseVolume",
         lazy.spawn("pactl set-sink-volume 0 +5%")
     ),
@@ -184,7 +188,7 @@ keys = [
         lazy.spawn('thunar'),
         desc='Launch thunar'
     ),
-   Key(
+    Key(
         [mod], 'b',
         lazy.spawn('env MOZ_X11_EGL=1 firefox'),
         desc='Launch firefox'
@@ -197,8 +201,7 @@ groups = [
     Group('d'),
     Group('f', layout='monadtall'),
     Group('u'),
-    Group('i'),
-    Group('o')
+    Group('i')
 ]
 
 for i in groups:
@@ -248,12 +251,12 @@ keys.extend([
 ])
 
 layout_theme = {
-    'border_width': 1,
-    'border_focus': bordercolor,
+    'border_width': 0,
+    'border_focus': '202020',
     'border_normal': bgcolor,
-    #'single_margin': 20,
-    'single_border_width': 0,
-    'margin': 5,
+ #   'single_margin': 0,
+ #   'single_border_width': 0,
+    'margin': 14,
     'font=': font
 }
 
@@ -266,14 +269,14 @@ layouts = [
         **layout_theme,
         change_ratio = 0.025,
         min_secondary_size=220,
-        ratio=0.68
+        ratio=0.61
     )
 ]
 
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 6,
+        'padding': 9,
         'background': bgcolor,
         'highlight_method': 'text'
 }
@@ -333,14 +336,19 @@ screens = [
                     },
                     stop_pause_text=''
                 ),
-                widget.PulseVolume(foreground=blue),
+                widget.PulseVolume(
+                        foreground=blue,
+                        padding=None,
+                ),
                 widget.Backlight(
+                        padding=None,
                         foreground=yellow,
                         backlight_name='intel_backlight',
                         change_command='brightnessctl s {0}'
                 ),
                 widget.Clock(
                     format='%a %H:%M',
+                    padding=None,
                     foreground = orange,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
