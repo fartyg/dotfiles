@@ -52,7 +52,6 @@ white = 'e3e1e4'
 
 
 keys = [
-    # Switch between windows in current stack pane
     Key(
         [mod], 'j',
         lazy.layout.down(),
@@ -71,7 +70,6 @@ keys = [
         [mod], 'l',
         lazy.layout.grow_main()
     ),
-    # Move windows up or down in current stack
     Key(
         [mod, 'control'], 'j',
         lazy.layout.shuffle_down(),
@@ -98,27 +96,16 @@ keys = [
         [mod], "p",
         lazy.layout.flip()
     ),
-    # Switch window focus to other pane(s) of stack
     Key(
         [mod], 'space',
         lazy.layout.next(),
         desc='Switch window focus to other pane(s) of stack'
     ),
-    # Swap panes of split stack
     Key(
         [mod, 'shift'], 'space',
         lazy.layout.rotate(),
         desc='Swap panes of split stack'
     ),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    # Key(
-    #     [mod, 'shift'], 'Return',
-    #     lazy.layout.toggle_split(),
-    #     desc='Toggle between split and unsplit sides of stack'
-    # ),
     Key(
         [mod], 'Return',
         lazy.spawn(terminal),
@@ -176,7 +163,7 @@ keys = [
     Key(
         [], "Print",
         lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'"),
-        desc='Take a screenshot'
+        desc='Take screenshot'
     ),
     Key(
         [mod], 'r',
@@ -206,44 +193,33 @@ groups = [
 
 for i in groups:
     keys.extend([
-        # mod1 + letter of group = switch to group
         Key(
             [mod], i.name,
             lazy.group[i.name].toscreen(),
-            desc='Switch to group {}'.format(i.name)
+            desc=f'Switch to group {i.name}'
         ),
-        # mod1 + shift + letter of group
-        # = switch to & move focused window to group
         Key(
             [mod, 'shift'], i.name,
             lazy.window.togroup(i.name, switch_group=True),
-            desc='Switch to & move focused window to group {}'.format(i.name)
+            desc=f'Switch to & move focused window to group {i.name}'
         ),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, 'shift'], i.name, lazy.window.togroup(i.name),
-        #     desc='move focused window to group {}'.format(i.name)),
     ])
 
 groups.append(
     ScratchPad('scratchpad', [
-        # define a drop down terminal.
-        # it is placed in the upper third of screen by default.
         DropDown(
             'term',
             'alacritty',
             opacity=1,
             height=0.80,
-            width=0.28,
-            x=0.71,
-            y=0.18
+            width=0.26,
+            x=0.72,
+            y=0.16
         )
     ])
 )
 
 keys.extend([
-    # Scratchpad
-    # toggle visibiliy of above defined DropDown named 'term'
     Key(
         [mod], 'minus',
         lazy.group['scratchpad'].dropdown_toggle('term')
