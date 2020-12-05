@@ -1,4 +1,16 @@
+let g:startify_custom_header = [
+ \ '                                        ▟▙            ',
+ \ '                                        ▝▘            ',
+ \ '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
+ \ '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
+ \ '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
+ \ '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
+ \ '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
+ \ '',
+ \]
+
 let mapleader = " " " space is the leader key
+let maplocalleader=" "
 syntax on " syntax highlighting
 filetype on
 set wildmenu " autocompletion for commandmenu
@@ -42,11 +54,13 @@ noremap <silent> <Leader>l :noh<CR>
 inoremap jj <Esc>
 nnoremap <silent> <Leader>g :Goyo<CR>
 nnoremap x "_x
+
 nnoremap <leader>git      :GFiles<CR>
 nnoremap <leader>t        :Files<CR>
 nnoremap <leader>f        :Lines<CR>
 nnoremap <leader>b        :Buffers<CR>
 nnoremap <leader>r        :History<CR>
+
 autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
@@ -70,19 +84,8 @@ function! CustomColors()
     hi StatusLine guibg=NONE
 endfunction
 
-autocmd InsertEnter * highlight  CursorLineNr guifg=#e5c463
-autocmd InsertLeave * highlight  CursorLineNr guifg=#e3e1e4
-
-function! g:BuffetSetCustomColors()
-  hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
-  hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetActiveBuffer guibg=NONE guifg=#656565
-  hi! BuffetBuffer guibg=NONE guifg=#656565
-  hi! BuffetTrunc guibg=NONE guifg=#656565
-  hi! BuffetTab guibg=NONE guifg=#656565
-  hi! BuffetModActiveBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetModBuffer guibg=NONE guifg=#656565
-endfunction
+autocmd InsertEnter * highlight CursorLineNr guifg=#e5c463
+autocmd InsertLeave * highlight CursorLineNr guifg=#e3e1e4
 
 call plug#begin()
     Plug 'Yggdroot/indentLine'
@@ -90,6 +93,7 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'mhinz/vim-startify'
     Plug 'junegunn/goyo.vim'
+    Plug 'lervag/vimtex'
     Plug 'preservim/tagbar'
     Plug 'junegunn/limelight.vim'
     Plug 'jnurmine/Zenburn'
@@ -101,7 +105,6 @@ call plug#begin()
 call plug#end()
 
 "Goyo and Limelight
-"let g:limelight_conceal_guifg='#565656'
 function! s:goyo_enter()
   if has('gui_running')
     set fullscreen
@@ -133,14 +136,35 @@ let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
-let g:fzf_preview_window = []
-let g:tagbar_autoclose = 1
+"vimtex
+set nocompatible
+let &rtp = '~/.vim/bundle/vimtex,' . &rtp
+filetype plugin indent on
+set iskeyword+=:
+let g:tex_flavor = "latex"
+let g:vimtex_view_method = 'zathura'
+
+"plugin colors, visuals etc
 let g:sonokai_disable_italic_comment = 1
 let g:sonokai_transparent_background = 1
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:highlightedyank_highlight_duration = 500
 let g:python_highlight_all = 1
+let g:fzf_preview_window = []
 let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
+let g:tagbar_autoclose = 1
+
+function! g:BuffetSetCustomColors()
+  hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
+  hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
+  hi! BuffetActiveBuffer guibg=NONE guifg=#656565
+  hi! BuffetBuffer guibg=NONE guifg=#656565
+  hi! BuffetTrunc guibg=NONE guifg=#656565
+  hi! BuffetTab guibg=NONE guifg=#656565
+  hi! BuffetModActiveBuffer guibg=NONE guifg=#e5c463
+  hi! BuffetModBuffer guibg=NONE guifg=#656565
+endfunction
+
 call CustomColors()

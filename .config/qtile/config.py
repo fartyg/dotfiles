@@ -133,12 +133,19 @@ keys = [
     ),
     Key(
         [mod, 'control'], "l",
-        lazy.spawn("/home/aj/.scripts/lock.sh"),
-        desc='Lock session'
+        lazy.spawn("/home/aj/.scripts/lock.sh")
     ),
     Key(
         [mod, 'control'], 'g',
         lazy.hide_show_bar("bottom")
+    ),
+    Key(
+        [], "Pause",
+        lazy.spawn(music_cmd + 'PlayPause')
+    ),
+    Key(
+        [mod], "XF86AudioRaiseVolume",
+        lazy.spawn("pactl set-sink-volume 0 +5%")
     ),
     Key(
         [], "XF86AudioRaiseVolume",
@@ -162,23 +169,19 @@ keys = [
     ),
     Key(
         [], "Print",
-        lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'"),
-        desc='Take screenshot'
+        lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")
     ),
     Key(
         [mod], 'r',
-        lazy.spawn('/usr/bin/rofi -combi-modi window,drun -show combi -modi combi'),
-        desc='Launch rofi'
+        lazy.spawn('/usr/bin/rofi -combi-modi window,drun -show combi -modi combi')
     ),
     Key(
         [mod], 't',
-        lazy.spawn('thunar'),
-        desc='Launch thunar'
+        lazy.spawn('thunar')
     ),
     Key(
         [mod], 'b',
-        lazy.spawn('env MOZ_X11_EGL=1 firefox'),
-        desc='Launch firefox'
+        lazy.spawn('env MOZ_X11_EGL=1 firefox')
     )
 ]
 
@@ -227,8 +230,8 @@ keys.extend([
 ])
 
 layout_theme = {
-    'border_width': 0,
-    'border_focus': '202020',
+    'border_width': 1,
+    'border_focus': '505050',
     'border_normal': bgcolor,
  #   'single_margin': 0,
  #   'single_border_width': 0,
@@ -245,7 +248,7 @@ layouts = [
         **layout_theme,
         change_ratio = 0.025,
         min_secondary_size=220,
-        ratio=0.61
+        ratio=0.67
     )
 ]
 
@@ -312,6 +315,13 @@ screens = [
                     },
                     stop_pause_text=''
                 ),
+                 widget.NetGraph(
+                    frequency=3,
+                    graph_color=magenta,
+                    line_width=2,
+                    type='line',
+                    border_width=0
+                ),
                 widget.PulseVolume(
                         foreground=blue,
                         padding=None,
@@ -339,7 +349,7 @@ screens = [
                 ),
             ],
             18,
-            opacity=1
+            opacity=0.93
         ),
     ),
 ]
