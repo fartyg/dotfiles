@@ -1,29 +1,3 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the 'Software'), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 from typing import List  # noqa: F401
 import os, subprocess
 from libqtile import bar, layout, widget, hook
@@ -40,8 +14,8 @@ music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
 # Colors
 bgcolor = '2c2e34'
 gray = '404040'
-anothergray = '606060'
-bordercolor = '606060'
+anothergray = '757575'
+bordercolor = anothergray
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -50,139 +24,36 @@ blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
 
-
 keys = [
-    Key(
-        [mod], 'j',
-        lazy.layout.down(),
-        desc='Move focus down in stack pane'
-    ),
-    Key(
-        [mod], 'k',
-        lazy.layout.up(),
-        desc='Move focus up in stack pane'
-    ),
-    Key(
-        [mod], 'h',
-        lazy.layout.shrink_main()
-    ),
-    Key(
-        [mod], 'l',
-        lazy.layout.grow_main()
-    ),
-    Key(
-        [mod, 'control'], 'j',
-        lazy.layout.shuffle_down(),
-        desc='Move window down in current stack'
-    ),
-    Key(
-        [mod, 'control'], 'k',
-        lazy.layout.shuffle_up(),
-        desc='Move window up in current stack'
-    ),
-    Key(
-        [mod], "n",
-        lazy.layout.normalize()
-    ),
-    Key(
-        [mod], "m",
-        lazy.layout.maximize()
-    ),
-    Key(
-        [mod], "g",
-        lazy.window.toggle_fullscreen()
-    ),
-    Key(
-        [mod], "p",
-        lazy.layout.flip()
-    ),
-    Key(
-        [mod], 'space',
-        lazy.layout.next(),
-        desc='Switch window focus to other pane(s) of stack'
-    ),
-    Key(
-        [mod, 'shift'], 'space',
-        lazy.layout.rotate(),
-        desc='Swap panes of split stack'
-    ),
-    Key(
-        [mod], 'Return',
-        lazy.spawn(terminal),
-        desc='Launch terminal'
-    ),
-    Key(
-        [mod], 'Tab',
-        lazy.next_layout(),
-        desc='Toggle between layouts'
-    ),
-    Key(
-        [mod], 'q',
-        lazy.window.kill(),
-        desc='Kill focused window'
-    ),
-    Key(
-        [mod, 'control'], 'r',
-        lazy.restart(),
-        desc='Restart qtile'
-    ),
-    Key(
-        [mod, 'control'], 'q',
-        lazy.shutdown(),
-        desc='Shutdown qtile'
-    ),
-    Key(
-        [mod, 'control'], "l",
-        lazy.spawn("/home/aj/.scripts/lock.sh")
-    ),
-    Key(
-        [mod, 'control'], 'g',
-        lazy.hide_show_bar("bottom")
-    ),
-    Key(
-        [], "Pause",
-        lazy.spawn(music_cmd + 'PlayPause')
-    ),
-    Key(
-        [mod], "XF86AudioRaiseVolume",
-        lazy.spawn("pactl set-sink-volume 0 +5%")
-    ),
-    Key(
-        [], "XF86AudioRaiseVolume",
-        lazy.spawn("pactl set-sink-volume 0 +5%")
-    ),
-    Key(
-        [], "XF86AudioLowerVolume",
-        lazy.spawn("pactl set-sink-volume 0 -5%")
-    ),
-    Key(
-        [], "XF86AudioMute",
-        lazy.spawn("pactl set-sink-mute 0 toggle")
-    ),
-    Key(
-        [], "XF86MonBrightnessUp",
-        lazy.spawn("brightnessctl s +100")
-    ),
-    Key(
-        [], "XF86MonBrightnessDown",
-        lazy.spawn("brightnessctl s 100-")
-    ),
-    Key(
-        [], "Print",
-        lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")
-    ),
-    Key(
-        [mod], 'r',
-        lazy.spawn('/usr/bin/rofi -combi-modi window,drun -show combi -modi combi')
-    ),
-    Key(
-        [mod], 't',
-        lazy.spawn('thunar')
-    ),
-    Key(
-        [mod], 'b',
-        lazy.spawn('env MOZ_X11_EGL=1 firefox')
-    )
+    Key([mod], 'j', lazy.layout.down()),
+    Key([mod], 'k', lazy.layout.up()),
+    Key([mod], 'h', lazy.layout.shrink_main()),
+    Key([mod], 'l', lazy.layout.grow_main()),
+    Key([mod, 'control'], 'j', lazy.layout.shuffle_down()),
+    Key([mod, 'control'], 'k', lazy.layout.shuffle_up()),
+    Key([mod], 'n', lazy.layout.normalize()),
+    Key([mod], 'm', lazy.layout.maximize()),
+    Key([mod], 'g', lazy.window.toggle_fullscreen()),
+    Key([mod], 'p', lazy.layout.flip()),
+    Key([mod], 'space', lazy.layout.next()),
+    Key([mod, 'shift'], 'space', lazy.layout.rotate()),
+    Key([mod], 'Return', lazy.spawn(terminal)),
+    Key([mod], 'Tab', lazy.next_layout()),
+    Key([mod], 'q', lazy.window.kill()),
+    Key([mod, 'control'], 'r', lazy.restart()),
+    Key([mod, 'control'], 'q', lazy.shutdown()),
+    Key([mod, 'control'], 'l', lazy.spawn('/home/aj/.scripts/lock.sh')),
+    Key([mod, 'control'], 'g', lazy.hide_show_bar('bottom')),
+    Key([], 'Pause', lazy.spawn(music_cmd + 'PlayPause')),
+    Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume 0 +5%')),
+    Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume 0 -5%')),
+    Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute 0 toggle')),
+    Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
+    Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
+    Key([], 'Print', lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")),
+    Key([mod], 'r', lazy.spawn('/usr/bin/rofi -combi-modi window,drun -show combi -modi combi')),
+    Key([mod], 't', lazy.spawn('thunar')),
+    Key([mod], 'b', lazy.spawn('env MOZ_X11_EGL=1 firefox'))
 ]
 
 groups = [
@@ -230,25 +101,22 @@ keys.extend([
 ])
 
 layout_theme = {
-    'border_width': 1,
-    'border_focus': '505050',
+    'border_width': 2,
+    'border_focus': bordercolor,
     'border_normal': bgcolor,
- #   'single_margin': 0,
- #   'single_border_width': 0,
-    'margin': 14,
+    'margin': 12,
+    'ratio': 0.65,
+    'min_secondary_size': 220,
+    'change_ratio': 0.025,
     'font=': font
 }
 
 layouts = [
     layout.MonadWide(
-        **layout_theme,
-        ratio=0.55
+        **layout_theme
     ),
     layout.MonadTall(
-        **layout_theme,
-        change_ratio = 0.025,
-        min_secondary_size=220,
-        ratio=0.67
+        **layout_theme
     )
 ]
 
@@ -279,6 +147,7 @@ screens = [
                      foreground = white,
                      background = bgcolor
                 ),
+                #widget.Pomodoro(),
                 widget.Spacer(),
                 widget.CPU(
                     format='{load_percent}%',
@@ -298,6 +167,14 @@ screens = [
                     visible_on_warn=False,
                     format='{uf} {m}B',
                     foreground=white
+                ),
+                widget.CheckUpdates(
+                       **widget_defaults,
+                       update_interval=21600,
+                       distro = 'Arch_checkupdates',
+                       display_format = '{updates}',
+                       execute = 'alacritty -e yay',
+                       colour_have_updates=yellow
                 ),
                 widget.Mpris2(
                     foreground=green,
@@ -322,19 +199,14 @@ screens = [
                     type='line',
                     border_width=0
                 ),
-                widget.PulseVolume(
-                        foreground=blue,
-                        padding=None,
-                ),
+                widget.PulseVolume(foreground=blue),
                 widget.Backlight(
-                        padding=None,
                         foreground=yellow,
                         backlight_name='intel_backlight',
                         change_command='brightnessctl s {0}'
                 ),
                 widget.Clock(
                     format='%a %H:%M',
-                    padding=None,
                     foreground = orange,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
@@ -354,7 +226,6 @@ screens = [
     ),
 ]
 
-# Drag floating layouts.
 mouse = [
     Drag(
         [mod], 'Button1',
@@ -398,15 +269,6 @@ floating_layout = layout.Floating(
                          {'wmclass': 'ssh-askpass'},  # ssh-askpass
                      ]
 )
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
 wmname = 'LG3D'
 
 @hook.subscribe.startup_once

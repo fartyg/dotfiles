@@ -45,24 +45,37 @@ set cmdheight=1
 set noruler
 
 " keybindings
-nmap <F6> :TagbarToggle<CR>
+inoremap jj <Esc>
+
 noremap <Leader>s :update<CR>
 noremap <Leader>q :bd<CR>
-noremap <silent> <Leader><Leader> :bn<CR>
-noremap <silent> <Leader>p :bp<CR>
-noremap <silent> <Leader>l :noh<CR>
-inoremap jj <Esc>
-nnoremap <silent> <Leader>g :Goyo<CR>
-nnoremap x "_x
+noremap <silent><Leader><Leader> :bn<CR>
+noremap <silent><Leader>p :bp<CR>
+noremap <silent><Leader>l :noh<CR>
+noremap <silent><Leader>c gcc<CR>
 
-nnoremap <leader>git      :GFiles<CR>
-nnoremap <leader>t        :Files<CR>
-nnoremap <leader>f        :Lines<CR>
-nnoremap <leader>b        :Buffers<CR>
-nnoremap <leader>r        :History<CR>
+" m (move) is cut and d is actually delete with vim-cutlass
+nnoremap m d
+xnoremap m d
+nnoremap mm dd
+nnoremap M D
+
+nmap <leader>c <Plug>Commentary
+xmap <leader>c <Plug>Commentary
+omap <leader>c <Plug>Commentary
+nmap <leader>cc <Plug>CommentaryLine
+
+nnoremap <silent><leader>git :GFiles<CR>
+nnoremap <silent><leader>t   :Files<CR>
+nnoremap <silent><leader>f   :Lines<CR>
+nnoremap <silent><leader>b   :Buffers<CR>
+nnoremap <silent><leader>r   :History<CR>
+
+nnoremap <silent><Leader>g :Goyo<CR>
 
 autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+nmap <silent><F6> :TagbarToggle<CR>
 
 "terminal colors
 if exists('+termguicolors')
@@ -88,18 +101,20 @@ autocmd InsertEnter * highlight CursorLineNr guifg=#e5c463
 autocmd InsertLeave * highlight CursorLineNr guifg=#e3e1e4
 
 call plug#begin()
+    Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
+    Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
+    Plug 'svermeulen/vim-cutlass'
+    Plug 'machakann/vim-highlightedyank'
+    Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
     Plug 'justinmk/vim-sneak'
-    Plug 'junegunn/fzf.vim'
     Plug 'mhinz/vim-startify'
-    Plug 'junegunn/goyo.vim'
     Plug 'lervag/vimtex'
     Plug 'preservim/tagbar'
-    Plug 'junegunn/limelight.vim'
-    Plug 'jnurmine/Zenburn'
-    Plug 'machakann/vim-highlightedyank'
-    Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
-    Plug 'sainnhe/sonokai'
     Plug 'bagrat/vim-buffet'
     Plug 'vim-python/python-syntax'
 call plug#end()
@@ -144,7 +159,7 @@ set iskeyword+=:
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'zathura'
 
-"plugin colors, visuals etc
+" etc
 let g:sonokai_disable_italic_comment = 1
 let g:sonokai_transparent_background = 1
 let g:limelight_conceal_guifg = 'DarkGray'
