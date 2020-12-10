@@ -9,13 +9,14 @@ mod = 'mod1'
 terminal = 'alacritty'
 font = 'Noto Sans'
 fontsize = 14
+margin = 9
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 # Colors
 bgcolor = '2c2e34'
 gray = '404040'
 anothergray = '757575'
-bordercolor = anothergray
+finalgray = '424242'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -23,6 +24,7 @@ magenta = 'ab9df2'
 blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
+bordercolor = 'a3a3a3'
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -33,10 +35,10 @@ keys = [
     Key([mod, 'control'], 'k', lazy.layout.shuffle_up()),
     Key([mod], 'n', lazy.layout.normalize()),
     Key([mod], 'm', lazy.layout.maximize()),
+    Key([mod], 'comma', lazy.layout.reset()),
     Key([mod], 'g', lazy.window.toggle_fullscreen()),
     Key([mod], 'p', lazy.layout.flip()),
     Key([mod], 'space', lazy.layout.next()),
-    Key([mod, 'shift'], 'space', lazy.layout.rotate()),
     Key([mod], 'Return', lazy.spawn(terminal)),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
@@ -73,7 +75,7 @@ for i in groups:
             desc=f'Switch to group {i.name}'
         ),
         Key(
-            [mod, 'shift'], i.name,
+            [mod, 'control'], i.name,
             lazy.window.togroup(i.name, switch_group=True),
             desc=f'Switch to & move focused window to group {i.name}'
         ),
@@ -101,11 +103,12 @@ keys.extend([
 ])
 
 layout_theme = {
-    'border_width': 2,
+    'border_width': 1,
     'border_focus': bordercolor,
-    'border_normal': bgcolor,
-    'margin': 12,
-    'ratio': 0.65,
+    'border_normal': finalgray,
+    'margin': margin,
+    'ratio': 0.6725,
+    'single_border_width': 0,
     'min_secondary_size': 220,
     'change_ratio': 0.025,
     'font=': font
@@ -147,7 +150,6 @@ screens = [
                      foreground = white,
                      background = bgcolor
                 ),
-                #widget.Pomodoro(),
                 widget.Spacer(),
                 widget.CPU(
                     format='{load_percent}%',
@@ -167,14 +169,6 @@ screens = [
                     visible_on_warn=False,
                     format='{uf} {m}B',
                     foreground=white
-                ),
-                widget.CheckUpdates(
-                       **widget_defaults,
-                       update_interval=21600,
-                       distro = 'Arch_checkupdates',
-                       display_format = '{updates}',
-                       execute = 'alacritty -e yay',
-                       colour_have_updates=yellow
                 ),
                 widget.Mpris2(
                     foreground=green,
@@ -205,6 +199,13 @@ screens = [
                         backlight_name='intel_backlight',
                         change_command='brightnessctl s {0}'
                 ),
+                widget.CheckUpdates(
+                       **widget_defaults,
+                       distro = 'Arch_checkupdates',
+                       display_format = '{updates}',
+                       execute = 'alacritty -e yay',
+                       colour_have_updates=green
+                ),
                 widget.Clock(
                     format='%a %H:%M',
                     foreground = orange,
@@ -220,8 +221,8 @@ screens = [
                         fontsize=fontsize
                 ),
             ],
-            18,
-            opacity=0.93
+            22,
+            opacity=1
         ),
     ),
 ]

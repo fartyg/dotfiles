@@ -1,6 +1,5 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
-
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty it self.
@@ -12,8 +11,6 @@ env:
   # `tput` command
   TERM: xterm-256color
 
-# Window dimensions in character columns and lines
-# (changes require restart)
 window:
 
   dimensions:
@@ -23,90 +20,30 @@ window:
   padding:
     x: 6
     y: 6
-      #decorations: "none"
-  # Background opacity
-  # #
-  # # Window opacity as a floating point number from `0.0` to `1.0`.
- # # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.96
+background_opacity: 0.92
 
 unfocused_hollow: true 
 
-# The FreeType rasterizer needs to know the device DPI for best results
-# (changes require restart)
 dpi:
   x: 96
   y: 96
 
 
 cursor:
-          # Style of the cursor
-          #   #
-          #     # Values for 'cursor_style':
-          #       # - Block
-          #         # - Underline
-          #           # - Beam
-          #             style: Block
-          #
     style: Beam
 
-    # Cursor blinking state
-    #
-    # Values for `blinking`:
-    #   - Never: Prevent the cursor from ever blinking
-    #   - Off: Disable blinking by default
-    #   - On: Enable blinking by default
-    #   - Always: Force the cursor to always blink
-    # blinking: On
-# When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
-# Font configuration (changes require restart)
 font:
-  # Normal (roman) font face
   normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
     family: LiterationMono Nerd Font
-
-    # The `style` can be specified to pick a specific face.
     style: Regular
 
-  # Bold font face
   bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
     family: LiterationMono Nerd Font
-
-    # The `style` can be specified to pick a specific face.
     style: Bold
-  size: 5.5
-  # Offset is the extra space around each character. offset.y can be thought of
-  # as modifying the linespacing, and offset.x as modifying the letter spacing.
-   # x: 2.0
-    #y: -11.0
+  size: 7
 
-  # OS X only: use thin stroke font rendering. Thin strokes are suitable
-  # for retina displays, but for non-retina you probably want this set to
-  # false.
- # use_thin_strokes: false
-
-# Should display the render timer
-# render_timer: false
-
-# Use custom cursor colors. If true, display the cursor in the cursor.foreground
-# and cursor.background colors, otherwise invert the colors of the cursor.
-# Base16 Zenburn 256 - alacritty color config
-# elnawe
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  # Normal colors
 colors:
   primary:
     background: "0x2c2e34"
@@ -131,30 +68,7 @@ colors:
     magenta: "0xb39df3"
     cyan: "0xf39660"
     white: "0xe2e2e3"
-  #colors:
-  #  primary:
-  #    background: "0x2c2e34"
-  #    foreground: "0xe3e1e4"
-  #
-  #  normal:
-  #    black: "0x757575"
-  #    red: "0xf85e84"
-  #    green: "0x9ecd6f"
-  #    yellow: "0xe5c463"
-  #    blue: "0x7accd7"
-  #    magenta: "0xab9df2"
-  #    cyan: "0xef9062"
-  #    white: "0xe3e1e4"
-  #
-  #  bright:
-  #    black: "0x757575"
-  #    red: "0xf85e84"
-  #    green: "0x9ecd6f"
-  #    yellow: "0xe5c463"
-  #    blue: "0x7accd7"
-  #    magenta: "0xab9df2"
-  #    cyan: "0xef9062"
-  #    white: "0xe3e1e4"
+
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
 # rung, the terminal background will be set to white and transition back to the
 # default background color. You can control the rate of this transition by

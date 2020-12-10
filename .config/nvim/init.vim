@@ -46,13 +46,13 @@ set noruler
 
 " keybindings
 inoremap jj <Esc>
-
+inoremap kk <Esc>
 noremap <Leader>s :update<CR>
-noremap <Leader>q :bd<CR>
+noremap <silent><Leader>q :bd<CR>
 noremap <silent><Leader><Leader> :bn<CR>
 noremap <silent><Leader>p :bp<CR>
 noremap <silent><Leader>l :noh<CR>
-noremap <silent><Leader>c gcc<CR>
+inoremap <C-H> <C-W>
 
 " m (move) is cut and d is actually delete with vim-cutlass
 nnoremap m d
@@ -85,12 +85,10 @@ if exists('+termguicolors')
 endif
 
 function! CustomColors()
-    colorscheme sonokai
-    highlight HighlightedyankRegion cterm=reverse gui=reverse
     hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
-    hi LineNr guibg=NONE guifg=#656565
-    hi Comment guifg=#656565
+    hi LineNr guibg=NONE guifg=#606060
+    hi Comment guifg=#606060
     hi Normal guibg=NONE
     hi EndOfBuffer guibg=NONE
     hi NonText guibg=NONE
@@ -170,16 +168,18 @@ let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
+highlight HighlightedyankRegion cterm=reverse gui=reverse
 
 function! g:BuffetSetCustomColors()
   hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
   hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetActiveBuffer guibg=NONE guifg=#656565
-  hi! BuffetBuffer guibg=NONE guifg=#656565
-  hi! BuffetTrunc guibg=NONE guifg=#656565
-  hi! BuffetTab guibg=NONE guifg=#656565
+  hi! BuffetActiveBuffer guibg=NONE guifg=#606060
+  hi! BuffetBuffer guibg=NONE guifg=#606060
+  hi! BuffetTrunc guibg=NONE guifg=#606060
+  hi! BuffetTab guibg=NONE guifg=#606060
   hi! BuffetModActiveBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetModBuffer guibg=NONE guifg=#656565
+  hi! BuffetModBuffer guibg=NONE guifg=#606060
 endfunction
 
+colorscheme sonokai
 call CustomColors()
