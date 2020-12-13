@@ -8,14 +8,17 @@ from libqtile.config import ScratchPad, DropDown
 mod = 'mod1'
 terminal = 'alacritty'
 font = 'Noto Sans'
-fontsize = 14
+fontsize = 16
 margin = 9
+barheight = 24
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
+rofi_cmd = '/usr/bin/rofi -combi-modi window,drun -show combi -modi combi -me-select-entry \'\' -me-accept-entry \'MousePrimary\''
+rofi_bottom_left = rofi_cmd + ' -location 7 -yoffset ' + str(-barheight -margin) + ' -xoffset ' + str(margin) 
 # Colors
 bgcolor = '2c2e34'
 gray = '404040'
-anothergray = '757575'
+anothergray = '858585'
 finalgray = '424242'
 yellow = 'e5c463'
 red = 'f85e84'
@@ -24,7 +27,7 @@ magenta = 'ab9df2'
 blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
-bordercolor = 'a3a3a3'
+bordercolor = anothergray
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -43,7 +46,7 @@ keys = [
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
     Key([mod, 'control'], 'r', lazy.restart()),
-    Key([mod, 'control'], 'q', lazy.shutdown()),
+    Key([mod, 'control'], 'q', lazy.spawn('/home/aj/.scripts/power.sh')),
     Key([mod, 'control'], 'l', lazy.spawn('/home/aj/.scripts/lock.sh')),
     Key([mod, 'control'], 'g', lazy.hide_show_bar('bottom')),
     Key([], 'Pause', lazy.spawn(music_cmd + 'PlayPause')),
@@ -53,7 +56,11 @@ keys = [
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")),
-    Key([mod], 'r', lazy.spawn('/usr/bin/rofi -combi-modi window,drun -show combi -modi combi')),
+    Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')),
+    Key([mod], 'odiaeresis', lazy.spawn('pavucontrol')),
+    Key([mod], 'adiaeresis', lazy.spawn('thunderbird')),
+#    Key([mod], 'r', lazy.spawn(rofi_cmd)),
+    Key([], 'Super_L', lazy.spawn(rofi_bottom_left)),
     Key([mod], 't', lazy.spawn('thunar')),
     Key([mod], 'b', lazy.spawn('env MOZ_X11_EGL=1 firefox'))
 ]
@@ -86,11 +93,7 @@ groups.append(
         DropDown(
             'term',
             'alacritty',
-            opacity=1,
-            height=0.80,
-            width=0.26,
-            x=0.72,
-            y=0.16
+            opacity=1
         )
     ])
 )
@@ -103,12 +106,13 @@ keys.extend([
 ])
 
 layout_theme = {
-    'border_width': 1,
+    'border_width': 2,
     'border_focus': bordercolor,
-    'border_normal': finalgray,
+    'border_normal': bgcolor,
     'margin': margin,
     'ratio': 0.6725,
     'single_border_width': 0,
+    'single_margin': 0,
     'min_secondary_size': 220,
     'change_ratio': 0.025,
     'font=': font
@@ -136,10 +140,21 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
+                widget.Image(
+                filename='/home/aj/.config/qtile/arch.png',
+                mouse_callbacks = {
+                    'Button1': lambda qtile:
+                    qtile.cmd_spawn(rofi_bottom_left),
+                    'Button3': lambda qtile:
+                    qtile.cmd_spawn('/home/aj/.scripts/power.sh')
+                    }
+                ),
+                widget.Sep(padding=10, linewidth=0),
                 widget.GroupBox(
                      margin_y=3,
-                     margin_x=0,
+                     padding=8,
                      borderwidth=0,
+                     center_aligned=True,
                      rounded=False,
                      disable_drag=True,
                      active = anothergray,
@@ -151,25 +166,6 @@ screens = [
                      background = bgcolor
                 ),
                 widget.Spacer(),
-                widget.CPU(
-                    format='{load_percent}%',
-                    foreground=white,
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn('alacritty -e htop'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn('pavucontrol'),
-                    }
-                ),
-                widget.Memory(
-                    format='{MemUsed} MB',
-                    foreground=white
-                ),
-                widget.DF(
-                    visible_on_warn=False,
-                    format='{uf} {m}B',
-                    foreground=white
-                ),
                 widget.Mpris2(
                     foreground=green,
                     name='spotify',
@@ -186,12 +182,29 @@ screens = [
                     },
                     stop_pause_text=''
                 ),
-                 widget.NetGraph(
-                    frequency=3,
-                    graph_color=magenta,
-                    line_width=2,
-                    type='line',
-                    border_width=0
+                widget.Spacer(),
+                widget.CPU(
+                    format='{load_percent}%',
+                    foreground=magenta,
+                    mouse_callbacks = {
+                        'Button1': lambda qtile:
+                        qtile.cmd_spawn('alacritty -e htop'),
+                        'Button2': lambda qtile:
+                        qtile.cmd_spawn('pavucontrol')
+                    }
+                ),
+                widget.Memory(
+                    format='{MemUsed} MB',
+                    foreground=magenta
+                ),
+                widget.DF(
+                    visible_on_warn=False,
+                    format='{uf} {m}B',
+                    foreground=magenta
+                ),
+                widget.Net(
+                        format='{down}',
+                        foreground=magenta
                 ),
                 widget.PulseVolume(foreground=blue),
                 widget.Backlight(
@@ -214,15 +227,9 @@ screens = [
                         qtile.cmd_spawn('alacritty -e calcurse')
                     }
                 ),
-                widget.QuickExit(
-                        foreground=red,
-                        default_text='x',
-                        countdown_format='{}',
-                        fontsize=fontsize
-                ),
             ],
-            22,
-            opacity=1
+            barheight,
+            opacity=0.94
         ),
     ),
 ]

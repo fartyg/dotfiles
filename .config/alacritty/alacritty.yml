@@ -18,9 +18,9 @@ window:
     lines: 80
 
   padding:
-    x: 6
-    y: 6
-background_opacity: 0.92
+    x: 4
+    y: 4
+background_opacity: 0.94
 
 unfocused_hollow: true 
 

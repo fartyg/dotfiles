@@ -4,6 +4,7 @@ width: 30;
 /*	lines: 15;*/
 /*	columns: 1;*/
 font: "Noto Sans 12";
+display-run: "";
 display-drun: "";
 display-window: "";
 display-combi: "";

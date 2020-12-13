@@ -8,6 +8,7 @@
     foreground:                  rgba ( 227, 225, 228, 100 % );
     normal-foreground:           @foreground;
     red:                         rgba ( 220, 50, 47, 100 % );
+    anothergray:                 rgba ( 133, 133, 133, 100 % );
     selected-urgent-foreground:  rgba ( 51, 51, 51, 100 % );
     blue:                        rgba ( 38, 139, 210, 100 % );
     urgent-foreground:           rgba ( 255, 153, 153, 100 % );
@@ -19,9 +20,9 @@
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 0, 0, 0, 0 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
-    border-color:                @foreground;
+    border-color:                @anothergray;
     spacing:                     2;
-    separatorcolor:              rgba ( 164, 155, 128, 100 % );
+    separatorcolor:              @anothergray;
     urgent-background:           rgba ( 0, 0, 0, 0 % );
     background-color:            rgba ( 0, 0, 0, 0 % );
     alternate-active-foreground: @active-foreground;
@@ -29,7 +30,7 @@
 }
 window {
     background-color: @background;
-    border:           1;
+    border:           2;
     padding:          5;
 }
 mainbox {
@@ -124,7 +125,7 @@ prompt {
     text-color: @normal-foreground;
 }
 inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+    children:   [ prompt,entry,case-indicator ];
 }
 textbox-prompt-colon {
     expand:     false;
