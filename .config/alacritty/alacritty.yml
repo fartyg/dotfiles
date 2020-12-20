@@ -11,7 +11,7 @@ window:
     x: 6
     y: 6
 
-background_opacity: 0.88
+background_opacity: 0.90
 
 unfocused_hollow: true
 
@@ -28,7 +28,7 @@ font:
   normal:
     family: MesloLGL Nerd Font
     style: Regular
-  size: 7.5
+  size: 7
 
 colors:
   primary:

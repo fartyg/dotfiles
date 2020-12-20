@@ -94,7 +94,8 @@ if exists('+termguicolors')
 endif
 
 function! CustomColors()
-    hi CursorLine guibg=#373a45
+    hi CursorLine guibg=#444444
+    "hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
     hi LineNr guibg=NONE guifg=#858585
     hi Comment guifg=#858585

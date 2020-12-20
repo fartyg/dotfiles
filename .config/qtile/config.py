@@ -17,9 +17,9 @@ music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
 rofi_cmd = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
             -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
             '''
-rofi_bottom_left = f'{rofi_cmd} -location 7 \
-                   -yoffset {-barheight -margin} \
-                   -xoffset {margin}'
+rofi_bottom_left = f'{rofi_cmd} -location 7'
+                   # -xoffset {margin}' \
+                   # -yoffset {-barheight -margin} \
 
 # Colors
 bgcolor = '2c2e34'
@@ -33,7 +33,7 @@ magenta = 'ab9df2'
 blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
-bordercolor = '306071'
+bordercolor = '506082'
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -62,19 +62,19 @@ keys = [
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")),
-    Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')), # å
-    Key([mod], 'adiaeresis', lazy.spawn('thunderbird')), # ä
-    Key([mod], 'odiaeresis', lazy.spawn('pavucontrol')), # ö
+    Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')), # båt
+    Key([mod], 'adiaeresis', lazy.spawn('pavucontrol')), # pävucontrol
+    Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
     Key([], 'Super_L', lazy.spawn(rofi_bottom_left)),
     Key([mod], 't', lazy.spawn('thunar')),
     Key([mod], 'b', lazy.spawn('env MOZ_X11_EGL=1 firefox'))
 ]
 
 groups = [
-    Group('a', layout='monadtall'),
+    Group('a'),
     Group('s'),
-    Group('d'),
-    Group('f', layout='monadtall'),
+    Group('d', layout='monadwide'),
+    Group('f'),
     Group('u'),
     Group('i')
 ]
@@ -106,7 +106,7 @@ groups.append(
 
 keys.extend([
     Key(
-        [mod], 'minus',
+        [], 'VoidSymbol', # unmapped Caps_Locked
         lazy.group['scratchpad'].dropdown_toggle('term')
     )
 ])
@@ -118,7 +118,7 @@ layout_theme = {
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'change_ratio': 0.025,
+    'change_ratio': 0.01,
     'font=': font
 }
 
@@ -222,7 +222,6 @@ screens = [
                     stop_pause_text=''
                 ),
                 widget.CheckUpdates(
-                    **widget_defaults,
                     distro = 'Arch_checkupdates',
                     display_format = '{updates}',
                     execute = 'alacritty -e yay',
@@ -283,7 +282,7 @@ wmname = 'LG3D'
 @hook.subscribe.startup_once
 def autostart():
     processes = [
-        ['/usr/bin/setxkbmap', '-layout', 'se'],
+        ['/usr/bin/setxkbmap', '-layout', 'se', '-option', 'caps:none'],
         ['nitrogen', '--restore'],
         ['picom', '--experimental-backends'],
         ['/home/aj/.scripts/xbindkeys_startup.sh'],

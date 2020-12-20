@@ -47,8 +47,8 @@ bind-key c mark-all-feeds-read
 color background         default   default
 color listnormal         default   default
 color listnormal_unread  green   default bold
-color listfocus          yellow    default
-color listfocus_unread   yellow    default bold
+color listfocus          yellow    color239
+color listfocus_unread   yellow    color239 bold
 color info               default   default
 color article            default   default
 
