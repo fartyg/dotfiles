@@ -13,6 +13,7 @@ let mapleader = " " " space is the leader key
 let maplocalleader=" "
 syntax on " syntax highlighting
 filetype on
+set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
 set number relativenumber
 set tabstop=4 " four spaces tab
@@ -32,6 +33,7 @@ set backspace=indent,eol,start
 set noswapfile " swap files won't be created
 set nobackup " no backup
 set nowritebackup
+set hidden
 set autoindent
 set smartindent
 set cursorline "highlight current line
@@ -41,17 +43,22 @@ set conceallevel=0
 set laststatus=0
 set noshowcmd
 set noshowmode " hide mode text at the bottom
-set cmdheight=1
-set noruler
+set cmdheight=1 " hide bloat at bottom
+set noruler " hide junk in bottom right
+set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
+set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
 
-" keybindings
 inoremap jj <Esc>
 inoremap kk <Esc>
 noremap <Leader>s :update<CR>
+noremap <silent><Leader>l :noh<CR>
+
+" buffer navigation
 noremap <silent><Leader>q :bd<CR>
 noremap <silent><Leader><Leader> :bn<CR>
 noremap <silent><Leader>p :bp<CR>
-noremap <silent><Leader>l :noh<CR>
+
+" ctrl+backspace removes word
 inoremap <C-H> <C-W>
 
 " m (move) is cut and d is actually delete with vim-cutlass
@@ -59,6 +66,8 @@ nnoremap m d
 xnoremap m d
 nnoremap mm dd
 nnoremap M D
+
+nnoremap S :%s//g<Left><Left>
 
 nmap <leader>c <Plug>Commentary
 xmap <leader>c <Plug>Commentary
@@ -87,8 +96,8 @@ endif
 function! CustomColors()
     hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
-    hi LineNr guibg=NONE guifg=#606060
-    hi Comment guifg=#606060
+    hi LineNr guibg=NONE guifg=#858585
+    hi Comment guifg=#858585
     hi Normal guibg=NONE
     hi EndOfBuffer guibg=NONE
     hi NonText guibg=NONE
@@ -140,7 +149,7 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
         \   | Limelight
-autocmd! User GoyoLeave nested call <SID>goyo_leave() 
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
         \   | Limelight!
         \   | call CustomColors()
 
@@ -173,12 +182,12 @@ highlight HighlightedyankRegion cterm=reverse gui=reverse
 function! g:BuffetSetCustomColors()
   hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
   hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetActiveBuffer guibg=NONE guifg=#606060
-  hi! BuffetBuffer guibg=NONE guifg=#606060
-  hi! BuffetTrunc guibg=NONE guifg=#606060
-  hi! BuffetTab guibg=NONE guifg=#606060
+  hi! BuffetActiveBuffer guibg=NONE guifg=#858585
+  hi! BuffetBuffer guibg=NONE guifg=#858585
+  hi! BuffetTrunc guibg=NONE guifg=#858585
+  hi! BuffetTab guibg=NONE guifg=#858585
   hi! BuffetModActiveBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetModBuffer guibg=NONE guifg=#606060
+  hi! BuffetModBuffer guibg=NONE guifg=#858585
 endfunction
 
 colorscheme sonokai

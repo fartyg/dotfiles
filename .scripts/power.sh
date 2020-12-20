@@ -6,17 +6,19 @@
 # - rofi
 # - systemd, but you can replace the commands for OpenRC or anything else
 #
-# Instructions:
+# Instructijns:
 # - Save this file as power.sh or anything
 # - Give it exec priviledge, or chmod +x /path/to/power.sh
 # - Run it
 
-chosen=$(echo -e "[Cancel]\nLogout\nShutdown\nReboot\nSuspend\nHibernate\nHybrid-sleep\nSuspend-then-hibernate" | rofi -dmenu -i -location 7 -yoffset -26)
+chosen=$(echo -e "[Cancel]\nLogout\nLock\nShutdown\nReboot\nSuspend\nHibernate\nHybrid-sleep\nSuspend-then-hibernate" | rofi -dmenu -i)
 # Info about some states are available here:
 # https://www.freedesktop.org/software/systemd/man/systemd-sleep.conf.html#Description
 
 if [[ $chosen = "Logout" ]]; then
 	qtile-cmd -o cmd -f shutdown
+elif [[ $chosen = "Lock" ]]; then
+	/home/aj/.scripts/lock.sh
 elif [[ $chosen = "Shutdown" ]]; then
 	systemctl poweroff
 elif [[ $chosen = "Reboot" ]]; then

@@ -8,13 +8,19 @@ from libqtile.config import ScratchPad, DropDown
 mod = 'mod1'
 terminal = 'alacritty'
 font = 'Noto Sans'
-fontsize = 16
-margin = 9
+fontsize = 14
+margin = 7
 barheight = 24
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
-rofi_cmd = '/usr/bin/rofi -combi-modi window,drun -show combi -modi combi -me-select-entry \'\' -me-accept-entry \'MousePrimary\''
-rofi_bottom_left = rofi_cmd + ' -location 7 -yoffset ' + str(-barheight -margin) + ' -xoffset ' + str(margin) 
+
+rofi_cmd = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
+            -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
+            '''
+rofi_bottom_left = f'{rofi_cmd} -location 7 \
+                   -yoffset {-barheight -margin} \
+                   -xoffset {margin}'
+
 # Colors
 bgcolor = '2c2e34'
 gray = '404040'
@@ -27,7 +33,7 @@ magenta = 'ab9df2'
 blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
-bordercolor = anothergray
+bordercolor = '306071'
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -56,10 +62,9 @@ keys = [
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")),
-    Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')),
-    Key([mod], 'odiaeresis', lazy.spawn('pavucontrol')),
-    Key([mod], 'adiaeresis', lazy.spawn('thunderbird')),
-#    Key([mod], 'r', lazy.spawn(rofi_cmd)),
+    Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')), # å
+    Key([mod], 'adiaeresis', lazy.spawn('thunderbird')), # ä
+    Key([mod], 'odiaeresis', lazy.spawn('pavucontrol')), # ö
     Key([], 'Super_L', lazy.spawn(rofi_bottom_left)),
     Key([mod], 't', lazy.spawn('thunar')),
     Key([mod], 'b', lazy.spawn('env MOZ_X11_EGL=1 firefox'))
@@ -93,6 +98,7 @@ groups.append(
         DropDown(
             'term',
             'alacritty',
+            on_focus_lost_hide=False,
             opacity=1
         )
     ])
@@ -110,19 +116,17 @@ layout_theme = {
     'border_focus': bordercolor,
     'border_normal': bgcolor,
     'margin': margin,
-    'ratio': 0.6725,
     'single_border_width': 0,
-    'single_margin': 0,
     'min_secondary_size': 220,
     'change_ratio': 0.025,
     'font=': font
 }
 
 layouts = [
-    layout.MonadWide(
+    layout.MonadTall(
         **layout_theme
     ),
-    layout.MonadTall(
+    layout.MonadWide(
         **layout_theme
     )
 ]
@@ -131,6 +135,7 @@ widget_defaults = {
         'font': font,
         'fontsize': fontsize,
         'padding': 9,
+        'foreground': yellow,
         'background': bgcolor,
         'highlight_method': 'text'
 }
@@ -141,34 +146,68 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.Image(
-                filename='/home/aj/.config/qtile/arch.png',
-                mouse_callbacks = {
-                    'Button1': lambda qtile:
-                    qtile.cmd_spawn(rofi_bottom_left),
-                    'Button3': lambda qtile:
-                    qtile.cmd_spawn('/home/aj/.scripts/power.sh')
+                    filename='/home/aj/.config/qtile/arch.png',
+                    scale=False,
+                    margin_y=4,
+                    margin_x=4,
+                    mouse_callbacks = {
+                        'Button1': lambda qtile:
+                        qtile.cmd_spawn(rofi_bottom_left),
+                        'Button3': lambda qtile:
+                        qtile.cmd_spawn('/home/aj/.scripts/power.sh')
                     }
                 ),
-                widget.Sep(padding=10, linewidth=0),
+                widget.Sep(padding=6, linewidth=0),
                 widget.GroupBox(
-                     margin_y=3,
-                     padding=8,
-                     borderwidth=0,
-                     center_aligned=True,
-                     rounded=False,
-                     disable_drag=True,
-                     active = anothergray,
-                     inactive = bgcolor,
-                     highlight_color = red,
-                     this_current_screen_border = yellow,
-                     this_screen_border = anothergray,
-                     foreground = white,
-                     background = bgcolor
+                    margin_y=4,
+                    padding=8,
+                    borderwidth=0,
+                    center_aligned=True,
+                    rounded=False,
+                    disable_drag=True,
+                    active = anothergray,
+                    inactive = bgcolor,
+                    highlight_color = red,
+                    this_current_screen_border = yellow,
+                    this_screen_border = anothergray,
+                    background = bgcolor
                 ),
                 widget.Spacer(),
+                widget.Clock(
+                    format='%H:%M',
+                    mouse_callbacks = {
+                        'Button1': lambda qtile:
+                        qtile.cmd_spawn('alacritty -e calcurse')
+                    }
+                ),
+                widget.Spacer(),
+                widget.CPU(
+                    format='{load_percent}%',
+                    foreground=anothergray,
+                    mouse_callbacks = {
+                        'Button1': lambda qtile:
+                        qtile.cmd_spawn('alacritty -e htop'),
+                        'Button2': lambda qtile:
+                        qtile.cmd_spawn('pavucontrol')
+                    }
+                ),
+                widget.Memory(
+                    foreground=anothergray,
+                    format='{MemUsed} MB'
+                ),
+                widget.DF(
+                    visible_on_warn=False,
+                    format='{uf} {m}B',
+                    foreground=anothergray
+                ),
+                widget.Backlight(
+                    backlight_name='intel_backlight',
+                    change_command='brightnessctl s {0}'
+                ),
+                widget.PulseVolume(foreground=blue),
                 widget.Mpris2(
-                    foreground=green,
                     name='spotify',
+                    foreground=green,
                     objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
                     scroll_chars=None,
@@ -182,54 +221,16 @@ screens = [
                     },
                     stop_pause_text=''
                 ),
-                widget.Spacer(),
-                widget.CPU(
-                    format='{load_percent}%',
-                    foreground=magenta,
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn('alacritty -e htop'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn('pavucontrol')
-                    }
-                ),
-                widget.Memory(
-                    format='{MemUsed} MB',
-                    foreground=magenta
-                ),
-                widget.DF(
-                    visible_on_warn=False,
-                    format='{uf} {m}B',
-                    foreground=magenta
-                ),
-                widget.Net(
-                        format='{down}',
-                        foreground=magenta
-                ),
-                widget.PulseVolume(foreground=blue),
-                widget.Backlight(
-                        foreground=yellow,
-                        backlight_name='intel_backlight',
-                        change_command='brightnessctl s {0}'
-                ),
                 widget.CheckUpdates(
-                       **widget_defaults,
-                       distro = 'Arch_checkupdates',
-                       display_format = '{updates}',
-                       execute = 'alacritty -e yay',
-                       colour_have_updates=green
-                ),
-                widget.Clock(
-                    format='%a %H:%M',
-                    foreground = orange,
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn('alacritty -e calcurse')
-                    }
+                    **widget_defaults,
+                    distro = 'Arch_checkupdates',
+                    display_format = '{updates}',
+                    execute = 'alacritty -e yay',
+                    colour_have_updates=green
                 ),
             ],
             barheight,
-            opacity=0.94
+            opacity=1
         ),
     ),
 ]

@@ -75,7 +75,7 @@ bar_spacing = 3
 
 # This option removes the ability to interact with the window
 # NOTE: It does not work with SDL2 
-; interactable = true
+interactable = 0
 
 # Create an taskbar icon
 taskbar_icon = false

@@ -1,14 +1,4 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator
-
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty it self.
 env:
-  # TERM env customization. Default is xterm-256color
-  # Note: the default TERM value `xterm-256color` does not
-  # specify all features alacritty supports. This does pose
-  # a few issues with programs relying on terminfo and the
-  # `tput` command
   TERM: xterm-256color
 
 window:
@@ -18,16 +8,16 @@ window:
     lines: 80
 
   padding:
-    x: 4
-    y: 4
-background_opacity: 0.94
+    x: 6
+    y: 6
 
-unfocused_hollow: true 
+background_opacity: 0.88
+
+unfocused_hollow: true
 
 dpi:
   x: 96
   y: 96
-
 
 cursor:
     style: Beam
@@ -36,13 +26,9 @@ draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: LiterationMono Nerd Font
+    family: MesloLGL Nerd Font
     style: Regular
-
-  bold:
-    family: LiterationMono Nerd Font
-    style: Bold
-  size: 7
+  size: 7.5
 
 colors:
   primary:

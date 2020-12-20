@@ -7,6 +7,11 @@
 height: 0 !important;
 }
 
+#browser-panel:-moz-lwtheme:-moz-window-inactive #toolbar-menubar,
+#browser-panel:-moz-lwtheme:-moz-window-inactive #toolbar-menubar {
+  background-color: #8bb !important;
+}
+
 /*** BEGIN Firefox 77 (June 2, 2020) Override URL bar enlargement ***/
 
   /* Compute new position, width, and padding */
