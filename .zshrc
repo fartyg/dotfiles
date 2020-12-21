@@ -109,7 +109,7 @@ export LANG=en_US.UTF-8
 #  * -e is for exact matching
 #  * ':' is mapped to "abort", mostly to use with vim.
 #  * for a full list of available actions to bind to, see "man fzf" and search for "action"
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 export FZF_ALT_C_COMMAND="fd --type d --color=never"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -118,6 +118,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
 
 alias cat='bat'
 alias vim='nvim'
+alias fm='vifm'
 alias båt='newsboat'
 alias rto='rtorrent'
 alias play='umpv'
