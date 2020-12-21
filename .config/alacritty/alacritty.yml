@@ -11,7 +11,7 @@ window:
     x: 6
     y: 6
 
-background_opacity: 0.90
+background_opacity: 0.93
 
 unfocused_hollow: true
 

@@ -13,6 +13,7 @@ let mapleader = " " " space is the leader key
 let maplocalleader=" "
 syntax on " syntax highlighting
 filetype on
+
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
 set number relativenumber
@@ -67,7 +68,7 @@ xnoremap m d
 nnoremap mm dd
 nnoremap M D
 
-nnoremap S :%s//g<Left><Left>
+nnoremap S :%s//gc<Left><Left><Left>
 
 nmap <leader>c <Plug>Commentary
 xmap <leader>c <Plug>Commentary
@@ -86,7 +87,6 @@ autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%,
 autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 nmap <silent><F6> :TagbarToggle<CR>
 
-"terminal colors
 if exists('+termguicolors')
  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -94,19 +94,19 @@ if exists('+termguicolors')
 endif
 
 function! CustomColors()
-    hi CursorLine guibg=#444444
-    "hi CursorLine guibg=#373a45
+    hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
-    hi LineNr guibg=NONE guifg=#858585
-    hi Comment guifg=#858585
+    hi LineNr guibg=NONE guifg=#707070
+    hi Comment guifg=#707070
     hi Normal guibg=NONE
     hi EndOfBuffer guibg=NONE
     hi NonText guibg=NONE
     hi StatusLine guibg=NONE
+    hi HighlightedyankRegion guibg=#506082
 endfunction
 
-autocmd InsertEnter * highlight CursorLineNr guifg=#e5c463
-autocmd InsertLeave * highlight CursorLineNr guifg=#e3e1e4
+autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
+autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
 
 call plug#begin()
     Plug 'junegunn/fzf.vim'
@@ -178,17 +178,16 @@ let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
-highlight HighlightedyankRegion cterm=reverse gui=reverse
 
 function! g:BuffetSetCustomColors()
   hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
   hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetActiveBuffer guibg=NONE guifg=#858585
-  hi! BuffetBuffer guibg=NONE guifg=#858585
-  hi! BuffetTrunc guibg=NONE guifg=#858585
-  hi! BuffetTab guibg=NONE guifg=#858585
+  hi! BuffetActiveBuffer guibg=NONE guifg=#707070
+  hi! BuffetBuffer guibg=NONE guifg=#707070
+  hi! BuffetTrunc guibg=NONE guifg=#707070
+  hi! BuffetTab guibg=NONE guifg=#707070
   hi! BuffetModActiveBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetModBuffer guibg=NONE guifg=#858585
+  hi! BuffetModBuffer guibg=NONE guifg=#707070
 endfunction
 
 colorscheme sonokai

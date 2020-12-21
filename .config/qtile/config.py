@@ -106,7 +106,7 @@ groups.append(
 
 keys.extend([
     Key(
-        [], 'VoidSymbol', # unmapped Caps_Locked
+        [], 'VoidSymbol', # unmapped Caps_Lock
         lazy.group['scratchpad'].dropdown_toggle('term')
     )
 ])
@@ -225,7 +225,7 @@ screens = [
                     distro = 'Arch_checkupdates',
                     display_format = '{updates}',
                     execute = 'alacritty -e yay',
-                    colour_have_updates=green
+                    colour_have_updates=orange
                 ),
             ],
             barheight,

@@ -169,10 +169,10 @@ background_opacity = 0.96
 # To enable gradients, just change gradient_count to the number of colors you have specified
 # (0 = disabled)
 gradient_count = 4 
-gradient_color_1 = '#262626'
+gradient_color_1 = '#2c2e34'
 gradient_color_2 = '#e5c463'
 gradient_color_3 = '#ef9062'
-gradient_color_4 = '#262626'
+gradient_color_4 = '#2c2e34'
 
 [smoothing]
 
