@@ -8,9 +8,8 @@ from libqtile.config import ScratchPad, DropDown
 mod = 'mod1'
 terminal = 'alacritty'
 font = 'Noto Sans'
-fontsize = 14
-margin = 7
-barheight = 24
+fontsize = 16
+margin = 14
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
@@ -18,14 +17,11 @@ rofi_cmd = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
             -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
             '''
 rofi_bottom_left = f'{rofi_cmd} -location 7'
-                   # -xoffset {margin}' \
-                   # -yoffset {-barheight -margin} \
 
 # Colors
 bgcolor = '2c2e34'
 gray = '404040'
-anothergray = '858585'
-finalgray = '424242'
+anothergray = '808080'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -33,7 +29,7 @@ magenta = 'ab9df2'
 blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
-bordercolor = '506082'
+bordercolor = anothergray
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -51,10 +47,17 @@ keys = [
     Key([mod], 'Return', lazy.spawn(terminal)),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
+    Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')), # båt
+    Key([mod], 'adiaeresis', lazy.spawn('pavucontrol')), # pävucontrol
+    Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
+    Key([mod], 't', lazy.spawn('thunar')),
+    Key([mod], 'b', lazy.spawn('env MOZ_X11_EGL=1 firefox')),
     Key([mod, 'control'], 'r', lazy.restart()),
     Key([mod, 'control'], 'q', lazy.spawn('/home/aj/.scripts/power.sh')),
     Key([mod, 'control'], 'l', lazy.spawn('/home/aj/.scripts/lock.sh')),
     Key([mod, 'control'], 'g', lazy.hide_show_bar('bottom')),
+    Key([mod, 'control'], 'Right', lazy.spawn(music_cmd + 'Next')),
+    Key([mod, 'control'], 'Left', lazy.spawn(music_cmd + 'Previous')),
     Key([], 'Pause', lazy.spawn(music_cmd + 'PlayPause')),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume 0 +5%')),
     Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume 0 -5%')),
@@ -62,12 +65,7 @@ keys = [
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")),
-    Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')), # båt
-    Key([mod], 'adiaeresis', lazy.spawn('pavucontrol')), # pävucontrol
-    Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
-    Key([], 'Super_L', lazy.spawn(rofi_bottom_left)),
-    Key([mod], 't', lazy.spawn('thunar')),
-    Key([mod], 'b', lazy.spawn('env MOZ_X11_EGL=1 firefox'))
+    Key([], 'Super_L', lazy.spawn(rofi_bottom_left))
 ]
 
 groups = [
@@ -98,7 +96,7 @@ groups.append(
         DropDown(
             'term',
             'alacritty',
-            on_focus_lost_hide=False,
+            height=0.45,
             opacity=1
         )
     ])
@@ -118,7 +116,7 @@ layout_theme = {
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'change_ratio': 0.01,
+    'change_ratio': 0.025,
     'font=': font
 }
 
@@ -134,7 +132,7 @@ layouts = [
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 9,
+        'padding': 8,
         'foreground': yellow,
         'background': bgcolor,
         'highlight_method': 'text'
@@ -157,27 +155,35 @@ screens = [
                         qtile.cmd_spawn('/home/aj/.scripts/power.sh')
                     }
                 ),
-                widget.Sep(padding=6, linewidth=0),
+                widget.Sep(padding=8, linewidth=0),
                 widget.GroupBox(
                     margin_y=4,
-                    padding=8,
                     borderwidth=0,
                     center_aligned=True,
                     rounded=False,
                     disable_drag=True,
-                    active = anothergray,
-                    inactive = bgcolor,
-                    highlight_color = red,
-                    this_current_screen_border = yellow,
-                    this_screen_border = anothergray,
-                    background = bgcolor
+                    active=anothergray,
+                    inactive=bgcolor,
+                    highlight_color=red,
+                    this_current_screen_border=yellow,
+                    this_screen_border=anothergray,
+                    background=bgcolor
                 ),
                 widget.Spacer(),
-                widget.Clock(
-                    format='%H:%M',
+                widget.Mpris2(
+                    name='spotify',
+                    foreground=green,
+                    stop_pause_text='',
+                    objname='org.mpris.MediaPlayer2.spotify',
+                    display_metadata=['xesam:artist', 'xesam:title'],
+                    scroll_chars=None,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn('alacritty -e calcurse')
+                        qtile.cmd_spawn(music_cmd + 'PlayPause'),
+                        'Button2': lambda qtile:
+                        qtile.cmd_spawn(music_cmd + 'Previous'),
+                        'Button3': lambda qtile:
+                        qtile.cmd_spawn(music_cmd + 'Next')
                     }
                 ),
                 widget.Spacer(),
@@ -200,35 +206,27 @@ screens = [
                     format='{uf} {m}B',
                     foreground=anothergray
                 ),
+                widget.PulseVolume(foreground=magenta),
                 widget.Backlight(
+                    foreground=blue,
                     backlight_name='intel_backlight',
                     change_command='brightnessctl s {0}'
                 ),
-                widget.PulseVolume(foreground=blue),
-                widget.Mpris2(
-                    name='spotify',
-                    foreground=green,
-                    objname='org.mpris.MediaPlayer2.spotify',
-                    display_metadata=['xesam:artist', 'xesam:title'],
-                    scroll_chars=None,
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn(music_cmd + 'PlayPause'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn(music_cmd + 'Previous'),
-                        'Button3': lambda qtile:
-                        qtile.cmd_spawn(music_cmd + 'Next')
-                    },
-                    stop_pause_text=''
-                ),
                 widget.CheckUpdates(
-                    distro = 'Arch_checkupdates',
-                    display_format = '{updates}',
-                    execute = 'alacritty -e yay',
+                    distro='Arch_checkupdates',
+                    display_format='{updates}',
+                    execute='alacritty -e yay',
                     colour_have_updates=orange
                 ),
+                widget.Clock(
+                    format='%H:%M',
+                    mouse_callbacks = {
+                        'Button1': lambda qtile:
+                        qtile.cmd_spawn('alacritty -e calcurse')
+                    }
+                )
             ],
-            barheight,
+            24,
             opacity=1
         ),
     ),

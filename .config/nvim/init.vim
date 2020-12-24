@@ -43,9 +43,9 @@ set updatetime=300
 set conceallevel=0
 set laststatus=0
 set noshowcmd
-set noshowmode " hide mode text at the bottom
-set cmdheight=1 " hide bloat at bottom
-set noruler " hide junk in bottom right
+set noshowmode
+set cmdheight=1
+set noruler
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
 
@@ -75,7 +75,10 @@ xmap <leader>c <Plug>Commentary
 omap <leader>c <Plug>Commentary
 nmap <leader>cc <Plug>CommentaryLine
 
-nnoremap <silent><leader>git :GFiles<CR>
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+
+noremap <silent><leader>git :GFiles<CR>
 nnoremap <silent><leader>t   :Files<CR>
 nnoremap <silent><leader>f   :Lines<CR>
 nnoremap <silent><leader>b   :Buffers<CR>
@@ -127,7 +130,7 @@ call plug#begin()
     Plug 'vim-python/python-syntax'
 call plug#end()
 
-"Goyo and Limelight
+" Goyo and Limelight
 function! s:goyo_enter()
   if has('gui_running')
     set fullscreen
@@ -154,12 +157,12 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
         \   | Limelight!
         \   | call CustomColors()
 
-"sneak
+" sneak
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
-"vimtex
+" vimtex
 set nocompatible
 let &rtp = '~/.vim/bundle/vimtex,' . &rtp
 filetype plugin indent on
@@ -168,7 +171,7 @@ let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'zathura'
 
 " etc
-let g:sonokai_disable_italic_comment = 1
+" let g:sonokai_disable_italic_comment = 1
 let g:sonokai_transparent_background = 1
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:highlightedyank_highlight_duration = 500

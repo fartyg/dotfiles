@@ -301,7 +301,7 @@ filetype *.rar
        \ mpv %f > /dev/null 2>&1 &,
        \ {extract with aunpack}
        \ aunpack %f,
-fileviewer *.rar aunpack %f
+fileviewer *.rar umpv %f > /dev/null 2>&1 &
 
 " IsoMount
 filetype *.iso

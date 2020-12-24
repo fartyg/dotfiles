@@ -11,8 +11,7 @@ window:
     x: 6
     y: 6
 
-background_opacity: 0.85
-
+background_opacity: 1
 unfocused_hollow: true
 
 dpi:
@@ -26,9 +25,9 @@ draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: MesloLGL Nerd Font
+    family: LiterationMono Nerd Font
     style: Regular
-  size: 7
+  size: 8
 
 colors:
   primary:
@@ -193,6 +192,3 @@ selection:
 #  program: /bin/bash
 #  args:
 #    - --login
-
-# If this is `true`, the cursor will be rendered as a hollow box when the
-# Axjjjjjwindow is not focus
