@@ -109,6 +109,7 @@ export LANG=en_US.UTF-8
 #  * -e is for exact matching
 #  * ':' is mapped to "abort", mostly to use with vim.
 #  * for a full list of available actions to bind to, see "man fzf" and search for "action"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --color=bg+:-1'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 export FZF_ALT_C_COMMAND="fd --type d --color=never"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

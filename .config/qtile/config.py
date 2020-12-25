@@ -45,6 +45,7 @@ keys = [
     Key([mod], 'p', lazy.layout.flip()),
     Key([mod], 'space', lazy.layout.next()),
     Key([mod], 'Return', lazy.spawn(terminal)),
+    Key([mod], "r", lazy.spawncmd()),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
     Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')), # båt
@@ -168,6 +169,10 @@ screens = [
                     this_current_screen_border=yellow,
                     this_screen_border=anothergray,
                     background=bgcolor
+                ),
+                widget.Prompt(
+                    prompt="run: ",
+                    ignore_dups_history=True,
                 ),
                 widget.Spacer(),
                 widget.Mpris2(
