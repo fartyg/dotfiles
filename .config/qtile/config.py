@@ -8,15 +8,14 @@ from libqtile.config import ScratchPad, DropDown
 mod = 'mod1'
 terminal = 'alacritty'
 font = 'Noto Sans'
-fontsize = 16
-margin = 14
+fontsize = 14
+margin = 8 
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
 rofi_cmd = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
             -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
             '''
-rofi_bottom_left = f'{rofi_cmd} -location 7'
 
 # Colors
 bgcolor = '2c2e34'
@@ -56,7 +55,7 @@ keys = [
     Key([mod, 'control'], 'r', lazy.restart()),
     Key([mod, 'control'], 'q', lazy.spawn('/home/aj/.scripts/power.sh')),
     Key([mod, 'control'], 'l', lazy.spawn('/home/aj/.scripts/lock.sh')),
-    Key([mod, 'control'], 'g', lazy.hide_show_bar('bottom')),
+    Key([mod, 'control'], 'g', lazy.hide_show_bar('top')),
     Key([mod, 'control'], 'Right', lazy.spawn(music_cmd + 'Next')),
     Key([mod, 'control'], 'Left', lazy.spawn(music_cmd + 'Previous')),
     Key([], 'Pause', lazy.spawn(music_cmd + 'PlayPause')),
@@ -66,7 +65,7 @@ keys = [
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")),
-    Key([], 'Super_L', lazy.spawn(rofi_bottom_left))
+    Key([], 'Super_L', lazy.spawn(rofi_cmd))
 ]
 
 groups = [
@@ -75,7 +74,8 @@ groups = [
     Group('d', layout='monadwide'),
     Group('f'),
     Group('u'),
-    Group('i')
+    Group('i'),
+    Group('o')
 ]
 
 for i in groups:
@@ -142,21 +142,17 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
-                widget.Image(
-                    filename='/home/aj/.config/qtile/arch.png',
-                    scale=False,
-                    margin_y=4,
-                    margin_x=4,
+                widget.TextBox(
+                    fmt='',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(rofi_bottom_left),
+                        qtile.cmd_spawn(rofi_cmd + ' -location 1'),
                         'Button3': lambda qtile:
                         qtile.cmd_spawn('/home/aj/.scripts/power.sh')
                     }
                 ),
-                widget.Sep(padding=8, linewidth=0),
                 widget.GroupBox(
                     margin_y=4,
                     borderwidth=0,
@@ -165,10 +161,11 @@ screens = [
                     disable_drag=True,
                     active=anothergray,
                     inactive=bgcolor,
-                    highlight_color=red,
                     this_current_screen_border=yellow,
                     this_screen_border=anothergray,
-                    background=bgcolor
+                    background=bgcolor,
+                    urgent_alert_method='text',
+                    urgent_text=red
                 ),
                 widget.Prompt(
                     prompt="run: ",
@@ -178,7 +175,7 @@ screens = [
                 widget.Mpris2(
                     name='spotify',
                     foreground=green,
-                    stop_pause_text='',
+                    stop_pause_text="⏯",
                     objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
                     scroll_chars=None,
@@ -231,7 +228,7 @@ screens = [
                     }
                 )
             ],
-            24,
+            22,
             opacity=1
         ),
     ),
