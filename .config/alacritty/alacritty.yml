@@ -25,9 +25,9 @@ draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: FiraCode Nerd Font
+    family: LiterationMono Nerd Font
     style: Regular
-  size: 7
+  size: 6.5
 
 colors:
   primary:

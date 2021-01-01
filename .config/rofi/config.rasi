@@ -1,9 +1,9 @@
 configuration {
 /*	modi: "window,run,ssh";*/
-width: 30;
-/*	lines: 15;*/
+width: 35;
+lines: 20;
 /*	columns: 1;*/
-font: "Noto Sans 12";
+font: "LiterationMono Nerd Font 12";
 display-run: "";
 display-drun: "";
 display-window: "";

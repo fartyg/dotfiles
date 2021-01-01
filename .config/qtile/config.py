@@ -7,9 +7,11 @@ from libqtile.config import ScratchPad, DropDown
 
 mod = 'mod1'
 terminal = 'alacritty'
-font = 'Noto Sans'
+margin = 7
+
+font = 'Inter Medium'
 fontsize = 14
-margin = 8
+
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
@@ -47,7 +49,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
-    Key([mod], 'aring', lazy.spawn('alacritty -e newsboat')), # båt
+    Key([mod], 'aring', lazy.spawn(terminal + ' -e newsboat')), # båt
     Key([mod], 'adiaeresis', lazy.spawn('pavucontrol')), # pävucontrol
     Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
     Key([mod], 't', lazy.spawn('thunar')),
@@ -68,15 +70,7 @@ keys = [
     Key([], 'Super_L', lazy.spawn(rofi_cmd))
 ]
 
-groups = [
-    Group('a'),
-    Group('s'),
-    Group('d', layout='monadwide'),
-    Group('f'),
-    Group('u'),
-    Group('i'),
-    Group('o')
-]
+groups = [Group(i) for i in 'asdfuio']
 
 for i in groups:
     keys.extend([
@@ -93,7 +87,7 @@ for i in groups:
     ])
 
 groups.append(
-    ScratchPad('scratchpad', [
+    ScratchPad('sp', [
         DropDown(
             'term',
             'alacritty',
@@ -106,7 +100,7 @@ groups.append(
 keys.extend([
     Key(
         [], 'VoidSymbol', # unmapped Caps_Lock
-        lazy.group['scratchpad'].dropdown_toggle('term')
+        lazy.group['sp'].dropdown_toggle('term')
     )
 ])
 
@@ -133,7 +127,7 @@ layouts = [
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 8,
+        'padding': 7,
         'foreground': yellow,
         'background': bgcolor,
         'highlight_method': 'text'
@@ -145,7 +139,8 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt='',
+                    fmt='❤',
+                    foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(rofi_cmd + ' -location 1'),
@@ -153,7 +148,9 @@ screens = [
                         qtile.cmd_spawn('/home/aj/.scripts/power.sh')
                     }
                 ),
+                widget.Sep(padding=8, linewidth=0),
                 widget.GroupBox(
+                    font='Inter Bold',
                     margin_y=4,
                     borderwidth=0,
                     center_aligned=True,
@@ -175,7 +172,7 @@ screens = [
                 widget.Mpris2(
                     name='spotify',
                     foreground=green,
-                    stop_pause_text="⏯",
+                    stop_pause_text='▶',
                     objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
                     scroll_chars=None,
@@ -194,9 +191,7 @@ screens = [
                     foreground=anothergray,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn('alacritty -e htop'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn('pavucontrol')
+                        qtile.cmd_spawn(terminal + ' -e htop')
                     }
                 ),
                 widget.Memory(
@@ -207,6 +202,13 @@ screens = [
                     visible_on_warn=False,
                     format='{uf} {m}B',
                     foreground=anothergray
+                ),
+                widget.NetGraph(
+                    frequency=3,
+                    graph_color=anothergray,
+                    line_width=1,
+                    type='line',
+                    border_width=0
                 ),
                 widget.PulseVolume(foreground=magenta),
                 widget.Backlight(
@@ -221,6 +223,7 @@ screens = [
                     colour_have_updates=orange
                 ),
                 widget.Clock(
+                    font='Inter Bold',
                     format='%H:%M',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
