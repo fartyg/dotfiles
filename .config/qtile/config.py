@@ -9,7 +9,7 @@ mod = 'mod1'
 terminal = 'alacritty'
 font = 'Noto Sans'
 fontsize = 14
-margin = 8 
+margin = 8
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
