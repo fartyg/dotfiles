@@ -15,7 +15,7 @@ boldfont = font + ' Semibold'
 font += ' Medium'
 
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
-             '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
+            '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
 rofi_cmd = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
             -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
@@ -32,7 +32,7 @@ magenta = 'ab9df2'
 blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
-bordercolor = '367075'
+bordercolor = '297095'
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -109,7 +109,7 @@ keys.extend([
 layout_theme = {
     'border_width': 2,
     'border_focus': bordercolor,
-    'border_normal': '606060',
+    'border_normal': '465C67',
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
