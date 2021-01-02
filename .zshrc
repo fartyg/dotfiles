@@ -6,6 +6,7 @@ export ZSH="/home/aj/.oh-my-zsh"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
+export BROWSER="firefox"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -75,6 +76,7 @@ plugins=(
 	fzf
 	zsh-syntax-highlighting
 	zsh-autosuggestions
+    zsh-interactive-cd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -122,6 +124,7 @@ alias vim='nvim'
 alias fm='vifm'
 alias båt='newsboat'
 alias rto='rtorrent'
+alias nmc='nmcli con'
 alias play='umpv'
 alias notes='nvim ~/Documents/notes.md'
 alias open='handlr open'

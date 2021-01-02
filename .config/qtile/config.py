@@ -7,21 +7,12 @@ from libqtile.config import ScratchPad, DropDown
 
 mod = 'mod1'
 terminal = 'alacritty'
-margin = 9
 
 fontsize = 14
 font = 'Inter'
 boldfont = font + ' Semibold'
 font += ' Medium'
 
-music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
-            '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
-
-rofi_cmd = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
-            -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
-           '''
-
-# Colors
 bgcolor = '2c2e34'
 gray = '404040'
 anothergray = '808080'
@@ -32,7 +23,17 @@ magenta = 'ab9df2'
 blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
-bordercolor = '297095'
+
+activeborder = '297095'
+inactiveborder = '465C67'
+margin = 9
+
+music = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
+            '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
+
+rofi = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
+       -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
+       '''
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -60,16 +61,16 @@ keys = [
     Key([mod, 'control'], 'q', lazy.spawn('/home/aj/.scripts/power.sh')),
     Key([mod, 'control'], 'l', lazy.spawn('/home/aj/.scripts/lock.sh')),
     Key([mod, 'control'], 'g', lazy.hide_show_bar('top')),
-    Key([mod, 'control'], 'Right', lazy.spawn(music_cmd + 'Next')),
-    Key([mod, 'control'], 'Left', lazy.spawn(music_cmd + 'Previous')),
-    Key([], 'Pause', lazy.spawn(music_cmd + 'PlayPause')),
+    Key([mod, 'control'], 'Right', lazy.spawn(music + 'Next')),
+    Key([mod, 'control'], 'Left', lazy.spawn(music + 'Previous')),
+    Key([], 'Pause', lazy.spawn(music + 'PlayPause')),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume 0 +5%')),
     Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume 0 -5%')),
     Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute 0 toggle')),
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")),
-    Key([], 'Super_L', lazy.spawn(rofi_cmd))
+    Key([], 'Super_L', lazy.spawn(rofi))
 ]
 
 groups = [Group(i) for i in 'asdfuio']
@@ -108,8 +109,8 @@ keys.extend([
 
 layout_theme = {
     'border_width': 2,
-    'border_focus': bordercolor,
-    'border_normal': '465C67',
+    'border_focus': activeborder,
+    'border_normal': inactiveborder,
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
@@ -145,7 +146,7 @@ screens = [
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(rofi_cmd + ' -location 1'),
+                        qtile.cmd_spawn(rofi + ' -location 1'),
                         'Button3': lambda qtile:
                         qtile.cmd_spawn('/home/aj/.scripts/power.sh')
                     }
@@ -179,11 +180,11 @@ screens = [
                     scroll_chars=None,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(music_cmd + 'PlayPause'),
+                        qtile.cmd_spawn(music + 'PlayPause'),
                         'Button2': lambda qtile:
-                        qtile.cmd_spawn(music_cmd + 'Previous'),
+                        qtile.cmd_spawn(music + 'Previous'),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn(music_cmd + 'Next')
+                        qtile.cmd_spawn(music + 'Next')
                     }
                 ),
                 widget.Spacer(),
@@ -203,13 +204,6 @@ screens = [
                     visible_on_warn=False,
                     format='{uf} {m}B',
                     foreground=anothergray
-                ),
-                widget.NetGraph(
-                    frequency=5,
-                    graph_color=anothergray,
-                    line_width=1,
-                    type='line',
-                    border_width=0
                 ),
                 widget.PulseVolume(foreground=magenta),
                 widget.Backlight(

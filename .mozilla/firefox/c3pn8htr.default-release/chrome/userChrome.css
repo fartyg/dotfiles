@@ -1,3 +1,26 @@
+@-moz-document url(chrome://browser/content/browser.xul),
+               url(chrome://browser/content/browser.xhtml) {
+
+  /* hide navigation bar when it is not focused; use Ctrl+L to get focus */
+  #main-window:not([customizing]) #navigator-toolbox:not(:focus-within) {
+    margin-top: -32px;
+  }
+  #navigator-toolbox {
+    transition: 0.2s margin-top ease-out;
+  }
+
+}
+
+#nav-bar { 
+  -moz-box-ordinal-group: 1 !important;
+}
+#PersonalToolbar { 
+  -moz-box-ordinal-group: 2 !important;
+}
+#titlebar { 
+  -moz-box-ordinal-group: 3 !important;
+}
+
 /* Hide blue stripe on active tab */
 .tab-line[selected="true"] {
   opacity: 0 !important;
@@ -65,6 +88,6 @@ tab:nth-child(8) .tab-label::before {
   counter-increment: tab-counter;
   content: counter(tab-counter) "";
   position: relative;
-  top: -0.5rem;
+  top: -0.38rem;
   font-weight: bold;
 }
