@@ -7,17 +7,19 @@ from libqtile.config import ScratchPad, DropDown
 
 mod = 'mod1'
 terminal = 'alacritty'
-margin = 7
+margin = 9
 
-font = 'Inter Medium'
 fontsize = 14
+font = 'Inter'
+boldfont = font + ' Semibold'
+font += ' Medium'
 
 music_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
              '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
 rofi_cmd = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
             -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
-            '''
+           '''
 
 # Colors
 bgcolor = '2c2e34'
@@ -30,7 +32,7 @@ magenta = 'ab9df2'
 blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
-bordercolor = anothergray
+bordercolor = '367075'
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -46,7 +48,7 @@ keys = [
     Key([mod], 'p', lazy.layout.flip()),
     Key([mod], 'space', lazy.layout.next()),
     Key([mod], 'Return', lazy.spawn(terminal)),
-    Key([mod], "r", lazy.spawncmd()),
+    Key([mod], 'r', lazy.spawncmd()),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
     Key([mod], 'aring', lazy.spawn(terminal + ' -e newsboat')), # båt
@@ -107,7 +109,7 @@ keys.extend([
 layout_theme = {
     'border_width': 2,
     'border_focus': bordercolor,
-    'border_normal': bgcolor,
+    'border_normal': '606060',
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
@@ -127,7 +129,7 @@ layouts = [
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 7,
+        'padding': 9,
         'foreground': yellow,
         'background': bgcolor,
         'highlight_method': 'text'
@@ -148,9 +150,8 @@ screens = [
                         qtile.cmd_spawn('/home/aj/.scripts/power.sh')
                     }
                 ),
-                widget.Sep(padding=8, linewidth=0),
                 widget.GroupBox(
-                    font='Inter Bold',
+                    font=boldfont,
                     margin_y=4,
                     borderwidth=0,
                     center_aligned=True,
@@ -172,7 +173,7 @@ screens = [
                 widget.Mpris2(
                     name='spotify',
                     foreground=green,
-                    stop_pause_text='▶',
+                    stop_pause_text='⏯',
                     objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
                     scroll_chars=None,
@@ -204,7 +205,7 @@ screens = [
                     foreground=anothergray
                 ),
                 widget.NetGraph(
-                    frequency=3,
+                    frequency=5,
                     graph_color=anothergray,
                     line_width=1,
                     type='line',
@@ -223,11 +224,11 @@ screens = [
                     colour_have_updates=orange
                 ),
                 widget.Clock(
-                    font='Inter Bold',
+                    font=boldfont,
                     format='%H:%M',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn('alacritty -e calcurse')
+                        qtile.cmd_spawn(terminal + ' -e calcurse')
                     }
                 )
             ],
