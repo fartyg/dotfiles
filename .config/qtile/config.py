@@ -284,10 +284,8 @@ wmname = 'LG3D'
 @hook.subscribe.startup_once
 def autostart():
     processes = [
-        ['/usr/bin/setxkbmap', '-layout', 'se', '-option', 'caps:none'],
         ['nitrogen', '--restore'],
         ['picom', '--experimental-backends'],
-        [home + '/.scripts/xbindkeys_startup.sh'],
         ['redshift']
     ]
 

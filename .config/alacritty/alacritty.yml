@@ -27,7 +27,7 @@ font:
   normal:
     family: SFMono Nerd Font Mono
     style: Medium
-  size: 7
+  size: 6
 
 colors:
   primary:
