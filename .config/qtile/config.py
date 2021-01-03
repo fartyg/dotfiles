@@ -32,7 +32,7 @@ margin = 12
 music = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
-rofi = '''/usr/bin/rofi -combi-modi window,drun -show combi -modi combi \
+rofi = '''rofi -combi-modi window,drun -show combi -modi combi \
        -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
        '''
 
@@ -98,7 +98,7 @@ groups.append(
         DropDown(
             'term',
             'alacritty',
-            height=0.45,
+            height=0.40,
             opacity=1
         )
     ])
@@ -118,7 +118,7 @@ layout_theme = {
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'ratio': 0.57,
+    'ratio': 0.61,
     'change_ratio': 0.025,
     'font=': font
 }
