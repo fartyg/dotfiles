@@ -87,6 +87,10 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+setopt HIST_IGNORE_ALL_DUPS
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -117,19 +121,16 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
-setopt HIST_IGNORE_ALL_DUPS
-HISTFILE=~/.zsh_history
-HISTSIZE=1000000
-SAVEHIST=1000000
 
 alias cat='bat'
+alias v='nvim'
 alias vim='nvim'
 alias fm='vifm'
 alias båt='newsboat'
 alias rto='rtorrent'
 alias nmc='nmcli con'
 alias play='umpv'
-alias notes='nvim ~/Documents/notes.md'
+alias note='nvim ~/Documents/notes.md'
 alias open='handlr open'
 alias ls='LC_COLLATE=C ls -h --group-directories-first --color=auto'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

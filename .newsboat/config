@@ -1,5 +1,5 @@
 browser "firefox %u"
-macro m set browser "/usr/bin/mpv %u </dev/null &>/dev/null &"; open-in-browser ; set browser "firefox %u"
+macro o set browser "/usr/bin/mpv %u </dev/null &>/dev/null &"; open-in-browser ; set browser "firefox %u"
 macro p set browser "umpv %u </dev/null &>/dev/null &"; open-in-browser ; set browser "firefox %u"
 #macro m set browser "/usr/bin/mpv %u &>/dev/null &"; open-in-browser ; set browser "/usr/bin/firefox %u"
 #general stuff
@@ -35,6 +35,7 @@ bind-key l open
 bind-key ^U pageup
 bind-key ^D pagedown
 bind-key h quit
+bind-key Z quit
 unbind-key g # bound to `sort` by default
 bind-key g home
 bind-key s sort

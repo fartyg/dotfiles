@@ -218,7 +218,7 @@ screens = [
                 widget.CheckUpdates(
                     distro='Arch_checkupdates',
                     display_format='{updates}',
-                    execute='alacritty -e yay',
+                    execute=[terminal, '-e', 'yay'],
                     colour_have_updates=orange
                 ),
                 widget.Clock(
