@@ -121,10 +121,11 @@ entry {
     spacing:    0;
     text-color: @normal-foreground;
 }
+
 prompt {
-    spacing:    0;
-    text-color: @normal-foreground;
+    enabled: false;
 }
+
 inputbar {
     children:   [ prompt,entry,case-indicator ];
 }

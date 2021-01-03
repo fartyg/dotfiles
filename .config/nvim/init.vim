@@ -125,6 +125,7 @@ call plug#begin()
     Plug 'justinmk/vim-sneak'
     Plug 'mhinz/vim-startify'
     Plug 'lervag/vimtex'
+    Plug 'cohama/lexima.vim'
     Plug 'preservim/tagbar'
     Plug 'bagrat/vim-buffet'
     Plug 'vim-python/python-syntax'
