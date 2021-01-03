@@ -11,6 +11,16 @@
 
 }
 
+#nav-bar-customization-target {
+	background-color: #2c2e34 !important;
+}
+
+#navigator-toolbox { --tabs-border-color: transparent !important; }
+.toolbarbutton-1 {
+    /* fill: #A3AFC1 !important; */
+    background-color: #2c2e34 !important;
+}
+
 #nav-bar { 
   -moz-box-ordinal-group: 1 !important;
 }
@@ -30,10 +40,10 @@
 height: 0 !important;
 }
 
-#browser-panel:-moz-lwtheme:-moz-window-inactive #toolbar-menubar,
-#browser-panel:-moz-lwtheme:-moz-window-inactive #toolbar-menubar {
-  background-color: #8bb !important;
-}
+/* #browser-panel:-moz-lwtheme:-moz-window-inactive #toolbar-menubar, */
+/* #browser-panel:-moz-lwtheme:-moz-window-inactive #toolbar-menubar { */
+/*   background-color: #8bb !important; */
+/* } */
 
 /*** BEGIN Firefox 77 (June 2, 2020) Override URL bar enlargement ***/
 
@@ -45,13 +55,21 @@ height: 0 !important;
   width: 100% !important;
   padding: 0px !important;
 }
+
+#urlbar-input-container{
+    border: none !important;
+    background-color: #2c2e34 !important;
+ }
+#urlbar-background {
+    background: #2c2e34 !important;
+}
 /* for alternate Density settings */
-[uidensity="compact"] #urlbar[breakout][breakout-extend] {
-  top: 3px !important;
-}
-[uidensity="touch"] #urlbar[breakout][breakout-extend] {
-  top: 4px !important;
-}
+/* [uidensity="compact"] #urlbar[breakout][breakout-extend] { */
+/*   top: 3px !important; */
+/* } */
+/* [uidensity="touch"] #urlbar[breakout][breakout-extend] { */
+/*   top: 4px !important; */
+/* } */
 
 /* Prevent shift of URL bar contents */
 
@@ -69,7 +87,6 @@ height: 0 !important;
 /* Remove shadows */
 
 #urlbar[breakout][breakout-extend] > #urlbar-background {
-  box-shadow: none !important;
   border: none !important;
 }
 
@@ -96,7 +113,7 @@ tab
   background-color: #2c2e34 !important;
 }
 
-.tabbrowser-tab{ opacity: 0.65 }
+.tabbrowser-tab{ opacity: 0.75 }
 .tabbrowser-tab:hover{ opacity: 0.85 }
 .tabbrowser-tab[selected]{ opacity: 1 }
 

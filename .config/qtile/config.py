@@ -5,10 +5,11 @@ from libqtile.config import Click, Drag, Group, Key, Screen, Match
 from libqtile.lazy import lazy
 from libqtile.config import ScratchPad, DropDown
 
-mod = 'mod1'
+mod = 'mod1' # alt
 terminal = 'alacritty'
+home = os.path.expanduser('~')
 
-fontsize = 14
+fontsize = 15
 font = 'Inter'
 boldfont = font + ' Semibold'
 font += ' Medium'
@@ -26,7 +27,7 @@ white = 'e3e1e4'
 
 activeborder = '525766' 
 inactiveborder = bgcolor
-margin = 9
+margin = 12
 
 music = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
@@ -53,15 +54,15 @@ keys = [
     Key([mod], 'r', lazy.spawncmd()),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
-    Key([mod], 'aring', lazy.spawn(terminal + ' -e newsboat')), # båt
+    Key([mod], 'aring', lazy.spawn([terminal, '-e', 'newsboat'])), # båt
     Key([mod], 'adiaeresis', lazy.spawn('pavucontrol')), # pävucontrol
     Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
     Key([mod], 't', lazy.spawn('thunar')),
-    Key([mod], 'b', lazy.spawn('env MOZ_X11_EGL=1 firefox')),
+    Key([mod], 'b', lazy.spawn(['env', 'MOZ_X11_EGL=1', 'firefox'])),
     Key([mod, 'control'], 'r', lazy.restart()),
-    Key([mod, 'control'], 'q', lazy.spawn('/home/aj/.scripts/power.sh')),
-    Key([mod, 'control'], 'l', lazy.spawn('/home/aj/.scripts/lock.sh')),
-    Key([mod, 'control'], 'g', lazy.hide_show_bar('top')),
+    Key([mod, 'control'], 'q', lazy.spawn(home + '/.scripts/power.sh')),
+    Key([mod, 'control'], 'l', lazy.spawn(home + '/.scripts/lock.sh')),
+    Key([mod, 'control'], 'g', lazy.hide_show_bar()),
     Key([mod, 'control'], 'Right', lazy.spawn(music + 'Next')),
     Key([mod, 'control'], 'Left', lazy.spawn(music + 'Previous')),
     Key([], 'Pause', lazy.spawn(music + 'PlayPause')),
@@ -70,8 +71,10 @@ keys = [
     Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute 0 toggle')),
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
-    Key([], 'Print', lazy.spawn("scrot -e 'mv $f /home/aj/Pictures/screenshots'")),
-    Key([], 'Super_L', lazy.spawn(rofi))
+    Key([], 'Print', lazy.spawn(['scrot', '-e', f'mv $f {home}/Pictures/screenshots'])),
+    Key([], 'Super_L', lazy.spawn(rofi)),
+    Key([mod, 'shift'], "f", lazy.window.toggle_floating()),
+    Key([mod, 'shift'], "b", lazy.window.bring_to_front()),
 ]
 
 groups = [Group(i) for i in 'asdfui']
@@ -132,7 +135,7 @@ layouts = [
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 9,
+        'padding': 12,
         'foreground': yellow,
         'background': bgcolor,
         'highlight_method': 'text'
@@ -149,8 +152,10 @@ screens = [
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(rofi + ' -location 1'),
+                        'Button2': lambda qtile:
+                        qtile.cmd_hide_show_bar(),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn('/home/aj/.scripts/power.sh')
+                        qtile.cmd_spawn(home + '/.scripts/power.sh')
                     }
                 ),
                 widget.GroupBox(
@@ -192,7 +197,7 @@ screens = [
                     foreground=anothergray,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(terminal + ' -e htop')
+                        qtile.cmd_spawn([terminal, '-e', 'htop'])
                     }
                 ),
                 widget.Memory(
@@ -221,11 +226,11 @@ screens = [
                     format='%H:%M',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(terminal + ' -e calcurse')
+                        qtile.cmd_spawn([terminal, '-e', 'calcurse'])
                     }
                 )
             ],
-            22,
+            23,
             opacity=1
         ),
     ),
@@ -282,7 +287,7 @@ def autostart():
         ['/usr/bin/setxkbmap', '-layout', 'se', '-option', 'caps:none'],
         ['nitrogen', '--restore'],
         ['picom', '--experimental-backends'],
-        ['/home/aj/.scripts/xbindkeys_startup.sh'],
+        [home + '/.scripts/xbindkeys_startup.sh'],
         ['redshift']
     ]
 

@@ -16,7 +16,7 @@ filetype on
 
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
-set number relativenumber
+set nu rnu
 set tabstop=4 " four spaces tab
 set expandtab " convert tabs to spaces
 set shiftwidth=4 " indents of four spaces
@@ -173,7 +173,7 @@ let g:vimtex_view_method = 'zathura'
 
 " etc
 " let g:sonokai_disable_italic_comment = 1
-let g:sonokai_transparent_background = 1
+"let g:sonokai_transparent_background = 1
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:highlightedyank_highlight_duration = 500
 let g:python_highlight_all = 1
