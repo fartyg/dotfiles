@@ -27,7 +27,7 @@ white = 'e3e1e4'
 
 activeborder = '525766' 
 inactiveborder = bgcolor
-margin = 12
+margin = 7
 
 music = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
@@ -49,6 +49,7 @@ keys = [
     Key([mod], 'g', lazy.window.toggle_fullscreen()),
     Key([mod], 'p', lazy.layout.flip()),
     Key([mod], 'space', lazy.layout.next()),
+    Key([mod], 'e', lazy.layout.previous()),
     Key([mod, 'control'], 'space', lazy.screen.next_group()),
     Key([mod], 'Return', lazy.spawn(terminal)),
     Key([mod], 'r', lazy.spawncmd()),
@@ -118,7 +119,6 @@ layout_theme = {
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'ratio': 0.61,
     'change_ratio': 0.025,
     'font=': font
 }
@@ -135,7 +135,7 @@ layouts = [
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 12,
+        'padding': 9,
         'foreground': yellow,
         'background': bgcolor,
         'highlight_method': 'text'
@@ -147,7 +147,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt='❤',
+                    fmt=' ❤',
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
