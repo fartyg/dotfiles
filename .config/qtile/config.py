@@ -6,13 +6,14 @@ from libqtile.config import Click, Drag, Group, Key, Screen, Match
 from libqtile.lazy import lazy
 from libqtile.config import ScratchPad, DropDown
 
+home = os.path.expanduser('~')
 mod = 'mod1' # alt
 terminal = 'alacritty'
 browser = ['env', 'MOZ_X11_EGL=1', 'firefox']
 
 fontsize = 13
 font = 'Inter'
-boldfont = font + ' Semibold'
+boldfont = f'{font} Semibold'
 font += ' Medium'
 
 # sonokai + gray colors
@@ -31,8 +32,7 @@ activeborder = '52596B'
 inactiveborder = bgcolor
 margin = 10
 
-home = os.path.expanduser('~')
-music = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
+player_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
 rofi = '''rofi -combi-modi window,drun -show combi -modi combi \
@@ -63,9 +63,9 @@ keys = [
     Key([mod, 'control'], 'q', lazy.spawn(f'{home}/.scripts/power.sh')),
     Key([mod, 'control'], 'l', lazy.spawn(f'{home}/.scripts/lock.sh')),
     Key([mod, 'control'], 'g', lazy.hide_show_bar()),
-    Key([mod, 'control'], 'Right', lazy.spawn(music + 'Next')),
-    Key([mod, 'control'], 'Left', lazy.spawn(music + 'Previous')),
-    Key([], 'Pause', lazy.spawn(music + 'PlayPause')),
+    Key([mod, 'control'], 'Right', lazy.spawn(f'{player_cmd}Next')),
+    Key([mod, 'control'], 'Left', lazy.spawn(f'{player_cmd}Previous')),
+    Key([], 'Pause', lazy.spawn(f'{player_cmd}PlayPause')),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume 0 +5%')),
     Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume 0 -5%')),
     Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute 0 toggle')),
@@ -79,20 +79,21 @@ keys = [
 ]
 
 groups = [Group(i) for i in 'asdfui']
-
 for i in groups:
-    keys.extend([
-        Key(
-            [mod], i.name,
-            lazy.group[i.name].toscreen(),
-            desc=f'Switch to group {i.name}'
-        ),
-        Key(
-            [mod, 'control'], i.name,
-            lazy.window.togroup(i.name, switch_group=True),
-            desc=f'Switch to & move focused window to group {i.name}'
-        ),
-    ])
+    keys.extend(
+        [
+            Key(
+                [mod], i.name,
+                lazy.group[i.name].toscreen(),
+                desc=f'Switch to group {i.name}'
+            ),
+            Key(
+                [mod, 'control'], i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc=f'Switch to & move focused window to group {i.name}'
+            ),
+        ]
+    )
 
 dropdown_conf = {
     'height': 0.5,
@@ -137,32 +138,34 @@ groups.append(
     )
 )
 
-keys.extend([
-    Key(
-        [], 'VoidSymbol', # unmapped Caps_Lock
-        lazy.group['sp'].dropdown_toggle('term')
-    ),
-    Key(
-        [mod], 'e',
-        lazy.group['sp'].dropdown_toggle('perfmon')
-    ),
-    Key(
-        [mod], 'r',
-        lazy.group['sp'].dropdown_toggle('irc')
-    ),
-    Key(
-        [mod], 't',
-        lazy.group['sp'].dropdown_toggle('filemanager')
-    ),
-    Key(
-        [mod], 'aring', # båt
-        lazy.group['sp'].dropdown_toggle('rss')
-    ),
-    Key(
-        [mod], 'adiaeresis', # pävucontrol
-        lazy.group['sp'].dropdown_toggle('sound')
-    )
-])
+keys.extend(
+    [
+        Key(
+            [], 'VoidSymbol', # unmapped Caps_Lock
+            lazy.group['sp'].dropdown_toggle('term')
+        ),
+        Key(
+            [mod], 'e',
+            lazy.group['sp'].dropdown_toggle('perfmon')
+        ),
+        Key(
+            [mod], 'r',
+            lazy.group['sp'].dropdown_toggle('irc')
+        ),
+        Key(
+            [mod], 't',
+            lazy.group['sp'].dropdown_toggle('filemanager')
+        ),
+        Key(
+            [mod], 'aring', # båt
+            lazy.group['sp'].dropdown_toggle('rss')
+        ),
+        Key(
+            [mod], 'adiaeresis', # pävucontrol
+            lazy.group['sp'].dropdown_toggle('sound')
+        )
+    ]
+)
 
 # for mouse callbacks
 # cant call lazy objects with mouse otherwise?
@@ -241,11 +244,11 @@ screens = [
                     scroll_chars=None,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(music + 'PlayPause'),
+                        qtile.cmd_spawn(f'{player_cmd}PlayPause'),
                         'Button2': lambda qtile:
-                        qtile.cmd_spawn(music + 'Previous'),
+                        qtile.cmd_spawn(f'{player_cmd}Previous'),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn(music + 'Next')
+                        qtile.cmd_spawn(f'{player_cmd}Next')
                     }
                 ),
                 widget.Spacer(),
@@ -287,7 +290,7 @@ screens = [
                 widget.CheckUpdates(
                     distro='Arch_checkupdates',
                     display_format='{updates}',
-                    execute=[terminal, '-e', 'yay'],
+                    execute=[terminal, '-e', 'pacman', '-Syu'],
                     colour_have_updates=orange
                 ),
                 widget.Clock(
