@@ -9,17 +9,16 @@ from libqtile.config import ScratchPad, DropDown
 home = os.path.expanduser('~')
 mod = 'mod1' # alt
 terminal = 'alacritty'
-browser = ['env', 'MOZ_X11_EGL=1', 'firefox']
+browser = ['env', 'MOZ_X11_EGL=1', 'firefox'] # for gpu video decoding
 
 fontsize = 13
 font = 'Inter'
 boldfont = f'{font} Semibold'
 font += ' Medium'
 
-# sonokai + gray colors
+# sonokai
 bgcolor = '2c2e34'
-gray = '404040'
-anothergray = '808080'
+gray = '808080'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -111,22 +110,22 @@ groups.append(
             ),
             DropDown(
                 'perfmon',
-                [terminal, '-e', 'htop'],
+                f'{terminal} -e htop',
                 **dropdown_conf
             ),
             DropDown(
                 'irc',
-                [terminal, '-e', 'irssi'],
+                f'{terminal} -e irssi',
                 **dropdown_conf
             ),
             DropDown(
                 'filemanager',
-                [terminal, '-e', 'vifm'],
+                f'{terminal} -e vifm',
                 **dropdown_conf
             ),
             DropDown(
                 'rss',
-                [terminal, '-e', 'newsboat'],
+                f'{terminal} -e newsboat',
                 **dropdown_conf
             ),
             DropDown(
@@ -210,9 +209,9 @@ screens = [
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(rofi + ' -location 1'),
+                        qtile.cmd_spawn(f'{rofi} -location 1'),
                         'Button2': lambda qtile:
-                        qtile.cmd_spawn([droptoggle, 'term']),
+                        qtile.cmd_spawn(f'{droptoggle} term'),
                         'Button3': lambda qtile:
                         qtile.cmd_spawn(f'{home}/.scripts/power.sh')
                     }
@@ -222,10 +221,10 @@ screens = [
                     fontsize=fontsize+1,
                     borderwidth=0,
                     disable_drag=True,
-                    active=anothergray,
+                    active=gray,
                     inactive=bgcolor,
                     this_current_screen_border=yellow,
-                    this_screen_border=anothergray,
+                    this_screen_border=gray,
                     background=bgcolor,
                     urgent_alert_method='text',
                     urgent_text=red
@@ -254,16 +253,16 @@ screens = [
                 widget.Spacer(),
                 widget.CPU(
                     format='{load_percent}%',
-                    foreground=anothergray,
+                    foreground=gray,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn([droptoggle, 'perfmon']),
+                        qtile.cmd_spawn(f'{droptoggle} perfmon'),
                         'Button3': lambda qtile:
                         qtile.cmd_spawn(terminal)
                     }
                 ),
                 widget.Memory(
-                    foreground=anothergray,
+                    foreground=gray,
                     format='{MemUsed} MB'
                 ),
                 widget.DF(
@@ -271,12 +270,12 @@ screens = [
                     warn_color=red,
                     warn_space=4,
                     format='{uf} {m}B',
-                    foreground=anothergray,
+                    foreground=gray,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn([droptoggle, 'filemanager']),
+                        qtile.cmd_spawn(f'{droptoggle} filemanager'),
                         'Button2': lambda qtile:
-                        qtile.cmd_spawn([terminal, '-e', 'ncdu']),
+                        qtile.cmd_spawn(f'{terminal} -e ncdu'),
                         'Button3': lambda qtile:
                         qtile.cmd_spawn('thunar')
                     }
@@ -290,7 +289,7 @@ screens = [
                 widget.CheckUpdates(
                     distro='Arch_checkupdates',
                     display_format='{updates}',
-                    execute=[terminal, '-e', 'pacman', '-Syu'],
+                    execute=f'{terminal} -e pacman -Syu',
                     colour_have_updates=orange
                 ),
                 widget.Clock(
@@ -299,11 +298,11 @@ screens = [
                     format='%H:%M  ',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn([droptoggle, 'rss']),
+                        qtile.cmd_spawn(f'{droptoggle} rss'),
                         'Button2': lambda qtile:
                         qtile.cmd_hide_show_bar(),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn([terminal, '-e', 'calcurse'])
+                        qtile.cmd_spawn(f'{terminal} -e calcurse')
                     }
                 )
             ],
