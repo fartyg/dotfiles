@@ -120,7 +120,7 @@ groups.append(
             ),
             DropDown(
                 'filemanager',
-                f'{terminal} -e vifm',
+                'thunar',
                 **dropdown_conf
             ),
             DropDown(
@@ -156,7 +156,7 @@ keys.extend(
             lazy.group['sp'].dropdown_toggle('filemanager')
         ),
         Key(
-            [mod], 'aring', # båt
+            [mod], 'aring', # nyhetsbåt
             lazy.group['sp'].dropdown_toggle('rss')
         ),
         Key(
@@ -257,13 +257,19 @@ screens = [
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} perfmon'),
+                        'Button2': lambda qtile:
+                        qtile.cmd_spawn(f'{droptoggle} sound'),
                         'Button3': lambda qtile:
                         qtile.cmd_spawn(terminal)
                     }
                 ),
                 widget.Memory(
                     foreground=gray,
-                    format='{MemUsed} MB'
+                    format='{MemUsed} MB',
+                    mouse_callbacks = {
+                        'Button1': lambda qtile:
+                        qtile.cmd_spawn(f'{droptoggle} irc'),
+                    }
                 ),
                 widget.DF(
                     visible_on_warn=False,
@@ -280,7 +286,9 @@ screens = [
                         qtile.cmd_spawn('thunar')
                     }
                 ),
-                widget.PulseVolume(foreground=magenta),
+                widget.PulseVolume(
+                    foreground=magenta
+                ),
                 widget.Backlight(
                     foreground=blue,
                     backlight_name='intel_backlight',
