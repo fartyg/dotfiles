@@ -10,7 +10,7 @@ mod = 'mod1' # alt
 terminal = 'alacritty'
 browser = ['env', 'MOZ_X11_EGL=1', 'firefox']
 
-fontsize = 15
+fontsize = 13
 font = 'Inter'
 boldfont = font + ' Semibold'
 font += ' Medium'
@@ -27,9 +27,9 @@ blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
 
-activeborder = '625766' 
+activeborder = '52596B' 
 inactiveborder = bgcolor
-margin = 11
+margin = 10
 
 home = os.path.expanduser('~')
 music = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
@@ -58,7 +58,6 @@ keys = [
     Key([mod], 'r', lazy.spawncmd()),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
-    Key([mod], 'adiaeresis', lazy.spawn('pavucontrol')), # pävucontrol
     Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
     Key([mod], 'b', lazy.spawn(browser)),
     Key([mod, 'control'], 'r', lazy.restart()),
@@ -110,18 +109,23 @@ groups.append(
                 **dropdown_conf
             ),
             DropDown(
-                'htop',
+                'perfmon',
                 [terminal, '-e', 'htop'],
                 **dropdown_conf
             ),
             DropDown(
-                'thunar',
+                'filemanager',
                 'thunar',
                 **dropdown_conf
             ),
             DropDown(
-                'newsboat',
+                'rss',
                 [terminal, '-e', 'newsboat'],
+                **dropdown_conf
+            ),
+            DropDown(
+                'sound',
+                'pavucontrol',
                 **dropdown_conf
             )
         ]
@@ -135,19 +139,25 @@ keys.extend([
     ),
     Key(
         [mod], 'e',
-        lazy.group['sp'].dropdown_toggle('htop')
+        lazy.group['sp'].dropdown_toggle('perfmon')
     ),
     Key(
         [mod], 't',
-        lazy.group['sp'].dropdown_toggle('thunar')
+        lazy.group['sp'].dropdown_toggle('filemanager')
     ),
     Key(
         [mod], 'aring',
-        lazy.group['sp'].dropdown_toggle('newsboat')
+        lazy.group['sp'].dropdown_toggle('rss')
+    ),
+    Key(
+        [mod], 'adiaeresis',
+        lazy.group['sp'].dropdown_toggle('sound')
     )
 ])
 
-droptoggle = f'{home}/.config/qtile/droptoggle.py' # for mouse callbacks
+# for mouse callbacks
+# cant call lazy objects with mouse otherwise?
+droptoggle = f'{home}/.config/qtile/droptoggle.py'
 
 layout_theme = {
     'border_width': 2,
@@ -156,7 +166,7 @@ layout_theme = {
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'change_ratio': 0.025,
+    'change_ratio': 0.0125,
     'font=': font
 }
 
@@ -184,19 +194,20 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt='  ❤',
+                    fmt='   ❤',
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(rofi + ' -location 1'),
                         'Button2': lambda qtile:
-                        qtile.cmd_hide_show_bar(),
+                        qtile.cmd_spawn([droptoggle, 'term']),
                         'Button3': lambda qtile:
                         qtile.cmd_spawn(f'{home}/.scripts/power.sh')
                     }
                 ),
                 widget.GroupBox(
                     font=boldfont,
+                    fontsize=fontsize+1,
                     borderwidth=0,
                     disable_drag=True,
                     active=anothergray,
@@ -215,7 +226,7 @@ screens = [
                 widget.Mpris2(
                     name='spotify',
                     foreground=green,
-                    stop_pause_text='⏯',
+                    stop_pause_text='▶',
                     objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
                     scroll_chars=None,
@@ -234,11 +245,9 @@ screens = [
                     foreground=anothergray,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn([droptoggle, 'htop']),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn([droptoggle, 'newsboat']),
+                        qtile.cmd_spawn([droptoggle, 'perfmon']),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn([droptoggle, 'thunar'])
+                        qtile.cmd_spawn(terminal)
                     }
                 ),
                 widget.Memory(
@@ -247,8 +256,18 @@ screens = [
                 ),
                 widget.DF(
                     visible_on_warn=False,
+                    warn_color=red,
+                    warn_space=4,
                     format='{uf} {m}B',
-                    foreground=anothergray
+                    foreground=anothergray,
+                    mouse_callbacks = {
+                        'Button1': lambda qtile:
+                        qtile.cmd_spawn([droptoggle, 'filemanager']),
+                        'Button2': lambda qtile:
+                        qtile.cmd_spawn([terminal, '-e', 'ncdu']),
+                        'Button3': lambda qtile:
+                        qtile.cmd_spawn([terminal, '-e', 'vifm'])
+                    }
                 ),
                 widget.PulseVolume(foreground=magenta),
                 widget.Backlight(
@@ -260,19 +279,23 @@ screens = [
                     distro='Arch_checkupdates',
                     display_format='{updates}',
                     execute=[terminal, '-e', 'yay'],
-                    colour_have_updates=yellow
+                    colour_have_updates=orange
                 ),
                 widget.Clock(
                     font=boldfont,
-                    format='%H:%M ',
-                    foreground=orange,
+                    fontsize=fontsize+1,
+                    format='%H:%M  ',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
+                        qtile.cmd_spawn([droptoggle, 'rss']),
+                        'Button2': lambda qtile:
+                        qtile.cmd_hide_show_bar(),
+                        'Button3': lambda qtile:
                         qtile.cmd_spawn([terminal, '-e', 'calcurse'])
                     }
                 )
             ],
-            24,
+            23,
             opacity=1
         ),
     ),
