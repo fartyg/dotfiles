@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+export LANG=sv_SE.UTF-8
 
 setopt HIST_IGNORE_ALL_DUPS
 HISTFILE=~/.zsh_history

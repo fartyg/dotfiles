@@ -1,4 +1,5 @@
 from typing import List  # noqa: F401
+from libqtile import qtile
 import os, subprocess
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Screen, Match
@@ -7,13 +8,14 @@ from libqtile.config import ScratchPad, DropDown
 
 mod = 'mod1' # alt
 terminal = 'alacritty'
-home = os.path.expanduser('~')
+browser = ['env', 'MOZ_X11_EGL=1', 'firefox']
 
 fontsize = 15
 font = 'Inter'
 boldfont = font + ' Semibold'
 font += ' Medium'
 
+# sonokai + gray colors
 bgcolor = '2c2e34'
 gray = '404040'
 anothergray = '808080'
@@ -25,10 +27,11 @@ blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
 
-activeborder = '525766' 
+activeborder = '625766' 
 inactiveborder = bgcolor
-margin = 7
+margin = 11
 
+home = os.path.expanduser('~')
 music = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
@@ -55,14 +58,12 @@ keys = [
     Key([mod], 'r', lazy.spawncmd()),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
-    Key([mod], 'aring', lazy.spawn([terminal, '-e', 'newsboat'])), # båt
     Key([mod], 'adiaeresis', lazy.spawn('pavucontrol')), # pävucontrol
     Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
-    Key([mod], 't', lazy.spawn('thunar')),
-    Key([mod], 'b', lazy.spawn(['env', 'MOZ_X11_EGL=1', 'firefox'])),
+    Key([mod], 'b', lazy.spawn(browser)),
     Key([mod, 'control'], 'r', lazy.restart()),
-    Key([mod, 'control'], 'q', lazy.spawn(home + '/.scripts/power.sh')),
-    Key([mod, 'control'], 'l', lazy.spawn(home + '/.scripts/lock.sh')),
+    Key([mod, 'control'], 'q', lazy.spawn(f'{home}/.scripts/power.sh')),
+    Key([mod, 'control'], 'l', lazy.spawn(f'{home}/.scripts/lock.sh')),
     Key([mod, 'control'], 'g', lazy.hide_show_bar()),
     Key([mod, 'control'], 'Right', lazy.spawn(music + 'Next')),
     Key([mod, 'control'], 'Left', lazy.spawn(music + 'Previous')),
@@ -74,8 +75,8 @@ keys = [
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn(['scrot', '-e', f'mv $f {home}/Pictures/screenshots'])),
     Key([], 'Super_L', lazy.spawn(rofi)),
-    Key([mod, 'shift'], "f", lazy.window.toggle_floating()),
-    Key([mod, 'shift'], "b", lazy.window.bring_to_front()),
+    Key([mod, 'shift'], 'f', lazy.window.toggle_floating()),
+    Key([mod, 'shift'], 'b', lazy.window.bring_to_front()),
 ]
 
 groups = [Group(i) for i in 'asdfui']
@@ -94,23 +95,59 @@ for i in groups:
         ),
     ])
 
+dropdown_conf = {
+    'height': 0.5,
+    'opacity': 1,
+    'warp_pointer': False
+}
+
 groups.append(
-    ScratchPad('sp', [
-        DropDown(
-            'term',
-            'alacritty',
-            height=0.40,
-            opacity=1
-        )
-    ])
+    ScratchPad('sp',
+        [
+            DropDown(
+                'term',
+                terminal,
+                **dropdown_conf
+            ),
+            DropDown(
+                'htop',
+                [terminal, '-e', 'htop'],
+                **dropdown_conf
+            ),
+            DropDown(
+                'thunar',
+                'thunar',
+                **dropdown_conf
+            ),
+            DropDown(
+                'newsboat',
+                [terminal, '-e', 'newsboat'],
+                **dropdown_conf
+            )
+        ]
+    )
 )
 
 keys.extend([
     Key(
         [], 'VoidSymbol', # unmapped Caps_Lock
         lazy.group['sp'].dropdown_toggle('term')
+    ),
+    Key(
+        [mod], 'e',
+        lazy.group['sp'].dropdown_toggle('htop')
+    ),
+    Key(
+        [mod], 't',
+        lazy.group['sp'].dropdown_toggle('thunar')
+    ),
+    Key(
+        [mod], 'aring',
+        lazy.group['sp'].dropdown_toggle('newsboat')
     )
 ])
+
+droptoggle = f'{home}/.scripts/droptoggle.py' # for mouse callbacks
 
 layout_theme = {
     'border_width': 2,
@@ -124,10 +161,10 @@ layout_theme = {
 }
 
 layouts = [
-    layout.MonadTall(
+    layout.MonadWide(
         **layout_theme
     ),
-    layout.MonadWide(
+    layout.MonadTall(
         **layout_theme
     )
 ]
@@ -135,7 +172,7 @@ layouts = [
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 9,
+        'padding': 10,
         'foreground': yellow,
         'background': bgcolor,
         'highlight_method': 'text'
@@ -147,7 +184,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt=' ❤',
+                    fmt='  ❤',
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
@@ -155,7 +192,7 @@ screens = [
                         'Button2': lambda qtile:
                         qtile.cmd_hide_show_bar(),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn(home + '/.scripts/power.sh')
+                        qtile.cmd_spawn(f'{home}/.scripts/power.sh')
                     }
                 ),
                 widget.GroupBox(
@@ -197,7 +234,11 @@ screens = [
                     foreground=anothergray,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn([terminal, '-e', 'htop'])
+                        qtile.cmd_spawn([droptoggle, 'htop']),
+                        'Button2': lambda qtile:
+                        qtile.cmd_spawn([droptoggle, 'newsboat']),
+                        'Button3': lambda qtile:
+                        qtile.cmd_spawn([droptoggle, 'thunar'])
                     }
                 ),
                 widget.Memory(
@@ -219,18 +260,19 @@ screens = [
                     distro='Arch_checkupdates',
                     display_format='{updates}',
                     execute=[terminal, '-e', 'yay'],
-                    colour_have_updates=orange
+                    colour_have_updates=yellow
                 ),
                 widget.Clock(
                     font=boldfont,
-                    format='%H:%M',
+                    format='%H:%M ',
+                    foreground=orange,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn([terminal, '-e', 'calcurse'])
                     }
                 )
             ],
-            23,
+            24,
             opacity=1
         ),
     ),
@@ -261,32 +303,44 @@ cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = 'smart'
 floating_layout = layout.Floating(
-                     **layout_theme,
-                     float_rules=[
-                         {'wmclass': 'confirm'},
-                         {'wmclass': 'dialog'},
-                         {'wmclass': 'download'},
-                         {'wmclass': 'error'},
-                         {'wmclass': 'file_progress'},
-                         {'wmclass': 'notification'},
-                         {'wmclass': 'splash'},
-                         {'wmclass': 'toolbar'},
-                         {'wmclass': 'confirmreset'},  # gitk
-                         {'wmclass': 'makebranch'},  # gitk
-                         {'wmclass': 'maketag'},  # gitk
-                         {'wname': 'branchdialog'},  # gitk
-                         {'wname': 'pinentry'},  # GPG key password entry
-                         {'wmclass': 'ssh-askpass'},  # ssh-askpass
-                     ]
+                    **layout_theme,
+                    float_rules=[
+                        {'wmclass': 'confirm'},
+                        {'wmclass': 'dialog'},
+                        {'wmclass': 'download'},
+                        {'wmclass': 'error'},
+                        {'wmclass': 'file_progress'},
+                        {'wmclass': 'notification'},
+                        {'wmclass': 'splash'},
+                        {'wmclass': 'toolbar'},
+                        {'wmclass': 'confirmreset'},  # gitk
+                        {'wmclass': 'makebranch'},  # gitk
+                        {'wmclass': 'maketag'},  # gitk
+                        {'wname': 'branchdialog'},  # gitk
+                        {'wname': 'pinentry'},  # GPG key password entry
+                        {'wmclass': 'ssh-askpass'},  # ssh-askpass
+                    ]
 )
 wmname = 'LG3D'
+
+@hook.subscribe.client_killed
+def fallback(window):
+    if window.group.windows != {window}:
+        return
+
+    for group in qtile.groups:
+        if group.windows:
+            qtile.current_screen.toggle_group(group)
+            return
+    qtile.current_screen.toggle_group(qtile.groups[0])
 
 @hook.subscribe.startup_once
 def autostart():
     processes = [
         ['nitrogen', '--restore'],
         ['picom', '--experimental-backends'],
-        ['redshift']
+        ['redshift'],
+        browser
     ]
 
     for p in processes:
