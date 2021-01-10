@@ -147,7 +147,7 @@ keys.extend([
     )
 ])
 
-droptoggle = f'{home}/.scripts/droptoggle.py' # for mouse callbacks
+droptoggle = f'{home}/.config/qtile/droptoggle.py' # for mouse callbacks
 
 layout_theme = {
     'border_width': 2,
