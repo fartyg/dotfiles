@@ -55,7 +55,6 @@ keys = [
     Key([mod], 'e', lazy.layout.previous()),
     Key([mod, 'control'], 'space', lazy.screen.next_group()),
     Key([mod], 'Return', lazy.spawn(terminal)),
-    Key([mod], 'r', lazy.spawncmd()),
     Key([mod], 'Tab', lazy.next_layout()),
     Key([mod], 'q', lazy.window.kill()),
     Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
@@ -74,6 +73,7 @@ keys = [
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn(['scrot', '-e', f'mv $f {home}/Pictures/screenshots'])),
     Key([], 'Super_L', lazy.spawn(rofi)),
+    Key([mod, 'shift'], 'r', lazy.spawncmd()),
     Key([mod, 'shift'], 'f', lazy.window.toggle_floating()),
     Key([mod, 'shift'], 'b', lazy.window.bring_to_front()),
 ]
@@ -114,8 +114,13 @@ groups.append(
                 **dropdown_conf
             ),
             DropDown(
+                'irc',
+                [terminal, '-e', 'irssi'],
+                **dropdown_conf
+            ),
+            DropDown(
                 'filemanager',
-                'thunar',
+                [terminal, '-e', 'vifm'],
                 **dropdown_conf
             ),
             DropDown(
@@ -142,15 +147,19 @@ keys.extend([
         lazy.group['sp'].dropdown_toggle('perfmon')
     ),
     Key(
+        [mod], 'r',
+        lazy.group['sp'].dropdown_toggle('irc')
+    ),
+    Key(
         [mod], 't',
         lazy.group['sp'].dropdown_toggle('filemanager')
     ),
     Key(
-        [mod], 'aring',
+        [mod], 'aring', # båt
         lazy.group['sp'].dropdown_toggle('rss')
     ),
     Key(
-        [mod], 'adiaeresis',
+        [mod], 'adiaeresis', # pävucontrol
         lazy.group['sp'].dropdown_toggle('sound')
     )
 ])
@@ -266,7 +275,7 @@ screens = [
                         'Button2': lambda qtile:
                         qtile.cmd_spawn([terminal, '-e', 'ncdu']),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn([terminal, '-e', 'vifm'])
+                        qtile.cmd_spawn('thunar')
                     }
                 ),
                 widget.PulseVolume(foreground=magenta),
