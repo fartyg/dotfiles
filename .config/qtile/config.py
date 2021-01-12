@@ -18,7 +18,7 @@ font += ' Medium'
 
 # sonokai
 bgcolor = '2c2e34'
-gray = '808080'
+gray = '828282'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -216,6 +216,7 @@ screens = [
                         qtile.cmd_spawn(f'{home}/.scripts/power.sh')
                     }
                 ),
+                widget.Sep(padding=20,linewidth=0),
                 widget.GroupBox(
                     font=boldfont,
                     fontsize=fontsize+1,
@@ -274,7 +275,7 @@ screens = [
                 widget.DF(
                     visible_on_warn=False,
                     warn_color=red,
-                    warn_space=4,
+                    warn_space=10,
                     format='{uf} {m}B',
                     foreground=gray,
                     mouse_callbacks = {
