@@ -11,7 +11,7 @@ mod = 'mod1' # alt
 terminal = 'alacritty'
 browser = ['env', 'MOZ_X11_EGL=1', 'firefox'] # for gpu video decoding
 
-fontsize = 13
+fontsize = 14
 font = 'Inter'
 boldfont = f'{font} Semibold'
 font += ' Medium'
@@ -182,10 +182,10 @@ layout_theme = {
 }
 
 layouts = [
-    layout.MonadWide(
+    layout.MonadTall(
         **layout_theme
     ),
-    layout.MonadTall(
+    layout.MonadWide(
         **layout_theme
     )
 ]
@@ -205,7 +205,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt='   ❤',
+                    fmt='  ❤',
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
@@ -283,12 +283,10 @@ screens = [
                         'Button2': lambda qtile:
                         qtile.cmd_spawn(f'{terminal} -e ncdu'),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn('thunar')
+                        qtile.cmd_spawn(f'{terminal} -e vifm')
                     }
                 ),
-                widget.PulseVolume(
-                    foreground=magenta
-                ),
+                widget.PulseVolume(foreground=magenta),
                 widget.Backlight(
                     foreground=blue,
                     backlight_name='intel_backlight',
@@ -297,7 +295,7 @@ screens = [
                 widget.CheckUpdates(
                     distro='Arch_checkupdates',
                     display_format='{updates}',
-                    execute=f'{terminal} -e pacman -Syu',
+                    execute=f'{terminal} -e yay',
                     colour_have_updates=orange
                 ),
                 widget.Clock(
@@ -314,7 +312,7 @@ screens = [
                     }
                 )
             ],
-            23,
+            22,
             opacity=1
         ),
     ),
