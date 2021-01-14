@@ -1,9 +1,4 @@
-#! /usr/bin/env python3
-'''
-lazystream helper script
-annoying having to always select
-yesterday due to timezone differences
-'''
+#! /usr/bin/env python
 
 import os, sys
 import datetime as dt
@@ -22,4 +17,5 @@ except:
 
 d = date.strftime('%Y/%m/%d').replace('/', '')
 cmd = f'lazystream --date {d} play select {p}'
+
 os.system(cmd)
