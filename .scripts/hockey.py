@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-
 import os, sys
 import datetime as dt
 
@@ -10,7 +9,7 @@ try:
     date = now + dt.timedelta(inp)
 
 except:
-    date = now
+    date = now + dt.timedelta(-1)
 
 d = date.strftime('%Y%m%d')
 p = '--custom-player /usr/bin/mpv'
