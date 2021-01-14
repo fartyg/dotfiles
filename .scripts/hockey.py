@@ -11,7 +11,9 @@ try:
 except:
     delta = dt.timedelta(-1)
 
-date = now + delta # default to yesterday
+# normal default annoying due to TZ diff
+# new default is yesterday
+date = now + delta
 
 d = date.strftime('%Y%m%d')
 p = '--custom-player /usr/bin/mpv'
