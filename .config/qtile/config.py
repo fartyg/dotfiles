@@ -11,7 +11,7 @@ mod = 'mod1' # alt
 terminal = 'alacritty'
 browser = ['env', 'MOZ_X11_EGL=1', 'firefox'] # for gpu video decoding
 
-fontsize = 14
+fontsize = 16
 font = 'Inter'
 boldfont = f'{font} Semibold'
 font += ' Medium'
@@ -29,7 +29,7 @@ white = 'e3e1e4'
 
 activeborder = '52596B' 
 inactiveborder = bgcolor
-margin = 10
+margin = 12
 
 player_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
@@ -95,7 +95,6 @@ for i in groups:
     )
 
 dropdown_conf = {
-    'height': 0.5,
     'opacity': 1,
     'warp_pointer': False
 }
@@ -193,7 +192,7 @@ layouts = [
 widget_defaults = {
         'font': font,
         'fontsize': fontsize,
-        'padding': 10,
+        'padding': 12,
         'foreground': yellow,
         'background': bgcolor,
         'highlight_method': 'text'
@@ -205,7 +204,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt='  ❤',
+                    fmt=' ❤',
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
@@ -219,7 +218,7 @@ screens = [
                 widget.Sep(padding=20,linewidth=0),
                 widget.GroupBox(
                     font=boldfont,
-                    fontsize=fontsize+1,
+                    # fontsize=fontsize+2,
                     borderwidth=0,
                     disable_drag=True,
                     active=gray,
@@ -301,8 +300,8 @@ screens = [
                 ),
                 widget.Clock(
                     font=boldfont,
-                    fontsize=fontsize+1,
-                    format='%H:%M  ',
+                    # fontsize=fontsize+2,
+                    format='%H:%M ',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} rss'),
@@ -313,7 +312,7 @@ screens = [
                     }
                 )
             ],
-            22,
+            24,
             opacity=1
         ),
     ),
@@ -379,7 +378,7 @@ def fallback(window):
 def autostart():
     processes = [
         ['nitrogen', '--restore'],
-        ['picom', '--experimental-backends'],
+    #    ['picom', '--experimental-backends'],
         ['redshift'],
         browser
     ]

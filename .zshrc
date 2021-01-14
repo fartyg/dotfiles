@@ -7,6 +7,8 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
+export PATH="$PATH:~/.scripts"
+export PATH="${PATH}:${HOME}/.scripts"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
