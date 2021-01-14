@@ -3,9 +3,6 @@
 import os, sys
 import datetime as dt
 
-player = '/usr/bin/mpv'
-p = f'--custom-player {player}'
-
 now = dt.datetime.now()
 
 try:
@@ -15,7 +12,8 @@ try:
 except:
     date = now
 
-d = date.strftime('%Y/%m/%d').replace('/', '')
-cmd = f'lazystream --date {d} play select {p}'
+d = date.strftime('%Y%m%d')
+p = '--custom-player /usr/bin/mpv'
 
+cmd = f'lazystream --date {d} play select {p}'
 os.system(cmd)
