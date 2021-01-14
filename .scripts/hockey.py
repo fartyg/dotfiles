@@ -6,10 +6,12 @@ now = dt.datetime.now()
 
 try:
     inp = int(sys.argv[1])
-    date = now + dt.timedelta(inp)
+    delta = dt.timedelta(inp)
 
 except:
-    date = now + dt.timedelta(-1)
+    delta = dt.timedelta(-1)
+
+date = now + delta # default to yesterday
 
 d = date.strftime('%Y%m%d')
 p = '--custom-player /usr/bin/mpv'
