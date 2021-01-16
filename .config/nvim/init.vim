@@ -29,17 +29,18 @@ set cpoptions+=x " stay at seach item when <esc>
 set hlsearch " highlight all text matching current search pattern
 set ignorecase " case insensitive search
 set smartcase " case sensitive when uppercase
-set scrolloff=5 " Display 5 lines above/below the cursor when scrolling with a mouse.
 set backspace=indent,eol,start
 set noswapfile " swap files won't be created
 set nobackup " no backup
+set scrolloff=6
 set nowritebackup
+set nohlsearch
 set hidden
 set autoindent
 set smartindent
 set cursorline "highlight current line
 set clipboard+=unnamedplus
-set updatetime=300
+set updatetime=50
 set conceallevel=0
 set laststatus=0
 set noshowcmd
@@ -48,26 +49,20 @@ set cmdheight=1
 set noruler
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
+set guicursor+=i:ver100-iCursor
 
 inoremap jj <Esc>
 inoremap kk <Esc>
 noremap <Leader>s :update<CR>
 noremap <silent><Leader>l :noh<CR>
 
-" buffer navigation
+vnoremap <leader>p "_dP
+
 noremap <silent><Leader>q :bd<CR>
 noremap <silent><Leader><Leader> :bn<CR>
 noremap <silent><Leader>p :bp<CR>
 
-" ctrl+backspace removes word
 inoremap <C-H> <C-W>
-
-" m (move) is cut and d is actually delete with vim-cutlass
-nnoremap m d
-xnoremap m d
-nnoremap mm dd
-nnoremap M D
-
 nnoremap S :%s//gc<Left><Left><Left>
 
 nmap <leader>c <Plug>Commentary
@@ -78,17 +73,14 @@ nmap <leader>cc <Plug>CommentaryLine
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
-noremap <silent><leader>git :GFiles<CR>
+noremap <silent><leader>git  :GFiles<CR>
 nnoremap <silent><leader>t   :Files<CR>
 nnoremap <silent><leader>f   :Lines<CR>
 nnoremap <silent><leader>b   :Buffers<CR>
 nnoremap <silent><leader>r   :History<CR>
 
-nnoremap <silent><Leader>g :Goyo<CR>
-
-autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 nmap <silent><F6> :TagbarToggle<CR>
+nnoremap <silent><Leader>g :Goyo<CR>
 
 if exists('+termguicolors')
  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -97,9 +89,12 @@ if exists('+termguicolors')
 endif
 
 function! CustomColors()
+    hi Cursor guifg=white guibg=black
+    hi iCursor guifg=white guibg=yellow
     hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
     hi LineNr guibg=NONE guifg=#707070
+    hi SignColumn guibg=NONE
     hi Comment guifg=#707070
     hi Normal guibg=NONE
     hi EndOfBuffer guibg=NONE
@@ -108,24 +103,39 @@ function! CustomColors()
     hi HighlightedyankRegion guibg=#506082
 endfunction
 
-autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
-autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+augroup donut
+    autocmd!
+    autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+    autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+    autocmd BufWritePre * :call TrimWhitespace()
+    autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
+    autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+            \   | Limelight
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+            \   | Limelight!
+            \   | call CustomColors()
+augroup END
 
 call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
-    " Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
-    " Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
+    Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
-    Plug 'svermeulen/vim-cutlass'
     Plug 'machakann/vim-highlightedyank'
     Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
     Plug 'justinmk/vim-sneak'
     Plug 'mhinz/vim-startify'
     Plug 'lervag/vimtex'
-    " Plug 'cohama/lexima.vim'
     Plug 'preservim/tagbar'
     Plug 'bagrat/vim-buffet'
     Plug 'vim-python/python-syntax'
@@ -152,18 +162,10 @@ function! s:goyo_leave()
   endif
 endfunction
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-        \   | Limelight
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-        \   | Limelight!
-        \   | call CustomColors()
-
-" sneak
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
-" vimtex
 set nocompatible
 let &rtp = '~/.vim/bundle/vimtex,' . &rtp
 filetype plugin indent on
@@ -171,9 +173,7 @@ set iskeyword+=:
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'zathura'
 
-" etc
-" let g:sonokai_disable_italic_comment = 1
-"let g:sonokai_transparent_background = 1
+let g:sonokai_disable_italic_comment = 1
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:highlightedyank_highlight_duration = 500
 let g:python_highlight_all = 1

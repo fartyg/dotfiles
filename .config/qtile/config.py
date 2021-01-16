@@ -11,7 +11,7 @@ mod = 'mod1' # alt
 terminal = 'alacritty'
 browser = ['env', 'MOZ_X11_EGL=1', 'firefox'] # for gpu video decoding
 
-fontsize = 16
+fontsize = 15
 font = 'Inter'
 boldfont = f'{font} Semibold'
 font += ' Medium'
@@ -27,9 +27,9 @@ blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
 
-activeborder = '52596B' 
+activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 12
+margin = 8
 
 player_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
@@ -176,8 +176,7 @@ layout_theme = {
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'change_ratio': 0.0125,
-    'font=': font
+    'change_ratio': 0.0125
 }
 
 layouts = [
@@ -218,7 +217,6 @@ screens = [
                 widget.Sep(padding=20,linewidth=0),
                 widget.GroupBox(
                     font=boldfont,
-                    # fontsize=fontsize+2,
                     borderwidth=0,
                     disable_drag=True,
                     active=gray,
@@ -300,7 +298,6 @@ screens = [
                 ),
                 widget.Clock(
                     font=boldfont,
-                    # fontsize=fontsize+2,
                     format='%H:%M ',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
@@ -378,7 +375,7 @@ def fallback(window):
 def autostart():
     processes = [
         ['nitrogen', '--restore'],
-    #    ['picom', '--experimental-backends'],
+        ['picom', '-b', '--experimental-backends'],
         ['redshift'],
         browser
     ]

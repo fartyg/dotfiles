@@ -8,8 +8,8 @@ window:
     lines: 80
 
   padding:
-    x: 6
-    y: 6
+    x: 8
+    y: 8
 
 background_opacity: 1
 unfocused_hollow: true
@@ -18,27 +18,10 @@ dpi:
   x: 96
   y: 96
 
-
 cursor:
-  # Cursor style
   style:
-    # Cursor shape
-    #
-    # Values for `shape`:
-    #   - ▇ Block
-    #   - _ Underline
-    #   - | Beam
     shape: Beam
-
-    # Cursor blinking state
-    #
-    # Values for `blinking`:
-    #   - Never: Prevent the cursor from ever blinking
-    #   - Off: Disable blinking by default
-    #   - On: Enable blinking by default
-    #   - Always: Force the cursor to always blink
     blinking: Always
-
 
 draw_bold_text_with_bright_colors: true
 
@@ -46,7 +29,7 @@ font:
   normal:
     family: SFMono Nerd Font Mono
     style: Medium
-  size: 6
+  size: 7
 
 colors:
   primary:
@@ -54,7 +37,7 @@ colors:
     foreground: "0xe2e2e3"
 
   normal:
-    black: "0x505050"
+    black: "0x828282"
     red: "0xfc5d7c"
     green: "0x9ed072"
     yellow: "0xe7c664"

@@ -8,7 +8,6 @@ export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export PATH="$PATH:~/.scripts"
-export PATH="${PATH}:${HOME}/.scripts"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -38,7 +37,7 @@ ZSH_THEME="simple"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -65,21 +64,27 @@ ZSH_THEME="simple"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+VIM_MODE_VICMD_KEY='jj'
+MODE_CURSOR_VIINS="#e5c463 blinking bar"
+MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
+MODE_CURSOR_VICMD="#e3e1e4 block"
+MODE_CURSOR_SEARCH="#ff00ff steady underline"
+MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ab9df2"
+MODE_INDICATOR_VIINS='%F{15}%F{3}INSERT%f'
+MODE_INDICATOR_VICMD='%F{7}%F{2}NORMAL%f'
+MODE_INDICATOR_REPLACE='%F{9}%F{1}REPLACE%f'
+MODE_INDICATOR_SEARCH='%F{13}%F{5}SEARCH%f'
+MODE_INDICATOR_VISUAL='%F{12}%F{4}VISUAL%f'
+MODE_INDICATOR_VLINE='%F{12}%F{4}V-LINE%f'
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
 	fzf
-	zsh-syntax-highlighting
-	zsh-autosuggestions
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-vim-mode
 )
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -136,3 +141,4 @@ alias open='handlr open'
 alias ls='LC_COLLATE=C ls -h --group-directories-first --color=auto'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias sudo='sudo '
+alias nhl='hockey.py'

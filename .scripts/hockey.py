@@ -1,6 +1,6 @@
 #! /usr/bin/env python
-import os, sys
 import datetime as dt
+import sys, os
 
 now = dt.datetime.now()
 
@@ -9,10 +9,8 @@ try:
     delta = dt.timedelta(inp)
 
 except:
-    delta = dt.timedelta(-1)
+    delta = dt.timedelta(0)
 
-# normal default annoying due to TZ diff
-# new default is yesterday
 date = now + delta
 
 d = date.strftime('%Y%m%d')
