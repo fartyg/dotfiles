@@ -29,7 +29,7 @@ white = 'e3e1e4'
 
 activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 8
+margin = 10
 
 player_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
@@ -96,7 +96,9 @@ for i in groups:
 
 dropdown_conf = {
     'opacity': 1,
-    'warp_pointer': False
+    'warp_pointer': False,
+    'height': 0.45,
+    'y': 0.0071
 }
 
 groups.append(
@@ -130,6 +132,11 @@ groups.append(
             DropDown(
                 'sound',
                 'pavucontrol',
+                **dropdown_conf
+            ),
+            DropDown(
+                'calendar',
+                f'{terminal} -e calcurse',
                 **dropdown_conf
             )
         ]
@@ -170,7 +177,7 @@ keys.extend(
 droptoggle = f'{home}/.config/qtile/droptoggle.py'
 
 layout_theme = {
-    'border_width': 2,
+    'border_width': 0,
     'border_focus': activeborder,
     'border_normal': inactiveborder,
     'margin': margin,
@@ -214,7 +221,7 @@ screens = [
                         qtile.cmd_spawn(f'{home}/.scripts/power.sh')
                     }
                 ),
-                widget.Sep(padding=20,linewidth=0),
+                widget.Sep(padding=20, linewidth=0),
                 widget.GroupBox(
                     font=boldfont,
                     borderwidth=0,
@@ -305,7 +312,7 @@ screens = [
                         'Button2': lambda qtile:
                         qtile.cmd_hide_show_bar(),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn(f'{terminal} -e calcurse')
+                        qtile.cmd_spawn(f'{droptoggle} calendar')
                     }
                 )
             ],

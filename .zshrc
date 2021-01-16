@@ -7,7 +7,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
-export PATH="$PATH:~/.scripts"
+export PATH="${PATH}:${HOME}/.scripts"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -71,12 +71,6 @@ MODE_CURSOR_VICMD="#e3e1e4 block"
 MODE_CURSOR_SEARCH="#ff00ff steady underline"
 MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
 MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ab9df2"
-MODE_INDICATOR_VIINS='%F{15}%F{3}INSERT%f'
-MODE_INDICATOR_VICMD='%F{7}%F{2}NORMAL%f'
-MODE_INDICATOR_REPLACE='%F{9}%F{1}REPLACE%f'
-MODE_INDICATOR_SEARCH='%F{13}%F{5}SEARCH%f'
-MODE_INDICATOR_VISUAL='%F{12}%F{4}VISUAL%f'
-MODE_INDICATOR_VLINE='%F{12}%F{4}V-LINE%f'
 
 plugins=(
 	git

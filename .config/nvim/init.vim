@@ -9,11 +9,19 @@ let g:startify_custom_header = [
  \ '',
  \]
 
+
+if exists('+termguicolors')
+ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+ set termguicolors
+endif
+
 let mapleader = " " " space is the leader key
 let maplocalleader=" "
-syntax on " syntax highlighting
+syntax on
 filetype on
 
+" sets
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
 set nu rnu
@@ -51,6 +59,8 @@ set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
 set guicursor+=i:ver100-iCursor
 
+
+" keybinds
 inoremap jj <Esc>
 inoremap kk <Esc>
 noremap <Leader>s :update<CR>
@@ -82,19 +92,12 @@ nnoremap <silent><leader>r   :History<CR>
 nmap <silent><F6> :TagbarToggle<CR>
 nnoremap <silent><Leader>g :Goyo<CR>
 
-if exists('+termguicolors')
- let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
- let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
- set termguicolors
-endif
 
 function! CustomColors()
-    hi Cursor guifg=white guibg=black
-    hi iCursor guifg=white guibg=yellow
+    hi iCursor guibg=#e5c463
     hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
     hi LineNr guibg=NONE guifg=#707070
-    hi SignColumn guibg=NONE
     hi Comment guifg=#707070
     hi Normal guibg=NONE
     hi EndOfBuffer guibg=NONE
@@ -102,44 +105,6 @@ function! CustomColors()
     hi StatusLine guibg=NONE
     hi HighlightedyankRegion guibg=#506082
 endfunction
-
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
-augroup donut
-    autocmd!
-    autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
-    autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-    autocmd BufWritePre * :call TrimWhitespace()
-    autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
-    autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
-    autocmd! User GoyoEnter nested call <SID>goyo_enter()
-            \   | Limelight
-    autocmd! User GoyoLeave nested call <SID>goyo_leave()
-            \   | Limelight!
-            \   | call CustomColors()
-augroup END
-
-call plug#begin()
-    Plug 'junegunn/fzf.vim'
-    Plug 'junegunn/goyo.vim'
-    Plug 'junegunn/limelight.vim'
-    Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-commentary'
-    Plug 'machakann/vim-highlightedyank'
-    Plug 'sainnhe/sonokai'
-    Plug 'Yggdroot/indentLine'
-    Plug 'justinmk/vim-sneak'
-    Plug 'mhinz/vim-startify'
-    Plug 'lervag/vimtex'
-    Plug 'preservim/tagbar'
-    Plug 'bagrat/vim-buffet'
-    Plug 'vim-python/python-syntax'
-call plug#end()
 
 " Goyo and Limelight
 function! s:goyo_enter()
@@ -162,6 +127,59 @@ function! s:goyo_leave()
   endif
 endfunction
 
+function! g:BuffetSetCustomColors()
+  hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
+  hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
+  hi! BuffetActiveBuffer guibg=NONE guifg=#707070
+  hi! BuffetBuffer guibg=NONE guifg=#707070
+  hi! BuffetTrunc guibg=NONE guifg=#707070
+  hi! BuffetTab guibg=NONE guifg=#707070
+  hi! BuffetModActiveBuffer guibg=NONE guifg=#e5c463
+  hi! BuffetModBuffer guibg=NONE guifg=#707070
+endfunction
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+augroup donut
+    autocmd!
+    autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+    autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
+    autocmd BufWritePre * :call TrimWhitespace()
+
+    autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
+    autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
+
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+            \   | Limelight
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+            \   | Limelight!
+            \   | call CustomColors()
+augroup END
+
+
+call plug#begin()
+    Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
+    Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
+    Plug 'machakann/vim-highlightedyank'
+    Plug 'sainnhe/sonokai'
+    Plug 'Yggdroot/indentLine'
+    Plug 'justinmk/vim-sneak'
+    Plug 'mhinz/vim-startify'
+    Plug 'lervag/vimtex'
+    Plug 'preservim/tagbar'
+    Plug 'bagrat/vim-buffet'
+    Plug 'vim-python/python-syntax'
+call plug#end()
+
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
@@ -182,17 +200,6 @@ let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
-
-function! g:BuffetSetCustomColors()
-  hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
-  hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetActiveBuffer guibg=NONE guifg=#707070
-  hi! BuffetBuffer guibg=NONE guifg=#707070
-  hi! BuffetTrunc guibg=NONE guifg=#707070
-  hi! BuffetTab guibg=NONE guifg=#707070
-  hi! BuffetModActiveBuffer guibg=NONE guifg=#e5c463
-  hi! BuffetModBuffer guibg=NONE guifg=#707070
-endfunction
 
 colorscheme sonokai
 call CustomColors()
