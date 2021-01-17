@@ -18,7 +18,6 @@ endif
 
 let mapleader = " " " space is the leader key
 let maplocalleader=" "
-syntax on
 filetype on
 
 " sets
@@ -47,7 +46,7 @@ set hidden
 set autoindent
 set smartindent
 set cursorline "highlight current line
-set clipboard+=unnamedplus
+set clipboard=unnamed
 set updatetime=50
 set conceallevel=0
 set laststatus=0
@@ -58,22 +57,22 @@ set noruler
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
 set guicursor+=i:ver100-iCursor
-
-
+" set signcolumn=yes
 " keybinds
 inoremap jj <Esc>
 inoremap kk <Esc>
 noremap <Leader>s :update<CR>
 noremap <silent><Leader>l :noh<CR>
-
-vnoremap <leader>p "_dP
+" noremap <Leader>m m
 
 noremap <silent><Leader>q :bd<CR>
 noremap <silent><Leader><Leader> :bn<CR>
-noremap <silent><Leader>p :bp<CR>
 
 inoremap <C-H> <C-W>
 nnoremap S :%s//gc<Left><Left><Left>
+
+imap <c-v> <plug>EasyClipInsertModePaste
+cmap <c-v> <plug>EasyClipCommandModePaste
 
 nmap <leader>c <Plug>Commentary
 xmap <leader>c <Plug>Commentary
@@ -85,19 +84,29 @@ map F <Plug>Sneak_S
 
 noremap <silent><leader>git  :GFiles<CR>
 nnoremap <silent><leader>t   :Files<CR>
-nnoremap <silent><leader>f   :Lines<CR>
+" nnoremap <silent><leader>f   :Lines<CR>
 nnoremap <silent><leader>b   :Buffers<CR>
 nnoremap <silent><leader>r   :History<CR>
 
 nmap <silent><F6> :TagbarToggle<CR>
 nnoremap <silent><Leader>g :Goyo<CR>
 
+" nmap <silent> <leader>rr :Semshi rename<CR>
+" nmap <silent> <Tab> :Semshi goto name next<CR>
+" nmap <silent> <S-Tab> :Semshi goto name prev<CR>
+" nmap <silent> <leader>f :Semshi goto function next<CR>
+" nmap <silent> <leader>F :Semshi goto function prev<CR>
+" nmap <silent> <leader>gu :Semshi goto unresolved first<CR>
+" nmap <silent> <leader>gp :Semshi goto parameterUnused first<CR>
+" nmap <silent> <leader>ee :Semshi error<CR>
+" nmap <silent> <leader>ge :Semshi goto error<CR>
 
 function! CustomColors()
     hi iCursor guibg=#e5c463
     hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
     hi LineNr guibg=NONE guifg=#707070
+    hi SignColumn guibg=NONE
     hi Comment guifg=#707070
     hi Normal guibg=NONE
     hi EndOfBuffer guibg=NONE
@@ -165,10 +174,13 @@ augroup END
 call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim'
+    Plug 'svermeulen/vim-easyclip'
     Plug 'junegunn/limelight.vim'
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-commentary'
+    " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
     Plug 'machakann/vim-highlightedyank'
     Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
@@ -192,14 +204,17 @@ let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'zathura'
 
 let g:sonokai_disable_italic_comment = 1
+let g:python_highlight_all = 1
+" let g:semshi#excluded_hl_groups = ['local', 'global']
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:highlightedyank_highlight_duration = 500
-let g:python_highlight_all = 1
 let g:fzf_preview_window = []
 let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
+let g:EasyClipUseSubstituteDefaults = 1
+let g:yankring_clipboard_monitor=0
 
 colorscheme sonokai
 call CustomColors()

@@ -13,7 +13,8 @@ browser = ['env', 'MOZ_X11_EGL=1', 'firefox'] # for gpu video decoding
 
 fontsize = 15
 font = 'Inter'
-boldfont = f'{font} Semibold'
+semiboldfont = f'{font} Semibold'
+boldfont = f'{font} Bold'
 font += ' Medium'
 
 # sonokai
@@ -29,7 +30,8 @@ white = 'e3e1e4'
 
 activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 10
+margin = 14
+barheight = 24
 
 player_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
@@ -98,7 +100,7 @@ dropdown_conf = {
     'opacity': 1,
     'warp_pointer': False,
     'height': 0.45,
-    'y': 0.0071
+    'y': margin / (1080 - barheight - margin)
 }
 
 groups.append(
@@ -177,13 +179,13 @@ keys.extend(
 droptoggle = f'{home}/.config/qtile/droptoggle.py'
 
 layout_theme = {
-    'border_width': 0,
+    'border_width': 1,
     'border_focus': activeborder,
     'border_normal': inactiveborder,
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'change_ratio': 0.0125
+    'change_ratio': 0.02
 }
 
 layouts = [
@@ -210,7 +212,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt=' ❤',
+                    fmt='  ❤',
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
@@ -221,9 +223,8 @@ screens = [
                         qtile.cmd_spawn(f'{home}/.scripts/power.sh')
                     }
                 ),
-                widget.Sep(padding=20, linewidth=0),
                 widget.GroupBox(
-                    font=boldfont,
+                    font=semiboldfont,
                     borderwidth=0,
                     disable_drag=True,
                     active=gray,
@@ -316,7 +317,7 @@ screens = [
                     }
                 )
             ],
-            24,
+            barheight,
             opacity=1
         ),
     ),
@@ -366,8 +367,6 @@ floating_layout = layout.Floating(
                     ]
 )
 wmname = 'LG3D'
-
-@hook.subscribe.client_killed
 def fallback(window):
     if window.group.windows != {window}:
         return
