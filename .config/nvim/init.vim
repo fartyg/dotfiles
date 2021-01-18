@@ -9,7 +9,6 @@ let g:startify_custom_header = [
  \ '',
  \]
 
-
 if exists('+termguicolors')
  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -58,12 +57,12 @@ set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
 set guicursor+=i:ver100-iCursor
 " set signcolumn=yes
+
 " keybinds
 inoremap jj <Esc>
 inoremap kk <Esc>
 noremap <Leader>s :update<CR>
 noremap <silent><Leader>l :noh<CR>
-" noremap <Leader>m m
 
 noremap <silent><Leader>q :bd<CR>
 noremap <silent><Leader><Leader> :bn<CR>
@@ -82,6 +81,13 @@ nmap <leader>cc <Plug>CommentaryLine
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
+" move (vim-cutlass)
+nnoremap m d
+xnoremap m d
+nnoremap mm dd
+nnoremap M D
+noremap <Leader>m m
+
 noremap <silent><leader>git  :GFiles<CR>
 nnoremap <silent><leader>t   :Files<CR>
 " nnoremap <silent><leader>f   :Lines<CR>
@@ -90,16 +96,6 @@ nnoremap <silent><leader>r   :History<CR>
 
 nmap <silent><F6> :TagbarToggle<CR>
 nnoremap <silent><Leader>g :Goyo<CR>
-
-" nmap <silent> <leader>rr :Semshi rename<CR>
-" nmap <silent> <Tab> :Semshi goto name next<CR>
-" nmap <silent> <S-Tab> :Semshi goto name prev<CR>
-" nmap <silent> <leader>f :Semshi goto function next<CR>
-" nmap <silent> <leader>F :Semshi goto function prev<CR>
-" nmap <silent> <leader>gu :Semshi goto unresolved first<CR>
-" nmap <silent> <leader>gp :Semshi goto parameterUnused first<CR>
-" nmap <silent> <leader>ee :Semshi error<CR>
-" nmap <silent> <leader>ge :Semshi goto error<CR>
 
 function! CustomColors()
     hi iCursor guibg=#e5c463
@@ -174,13 +170,12 @@ augroup END
 call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim'
-    Plug 'svermeulen/vim-easyclip'
     Plug 'junegunn/limelight.vim'
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-commentary'
-    " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    Plug 'svermeulen/vim-cutlass'
     Plug 'machakann/vim-highlightedyank'
     Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
@@ -205,7 +200,6 @@ let g:vimtex_view_method = 'zathura'
 
 let g:sonokai_disable_italic_comment = 1
 let g:python_highlight_all = 1
-" let g:semshi#excluded_hl_groups = ['local', 'global']
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:highlightedyank_highlight_duration = 500
 let g:fzf_preview_window = []
@@ -213,8 +207,6 @@ let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
-let g:EasyClipUseSubstituteDefaults = 1
-let g:yankring_clipboard_monitor=0
 
 colorscheme sonokai
 call CustomColors()

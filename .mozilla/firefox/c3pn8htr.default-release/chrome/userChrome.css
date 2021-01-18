@@ -6,7 +6,7 @@
     margin-top: -32px;
   }
   #navigator-toolbox {
-    transition: 0.2s margin-top ease-out;
+    transition: 0.05s margin-top ease-out;
   }
 
 }
@@ -21,13 +21,13 @@
     background-color: #2c2e34 !important;
 }
 
-#nav-bar { 
+#nav-bar {
   -moz-box-ordinal-group: 1 !important;
 }
-#PersonalToolbar { 
+#PersonalToolbar {
   -moz-box-ordinal-group: 2 !important;
 }
-#titlebar { 
+#titlebar {
   -moz-box-ordinal-group: 3 !important;
 }
 

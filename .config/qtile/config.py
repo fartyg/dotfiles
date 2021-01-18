@@ -1,4 +1,3 @@
-from typing import List  # noqa: F401
 from libqtile import qtile
 import os, subprocess
 from libqtile import bar, layout, widget, hook
@@ -8,10 +7,8 @@ from libqtile.config import ScratchPad, DropDown
 
 home = os.path.expanduser('~')
 mod = 'mod1' # alt
-terminal = 'alacritty'
-browser = ['env', 'MOZ_X11_EGL=1', 'firefox'] # for gpu video decoding
 
-fontsize = 15
+fontsize = 14
 font = 'Inter'
 semiboldfont = f'{font} Semibold'
 boldfont = f'{font} Bold'
@@ -30,15 +27,18 @@ white = 'e3e1e4'
 
 activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 14
-barheight = 24
+margin = 12
+barheight = 22
+borderwidth = 2
 
-player_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
-        '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
+terminal = 'alacritty'
+browser = 'env MOZ_X11_EGL=1 firefox' # for gpu video decoding
 
 rofi = '''rofi -combi-modi window,drun -show combi -modi combi \
        -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
        '''
+player_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
+        '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -47,23 +47,26 @@ keys = [
     Key([mod], 'l', lazy.layout.grow_main()),
     Key([mod, 'control'], 'j', lazy.layout.shuffle_down()),
     Key([mod, 'control'], 'k', lazy.layout.shuffle_up()),
+
+    Key([mod], 'space', lazy.layout.next()),
+    Key([mod], 'Tab', lazy.layout.previous()),
+    Key([mod], 'Return', lazy.spawn(terminal)),
+    # Key([mod], 'Tab', lazy.next_layout()),
+    Key([mod], 'q', lazy.window.kill()),
     Key([mod], 'n', lazy.layout.normalize()),
     Key([mod], 'm', lazy.layout.maximize()),
     Key([mod], 'comma', lazy.layout.reset()),
     Key([mod], 'g', lazy.window.toggle_fullscreen()),
     Key([mod], 'p', lazy.layout.flip()),
-    Key([mod], 'space', lazy.layout.next()),
-    Key([mod], 'e', lazy.layout.previous()),
-    Key([mod, 'control'], 'space', lazy.screen.next_group()),
-    Key([mod], 'Return', lazy.spawn(terminal)),
-    Key([mod], 'Tab', lazy.next_layout()),
-    Key([mod], 'q', lazy.window.kill()),
-    Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
-    Key([mod], 'b', lazy.spawn(browser)),
     Key([mod, 'control'], 'r', lazy.restart()),
     Key([mod, 'control'], 'q', lazy.spawn(f'{home}/.scripts/power.sh')),
     Key([mod, 'control'], 'l', lazy.spawn(f'{home}/.scripts/lock.sh')),
     Key([mod, 'control'], 'g', lazy.hide_show_bar()),
+    Key([mod, 'control'], 'space', lazy.screen.next_group()),
+    Key([mod, 'shift'], 'r', lazy.spawncmd()),
+    Key([mod, 'shift'], 'f', lazy.window.toggle_floating()),
+    Key([mod, 'shift'], 'b', lazy.window.bring_to_front()),
+
     Key([mod, 'control'], 'Right', lazy.spawn(f'{player_cmd}Next')),
     Key([mod, 'control'], 'Left', lazy.spawn(f'{player_cmd}Previous')),
     Key([], 'Pause', lazy.spawn(f'{player_cmd}PlayPause')),
@@ -73,10 +76,13 @@ keys = [
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
     Key([], 'Print', lazy.spawn(['scrot', '-e', f'mv $f {home}/Pictures/screenshots'])),
+
     Key([], 'Super_L', lazy.spawn(rofi)),
-    Key([mod, 'shift'], 'r', lazy.spawncmd()),
-    Key([mod, 'shift'], 'f', lazy.window.toggle_floating()),
-    Key([mod, 'shift'], 'b', lazy.window.bring_to_front()),
+    Key([mod], 'b', lazy.spawn(browser)),
+    Key([mod, 'control'], 'b', lazy.spawn(f'{browser} --private-window')),
+    Key([mod], 'apostrophe', lazy.spawn(f'{terminal} -e zsh -c \'. ~/.zshrc; nvim\'')),
+    Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
+    Key([mod], 'section', lazy.spawn(f'{home}/.scripts/spotify.sh')), # thunderbörd
 ]
 
 groups = [Group(i) for i in 'asdfui']
@@ -179,7 +185,7 @@ keys.extend(
 droptoggle = f'{home}/.config/qtile/droptoggle.py'
 
 layout_theme = {
-    'border_width': 1,
+    'border_width': borderwidth,
     'border_focus': activeborder,
     'border_normal': inactiveborder,
     'margin': margin,
@@ -192,9 +198,6 @@ layouts = [
     layout.MonadTall(
         **layout_theme
     ),
-    layout.MonadWide(
-        **layout_theme
-    )
 ]
 
 widget_defaults = {
@@ -212,7 +215,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt='  ❤',
+                    fmt=' ❤',
                     foreground=red,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
@@ -268,6 +271,11 @@ screens = [
                         'Button3': lambda qtile:
                         qtile.cmd_spawn(terminal)
                     }
+                ),
+                widget.ThermalSensor(
+                        foreground=gray,
+                        foreground_alert=red,
+                        threshold=85
                 ),
                 widget.Memory(
                     foreground=gray,
@@ -342,6 +350,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
+wmname = 'LG3D' # read docs
 follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
@@ -366,7 +375,7 @@ floating_layout = layout.Floating(
                         {'wmclass': 'ssh-askpass'},  # ssh-askpass
                     ]
 )
-wmname = 'LG3D'
+
 def fallback(window):
     if window.group.windows != {window}:
         return
@@ -381,9 +390,9 @@ def fallback(window):
 def autostart():
     processes = [
         ['nitrogen', '--restore'],
-        ['picom', '-b', '--experimental-backends'],
+        ['picom'],
         ['redshift'],
-        browser
+        [browser]
     ]
 
     for p in processes:

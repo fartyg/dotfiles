@@ -1,5 +1,3 @@
-env:
-  TERM: xterm-256color
 
 window:
 
@@ -107,12 +105,12 @@ colors:
 # specified string every time that binding is activated. These should generally
 # be escape sequences, but they can be configured to send arbitrary strings of
 # bytes. Possible values of `action` include `Paste` and `PasteSelection`.
-#key_bindings:
+key_bindings:
 # - { key: Up,   mods: Control|Shift,   action: ScrollPageUp                 }
 # - { key: Down, mods: Control|Shift,   action: ScrollPageDown               }
-#  - { key: V,        mods: Control|Shift, action: Paste                        }
+  - { key: V, mods: Control, action: Paste}
 #  - { key: C,        mods: Control|Shift, action: Copy                         }
-#  - { key: Q,        mods: Control|Shift, action: Quit                         }
+#  - { key: W, mods: Control, action: Quit}
 #  - { key: W,        mods: Control|Shift, action: Quit                         }
 #  - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
 #  - { key: Home,                    chars: "\x1b[1~",  mode: ~AppCursor  }
@@ -190,7 +188,7 @@ selection:
 #
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
-#shell:
-#  program: /bin/bash
-#  args:
-#    - --login
+# shell:
+#   program: /bin/zsh
+#   args:
+#     - --login
