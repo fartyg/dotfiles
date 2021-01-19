@@ -14,7 +14,7 @@ except:
 date = now + delta
 
 d = date.strftime('%Y%m%d')
-p = '--custom-player /usr/bin/mpv'
+p = '--custom-player \'devour /usr/bin/mpv\''
 
 cmd = f'lazystream --date {d} play select {p}'
 os.system(cmd)
