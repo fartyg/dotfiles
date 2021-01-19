@@ -45,8 +45,8 @@ set hidden
 set autoindent
 set smartindent
 set cursorline "highlight current line
-set clipboard=unnamed
 set updatetime=50
+set clipboard+=unnamedplus
 set conceallevel=0
 set laststatus=0
 set noshowcmd
@@ -69,9 +69,6 @@ noremap <silent><Leader><Leader> :bn<CR>
 
 inoremap <C-H> <C-W>
 nnoremap S :%s//gc<Left><Left><Left>
-
-imap <c-v> <plug>EasyClipInsertModePaste
-cmap <c-v> <plug>EasyClipCommandModePaste
 
 nmap <leader>c <Plug>Commentary
 xmap <leader>c <Plug>Commentary

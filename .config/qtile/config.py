@@ -4,6 +4,7 @@ from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Screen, Match
 from libqtile.lazy import lazy
 from libqtile.config import ScratchPad, DropDown
+import psutil
 
 home = os.path.expanduser('~')
 mod = 'mod1' # alt
@@ -191,7 +192,7 @@ layout_theme = {
     'margin': margin,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'change_ratio': 0.02
+    'change_ratio': 0.015
 }
 
 layouts = [
@@ -376,6 +377,7 @@ floating_layout = layout.Floating(
                     ]
 )
 
+@hook.subscribe.client_killed
 def fallback(window):
     if window.group.windows != {window}:
         return
@@ -386,11 +388,30 @@ def fallback(window):
             return
     qtile.current_screen.toggle_group(qtile.groups[0])
 
+@hook.subscribe.client_new
+def _swallow(window):
+    pid = window.window.get_net_wm_pid()
+    ppid = psutil.Process(pid).ppid()
+    cpids = {c.window.get_net_wm_pid(): wid for wid, c in window.qtile.windows_map.items()}
+    for i in range(5):
+        if not ppid:
+            return
+        if ppid in cpids:
+            parent = window.qtile.windows_map.get(cpids[ppid])
+            parent.minimized = True
+            window.parent = parent
+            return
+        ppid = psutil.Process(ppid).ppid()
+
+def _unswallow(window):
+    if hasattr(window, 'parent'):
+        window.parent.minimized = False
+
 @hook.subscribe.startup_once
 def autostart():
     processes = [
         ['nitrogen', '--restore'],
-        ['picom'],
+        ['picom', '-b', '--experimental-backends'],
         ['redshift'],
         [browser]
     ]

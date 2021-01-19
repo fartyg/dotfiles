@@ -90,14 +90,8 @@ export LANG=sv_SE.UTF-8
 
 setopt HIST_IGNORE_ALL_DUPS
 HISTFILE=~/.zsh_history
-HISTSIZE=1000000
-SAVEHIST=1000000
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
