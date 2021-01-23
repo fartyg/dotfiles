@@ -23,8 +23,6 @@ cursor:
 
   blink_interval: 640
 
-draw_bold_text_with_bright_colors: true
-
 font:
   normal:
     family: SFMono Nerd Font Mono
@@ -110,6 +108,7 @@ colors:
 key_bindings:
 # - { key: Up,   mods: Control|Shift,   action: ScrollPageUp                 }
 # - { key: Down, mods: Control|Shift,   action: ScrollPageDown               }
+  - { key: Space,  mods: Control, action: ToggleViMode}
   - { key: V, mods: Control, action: Paste}
 #  - { key: C,        mods: Control|Shift, action: Copy                         }
 #  - { key: W, mods: Control, action: Quit}

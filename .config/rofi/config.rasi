@@ -143,9 +143,9 @@ show-icons: false;
 /*	ml-row-right: "ScrollRight";*/
 /*	ml-row-up: "ScrollUp";*/
 /*	ml-row-down: "ScrollDown";*/
-/*	me-select-entry: "MousePrimary";*/
-/*	me-accept-entry: "MouseDPrimary";*/
-/*	me-accept-custom: "Control+MouseDPrimary";*/
+me-select-entry: "";
+me-accept-entry: "MousePrimary";
+/* me-accept-custom: "MousePrimary"; */
 kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
 kb-row-down: "Down,Control+j";
 kb-accept-entry: "Control+m,Return,KP_Enter";

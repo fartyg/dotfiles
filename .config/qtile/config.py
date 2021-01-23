@@ -33,13 +33,15 @@ barheight = 22
 borderwidth = 2
 
 terminal = 'alacritty'
-browser = 'env MOZ_X11_EGL=1 firefox' # for gpu video decoding
+browser = 'env MOZ_X11_EGL=1 firefox'
 
-rofi = '''rofi -combi-modi window,drun -show combi -modi combi \
-       -me-select-entry \'\' -me-accept-entry \'MousePrimary\'
-       '''
-player_cmd = ('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
-        '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.')
+rofi = ['rofi', '-combi-modi', 'window,drun',
+        '-show', 'combi', '-modi', 'combi'
+]
+player_cmd = (
+        'dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
+        '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.'
+)
 
 keys = [
     Key([mod], 'j', lazy.layout.down()),
@@ -52,13 +54,14 @@ keys = [
     Key([mod], 'space', lazy.layout.next()),
     Key([mod], 'Tab', lazy.layout.previous()),
     Key([mod], 'Return', lazy.spawn(terminal)),
-    # Key([mod], 'Tab', lazy.next_layout()),
+
     Key([mod], 'q', lazy.window.kill()),
     Key([mod], 'n', lazy.layout.normalize()),
     Key([mod], 'm', lazy.layout.maximize()),
     Key([mod], 'comma', lazy.layout.reset()),
     Key([mod], 'g', lazy.window.toggle_fullscreen()),
     Key([mod], 'p', lazy.layout.flip()),
+
     Key([mod, 'control'], 'r', lazy.restart()),
     Key([mod, 'control'], 'q', lazy.spawn(f'{home}/.scripts/power.sh')),
     Key([mod, 'control'], 'l', lazy.spawn(f'{home}/.scripts/lock.sh')),
@@ -76,12 +79,18 @@ keys = [
     Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute 0 toggle')),
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
-    Key([], 'Print', lazy.spawn(['scrot', '-e', f'mv $f {home}/Pictures/screenshots'])),
+    Key([], 'Print', lazy.spawn(
+            ['scrot', '-e', f'mv $f {home}/Pictures/screenshots']
+        )
+    ),
 
     Key([], 'Super_L', lazy.spawn(rofi)),
     Key([mod], 'b', lazy.spawn(browser)),
     Key([mod, 'control'], 'b', lazy.spawn(f'{browser} --private-window')),
-    Key([mod], 'apostrophe', lazy.spawn(f'{terminal} -e zsh -c \'. ~/.zshrc; nvim\'')),
+    Key([mod], 'apostrophe', lazy.spawn(
+            f'{terminal} -e zsh -c \'. ~/.zshrc; nvim\''
+        )
+    ),
     Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
     Key([mod], 'section', lazy.spawn(f'{home}/.scripts/spotify.sh')), # thunderbörd
 ]
@@ -220,7 +229,7 @@ screens = [
                     foreground=orange,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(f'{rofi} -location 1'),
+                        qtile.cmd_spawn(rofi + ['-location', '1']),
                         'Button2': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} term'),
                         'Button3': lambda qtile:
@@ -393,7 +402,8 @@ def autostart():
     processes = [
         ['nitrogen', '--restore'],
         ['picom', '-b', '--experimental-backends'],
-        ['redshift']
+        ['redshift'],
+        rofi
     ]
 
     for p in processes:
