@@ -70,6 +70,11 @@ noremap <silent><Leader><Leader> :bn<CR>
 inoremap <C-H> <C-W>
 nnoremap S :%s//gc<Left><Left><Left>
 
+" cycle windows with enter
+nnoremap <silent><leader>v   :vsplit<CR>
+nnoremap <silent><leader>h   :hsplit<CR>
+nnoremap <cr> <c-w>w
+
 nmap <leader>c <Plug>Commentary
 xmap <leader>c <Plug>Commentary
 omap <leader>c <Plug>Commentary

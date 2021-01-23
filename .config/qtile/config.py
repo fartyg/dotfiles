@@ -79,20 +79,21 @@ keys = [
     Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute 0 toggle')),
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
+
     Key([], 'Print', lazy.spawn(
             ['scrot', '-e', f'mv $f {home}/Pictures/screenshots']
         )
     ),
-
     Key([], 'Super_L', lazy.spawn(rofi)),
     Key([mod], 'b', lazy.spawn(browser)),
     Key([mod, 'control'], 'b', lazy.spawn(f'{browser} --private-window')),
+
     Key([mod], 'apostrophe', lazy.spawn(
             f'{terminal} -e zsh -c \'. ~/.zshrc; nvim\''
         )
     ),
     Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
-    Key([mod], 'section', lazy.spawn(f'{home}/.scripts/spotify.sh')), # thunderbörd
+    Key([mod], 'section', lazy.spawn(f'{home}/.scripts/spotify.sh')),
 ]
 
 groups = [Group(i) for i in 'asdfui']
@@ -225,8 +226,10 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt=' ⎀',
+                    fmt=' rofi',
                     foreground=orange,
+                    font=boldfont,
+                    fontsize=fontsize-4,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(rofi + ['-location', '1']),

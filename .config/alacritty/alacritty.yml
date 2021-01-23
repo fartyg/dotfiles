@@ -9,7 +9,7 @@ window:
     x: 8
     y: 8
 
-background_opacity: 1
+background_opacity: 0.9
 unfocused_hollow: true
 
 dpi:
@@ -109,7 +109,7 @@ key_bindings:
 # - { key: Up,   mods: Control|Shift,   action: ScrollPageUp                 }
 # - { key: Down, mods: Control|Shift,   action: ScrollPageDown               }
   - { key: Space,  mods: Control, action: ToggleViMode}
-  - { key: V, mods: Control, action: Paste}
+  # - { key: V, mods: Control, action: Paste}
 #  - { key: C,        mods: Control|Shift, action: Copy                         }
 #  - { key: W, mods: Control, action: Quit}
 #  - { key: W,        mods: Control|Shift, action: Quit                         }
