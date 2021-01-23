@@ -28,7 +28,7 @@ white = 'e3e1e4'
 
 activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 12
+margin = 10
 barheight = 22
 borderwidth = 2
 
@@ -216,8 +216,8 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt=' ❤',
-                    foreground=red,
+                    fmt=' ⎀',
+                    foreground=orange,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{rofi} -location 1'),
@@ -351,7 +351,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
-wmname = 'LG3D' # read docs
+wmname = 'LG3D' # see default config for expl.
 follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
@@ -393,8 +393,7 @@ def autostart():
     processes = [
         ['nitrogen', '--restore'],
         ['picom', '-b', '--experimental-backends'],
-        ['redshift'],
-        [browser]
+        ['redshift']
     ]
 
     for p in processes:

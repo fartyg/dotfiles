@@ -73,8 +73,8 @@ MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
 MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ab9df2"
 
 plugins=(
-	git
-	fzf
+    git
+    fzf
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-vim-mode
@@ -123,10 +123,11 @@ alias fm='vifm'
 alias båt='newsboat'
 alias rto='rtorrent'
 alias nmc='nmcli con'
-alias play='umpv'
+alias spela='devour umpv'
+alias köa='umpv'
 alias note='nvim ~/Documents/notes.md'
 alias open='handlr open'
 alias ls='LC_COLLATE=C ls -h --group-directories-first --color=auto'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias sudo='sudo '
-alias nhl='hockey.py'
+alias nhl='lazystream play select --custom-player "devour /usr/bin/mpv"'
