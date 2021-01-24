@@ -18,7 +18,6 @@ font += ' Medium'
 # sonokai
 bgcolor = '2c2e34'
 gray = '828282'
-bluegray = '373a45'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'

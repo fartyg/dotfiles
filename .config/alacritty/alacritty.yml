@@ -9,7 +9,7 @@ window:
     x: 8
     y: 8
 
-background_opacity: 0.91
+background_opacity: 0.86
 unfocused_hollow: true
 
 dpi:

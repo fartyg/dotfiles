@@ -215,12 +215,17 @@ let g:python_highlight_all = 1
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:highlightedyank_highlight_duration = 500
 let g:fzf_preview_window = []
-let g:buffet_always_show_tabline = 0
+" let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
 
 " startify
+let g:startify_lists = [
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']},
+        \ { 'type': 'files',     'header': ['   MRU']},
+\ ]
+
 let g:startify_bookmarks = [
         \ {'x': '~/Documents/notes.md'},
         \ {'z': '~/.zshrc'},
@@ -230,20 +235,14 @@ let g:startify_bookmarks = [
         \ {'m': '~/.config/mpv/mpv.conf'},
         \ {'p': '~/.config/picom.conf'},
         \ {'r': '~/.config/rofi/config.rasi'},
-        \ ]
+\ ]
 
-let g:startify_skiplist = []
+let g:startify_skiplist = ['^/tmp']
 for d in g:startify_bookmarks
     for v in values(d)
         call add(g:startify_skiplist, v)
     endfor
 endfor
-
-let g:startify_lists = [
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': 'files',     'header': ['   MRU']            },
-        \ ]
-
 
 colorscheme sonokai
 call CustomColors()
