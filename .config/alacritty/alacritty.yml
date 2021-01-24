@@ -9,7 +9,7 @@ window:
     x: 8
     y: 8
 
-background_opacity: 0.9
+background_opacity: 0.91
 unfocused_hollow: true
 
 dpi:
@@ -21,7 +21,7 @@ cursor:
     shape: Beam
     blinking: Always
 
-  blink_interval: 640
+  blink_interval: 680
 
 font:
   normal:
@@ -33,6 +33,9 @@ colors:
   primary:
     background: "0x2c2e34"
     foreground: "0xe2e2e3"
+
+  # cursor:
+  #   cursor: "0xe7c664"
 
   normal:
     black: "0x707070"

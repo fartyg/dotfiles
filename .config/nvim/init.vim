@@ -55,25 +55,27 @@ set cmdheight=1
 set noruler
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
-set guicursor+=i:ver100-iCursor
-" set signcolumn=yes
 
-" keybinds
+
+" ctrl + backspace removes word
+inoremap <C-H> <C-W>
+" search and replace
+nnoremap S :%s//gc<Left><Left><Left>
 inoremap jj <Esc>
-inoremap kk <Esc>
 noremap <Leader>s :update<CR>
 noremap <silent><Leader>l :noh<CR>
 
+nnoremap <silent><leader>v   :vsplit<CR>
+nnoremap <silent><leader>h   :split<CR>
 noremap <silent><Leader>q :bd<CR>
 noremap <silent><Leader><Leader> :bn<CR>
 
-inoremap <C-H> <C-W>
-nnoremap S :%s//gc<Left><Left><Left>
-
 " cycle windows with enter
-nnoremap <silent><leader>v   :vsplit<CR>
-nnoremap <silent><leader>h   :hsplit<CR>
 nnoremap <cr> <c-w>w
+
+" keep selection on indentation
+vnoremap < <gv
+vnoremap > >gv
 
 nmap <leader>c <Plug>Commentary
 xmap <leader>c <Plug>Commentary
@@ -84,33 +86,37 @@ map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
 " move (vim-cutlass)
+noremap <Leader>m m
 nnoremap m d
 xnoremap m d
 nnoremap mm dd
 nnoremap M D
-noremap <Leader>m m
-
-noremap <silent><leader>git  :GFiles<CR>
-nnoremap <silent><leader>t   :Files<CR>
-" nnoremap <silent><leader>f   :Lines<CR>
-nnoremap <silent><leader>b   :Buffers<CR>
-nnoremap <silent><leader>r   :History<CR>
 
 nmap <silent><F6> :TagbarToggle<CR>
 nnoremap <silent><Leader>g :Goyo<CR>
 
+noremap <silent><leader>git  :GFiles<CR>
+nnoremap <silent><leader>t   :Files<CR>
+nnoremap <silent><leader>f   :Lines<CR>
+nnoremap <silent><leader>b   :Buffers<CR>
+nnoremap <silent><leader>r   :History<CR>
+
 function! CustomColors()
     hi iCursor guibg=#e5c463
+    hi vCursor guibg=#ab9df2
     hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
     hi LineNr guibg=NONE guifg=#707070
     hi SignColumn guibg=NONE
     hi Comment guifg=#707070
     hi Normal guibg=NONE
+    hi Visual guibg=#543a59
     hi EndOfBuffer guibg=NONE
     hi NonText guibg=NONE
     hi StatusLine guibg=NONE
     hi HighlightedyankRegion guibg=#506082
+    set guicursor+=i:ver100-iCursor
+    set guicursor+=v:block-vCursor
 endfunction
 
 " Goyo and Limelight
@@ -157,6 +163,7 @@ augroup donut
     autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
     autocmd BufWritePre * :call TrimWhitespace()
+    au VimLeave * set guicursor=a:ver100
 
     autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
     autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
@@ -189,10 +196,12 @@ call plug#begin()
     Plug 'vim-python/python-syntax'
 call plug#end()
 
+" sneak
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
+" vimtex
 set nocompatible
 let &rtp = '~/.vim/bundle/vimtex,' . &rtp
 filetype plugin indent on
@@ -200,6 +209,7 @@ set iskeyword+=:
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'zathura'
 
+" other
 let g:sonokai_disable_italic_comment = 1
 let g:python_highlight_all = 1
 let g:limelight_conceal_guifg = 'DarkGray'
@@ -209,6 +219,31 @@ let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
+
+" startify
+let g:startify_bookmarks = [
+        \ {'x': '~/Documents/notes.md'},
+        \ {'z': '~/.zshrc'},
+        \ {'a': '~/.config/alacritty/alacritty.yml'},
+        \ {'c': '~/.config/qtile/config.py'},
+        \ {'n': '~/.config/nvim/init.vim'},
+        \ {'m': '~/.config/mpv/mpv.conf'},
+        \ {'p': '~/.config/picom.conf'},
+        \ {'r': '~/.config/rofi/config.rasi'},
+        \ ]
+
+let g:startify_skiplist = []
+for d in g:startify_bookmarks
+    for v in values(d)
+        call add(g:startify_skiplist, v)
+    endfor
+endfor
+
+let g:startify_lists = [
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ ]
+
 
 colorscheme sonokai
 call CustomColors()

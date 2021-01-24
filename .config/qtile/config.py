@@ -18,6 +18,7 @@ font += ' Medium'
 # sonokai
 bgcolor = '2c2e34'
 gray = '828282'
+bluegray = '373a45'
 yellow = 'e5c463'
 red = 'f85e84'
 green = '9ecd6f'
@@ -28,16 +29,15 @@ white = 'e3e1e4'
 
 activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 10
+margin = 14
 barheight = 22
 borderwidth = 2
 
 terminal = 'alacritty'
 browser = 'env MOZ_X11_EGL=1 firefox'
 
-rofi = ['rofi', '-combi-modi', 'window,drun',
-        '-show', 'combi', '-modi', 'combi'
-]
+rofi = ['rofi', '-show']
+
 player_cmd = (
         'dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.'
@@ -48,6 +48,7 @@ keys = [
     Key([mod], 'k', lazy.layout.up()),
     Key([mod], 'h', lazy.layout.shrink_main()),
     Key([mod], 'l', lazy.layout.grow_main()),
+
     Key([mod, 'control'], 'j', lazy.layout.shuffle_down()),
     Key([mod, 'control'], 'k', lazy.layout.shuffle_up()),
 
@@ -84,10 +85,10 @@ keys = [
             ['scrot', '-e', f'mv $f {home}/Pictures/screenshots']
         )
     ),
-    Key([], 'Super_L', lazy.spawn(rofi)),
+    Key([], 'Super_L', lazy.spawn(rofi + ['drun'])),
+    Key([mod], 'Super_L', lazy.spawn(rofi + ['window'])),
     Key([mod], 'b', lazy.spawn(browser)),
     Key([mod, 'control'], 'b', lazy.spawn(f'{browser} --private-window')),
-
     Key([mod], 'apostrophe', lazy.spawn(
             f'{terminal} -e zsh -c \'. ~/.zshrc; nvim\''
         )
@@ -116,7 +117,7 @@ for i in groups:
 dropdown_conf = {
     'opacity': 1,
     'warp_pointer': False,
-    'height': 0.45,
+    'height': 0.5,
     'y': margin / (1080 - barheight - margin)
 }
 
@@ -191,25 +192,17 @@ keys.extend(
     ]
 )
 
-# for mouse callbacks
-# cant call lazy objects with mouse otherwise?
-droptoggle = f'{home}/.config/qtile/droptoggle.py'
-
 layout_theme = {
     'border_width': borderwidth,
     'border_focus': activeborder,
     'border_normal': inactiveborder,
     'margin': margin,
+    'ratio': 0.64,
     'single_border_width': 0,
     'min_secondary_size': 220,
     'change_ratio': 0.015
 }
-
-layouts = [
-    layout.MonadTall(
-        **layout_theme
-    ),
-]
+layouts = [layout.MonadTall(**layout_theme)]
 
 widget_defaults = {
         'font': font,
@@ -221,26 +214,29 @@ widget_defaults = {
 }
 extension_defaults = widget_defaults.copy()
 
+# for mouse callbacks
+# cant call lazy objects with mouse otherwise?
+droptoggle = f'{home}/.config/qtile/droptoggle.py'
 screens = [
     Screen(
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt=' rofi',
-                    foreground=orange,
+                    fmt='~',
+                    foreground=gray,
                     font=boldfont,
-                    fontsize=fontsize-4,
                     mouse_callbacks = {
                         'Button1': lambda qtile:
-                        qtile.cmd_spawn(rofi + ['-location', '1']),
+                        qtile.cmd_spawn(rofi + ['drun', '-location', '1']),
                         'Button2': lambda qtile:
-                        qtile.cmd_spawn(f'{droptoggle} term'),
+                        qtile.cmd_spawn(f'{home}/.scripts/power.sh'),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn(f'{home}/.scripts/power.sh')
+                        qtile.cmd_spawn(rofi + ['window', '-location', '1']),
                     }
                 ),
                 widget.GroupBox(
                     font=semiboldfont,
+                    fontsize=fontsize+2,
                     borderwidth=0,
                     disable_drag=True,
                     active=gray,
@@ -258,7 +254,7 @@ screens = [
                 widget.Spacer(),
                 widget.Mpris2(
                     name='spotify',
-                    foreground=green,
+                    foreground=gray,
                     stop_pause_text='▶',
                     objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
@@ -296,6 +292,8 @@ screens = [
                     mouse_callbacks = {
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} irc'),
+                        'Button3': lambda qtile:
+                        qtile.cmd_spawn(f'{droptoggle} term')
                     }
                 ),
                 widget.DF(
@@ -327,6 +325,7 @@ screens = [
                 ),
                 widget.Clock(
                     font=boldfont,
+                    fontsize=fontsize+1,
                     format='%H:%M ',
                     mouse_callbacks = {
                         'Button1': lambda qtile:
@@ -361,14 +360,7 @@ mouse = [
     )
 ]
 
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
-wmname = 'LG3D' # see default config for expl.
 follow_mouse_focus = False
-bring_front_click = False
-cursor_warp = False
-auto_fullscreen = True
-focus_on_window_activation = 'smart'
 floating_layout = layout.Floating(
                     **layout_theme,
                     float_rules=[
@@ -406,7 +398,7 @@ def autostart():
         ['nitrogen', '--restore'],
         ['picom', '-b', '--experimental-backends'],
         ['redshift'],
-        rofi
+        rofi + ['drun']
     ]
 
     for p in processes:
