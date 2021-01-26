@@ -1,13 +1,13 @@
 from libqtile import qtile
-import os, subprocess
+import os
+import subprocess
 from libqtile import bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Screen, Match
+from libqtile.config import Click, Drag, Group, Key, Screen
 from libqtile.lazy import lazy
 from libqtile.config import ScratchPad, DropDown
-import psutil
 
 home = os.path.expanduser('~')
-mod = 'mod1' # alt
+mod = 'mod1'  # alt
 
 fontsize = 14
 font = 'Inter'
@@ -34,9 +34,7 @@ borderwidth = 2
 
 terminal = 'alacritty'
 browser = 'env MOZ_X11_EGL=1 firefox'
-
 rofi = ['rofi', '-show']
-
 player_cmd = (
         'dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
         '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.'
@@ -82,17 +80,15 @@ keys = [
 
     Key([], 'Print', lazy.spawn(
             ['scrot', '-e', f'mv $f {home}/Pictures/screenshots']
-        )
-    ),
+        )),
     Key([], 'Super_L', lazy.spawn(rofi + ['drun'])),
     Key([mod], 'Super_L', lazy.spawn(rofi + ['window'])),
     Key([mod], 'b', lazy.spawn(browser)),
     Key([mod, 'control'], 'b', lazy.spawn(f'{browser} --private-window')),
     Key([mod], 'apostrophe', lazy.spawn(
             f'{terminal} -e zsh -c \'. ~/.zshrc; nvim\''
-        )
-    ),
-    Key([mod], 'odiaeresis', lazy.spawn('thunderbird')), # thunderbörd
+        )),
+    Key([mod], 'odiaeresis', lazy.spawn('thunderbird')),  # thunderbörd
     Key([mod], 'section', lazy.spawn(f'{home}/.scripts/spotify.sh')),
 ]
 
@@ -121,8 +117,7 @@ dropdown_conf = {
 }
 
 groups.append(
-    ScratchPad('sp',
-        [
+    ScratchPad('sp', [
             DropDown(
                 'term',
                 terminal,
@@ -165,7 +160,7 @@ groups.append(
 keys.extend(
     [
         Key(
-            [], 'VoidSymbol', # unmapped Caps_Lock
+            [], 'VoidSymbol',  # unmapped Caps_Lock
             lazy.group['sp'].dropdown_toggle('term')
         ),
         Key(
@@ -181,11 +176,11 @@ keys.extend(
             lazy.group['sp'].dropdown_toggle('filemanager')
         ),
         Key(
-            [mod], 'aring', # nyhetsbåt
+            [mod], 'aring',  # nyhetsbåt
             lazy.group['sp'].dropdown_toggle('rss')
         ),
         Key(
-            [mod], 'adiaeresis', # pävucontrol
+            [mod], 'adiaeresis',  # pävucontrol
             lazy.group['sp'].dropdown_toggle('sound')
         )
     ]
@@ -224,7 +219,7 @@ screens = [
                     fmt='~',
                     foreground=gray,
                     font=boldfont,
-                    mouse_callbacks = {
+                    mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(rofi + ['drun', '-location', '1']),
                         'Button2': lambda qtile:
@@ -258,7 +253,7 @@ screens = [
                     objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
                     scroll_chars=None,
-                    mouse_callbacks = {
+                    mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{player_cmd}PlayPause'),
                         'Button2': lambda qtile:
@@ -271,7 +266,7 @@ screens = [
                 widget.CPU(
                     format='{load_percent}%',
                     foreground=gray,
-                    mouse_callbacks = {
+                    mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} perfmon'),
                         'Button2': lambda qtile:
@@ -288,7 +283,7 @@ screens = [
                 widget.Memory(
                     foreground=gray,
                     format='{MemUsed} MB',
-                    mouse_callbacks = {
+                    mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} irc'),
                         'Button3': lambda qtile:
@@ -301,7 +296,7 @@ screens = [
                     warn_space=10,
                     format='{uf} {m}B',
                     foreground=gray,
-                    mouse_callbacks = {
+                    mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} filemanager'),
                         'Button2': lambda qtile:
@@ -325,8 +320,8 @@ screens = [
                 widget.Clock(
                     font=boldfont,
                     fontsize=fontsize+1,
-                    format='%H:%M ',
-                    mouse_callbacks = {
+                    format='%H:%M',
+                    mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} rss'),
                         'Button2': lambda qtile:
@@ -380,6 +375,7 @@ floating_layout = layout.Floating(
                     ]
 )
 
+
 @hook.subscribe.client_killed
 def fallback(window):
     if window.group.windows != {window}:
@@ -390,6 +386,7 @@ def fallback(window):
             qtile.current_screen.toggle_group(group)
             return
     qtile.current_screen.toggle_group(qtile.groups[0])
+
 
 @hook.subscribe.startup_once
 def autostart():

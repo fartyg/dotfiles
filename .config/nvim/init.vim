@@ -9,10 +9,8 @@ let g:startify_custom_header = [
  \ '',
  \]
 
-if exists('+termguicolors')
- let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
- let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
- set termguicolors
+if has('termguicolors')
+set termguicolors
 endif
 
 let mapleader = " " " space is the leader key
@@ -55,11 +53,13 @@ set cmdheight=1
 set noruler
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
+set splitbelow
+set splitright
 
 
 " ctrl + backspace removes word
 inoremap <C-H> <C-W>
-" search and replace
+
 nnoremap S :%s//gc<Left><Left><Left>
 inoremap jj <Esc>
 noremap <Leader>s :update<CR>
@@ -72,10 +72,6 @@ noremap <silent><Leader><Leader> :bn<CR>
 
 " cycle windows with enter
 nnoremap <cr> <c-w>w
-
-" keep selection on indentation
-vnoremap < <gv
-vnoremap > >gv
 
 nmap <leader>c <Plug>Commentary
 xmap <leader>c <Plug>Commentary
@@ -100,6 +96,15 @@ nnoremap <silent><leader>t   :Files<CR>
 nnoremap <silent><leader>f   :Lines<CR>
 nnoremap <silent><leader>b   :Buffers<CR>
 nnoremap <silent><leader>r   :History<CR>
+
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gh     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
 function! CustomColors()
     hi iCursor guibg=#e5c463
@@ -159,24 +164,28 @@ endfun
 
 augroup donut
     autocmd!
-    autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
-    autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+        autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+        autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
-    autocmd BufWritePre * :call TrimWhitespace()
-    au VimLeave * set guicursor=a:ver100
+        autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-    autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
-    autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
+        autocmd BufWritePre * :call TrimWhitespace()
+        au VimLeave * set guicursor=a:ver100
 
-    autocmd! User GoyoEnter nested call <SID>goyo_enter()
-            \   | Limelight
-    autocmd! User GoyoLeave nested call <SID>goyo_leave()
-            \   | Limelight!
-            \   | call CustomColors()
+        autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
+        autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
+
+        autocmd! User GoyoEnter nested call <SID>goyo_enter()
+                \   | Limelight
+        autocmd! User GoyoLeave nested call <SID>goyo_leave()
+                \   | Limelight!
+                \   | call CustomColors()
 augroup END
 
 
 call plug#begin()
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
@@ -185,7 +194,6 @@ call plug#begin()
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-commentary'
     Plug 'svermeulen/vim-cutlass'
-    Plug 'machakann/vim-highlightedyank'
     Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
     Plug 'justinmk/vim-sneak'
@@ -193,7 +201,6 @@ call plug#begin()
     Plug 'lervag/vimtex'
     Plug 'preservim/tagbar'
     Plug 'bagrat/vim-buffet'
-    Plug 'vim-python/python-syntax'
 call plug#end()
 
 " sneak
@@ -210,15 +217,13 @@ let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'zathura'
 
 " other
-let g:sonokai_disable_italic_comment = 1
 let g:python_highlight_all = 1
 let g:limelight_conceal_guifg = 'DarkGray'
-let g:highlightedyank_highlight_duration = 500
 let g:fzf_preview_window = []
-" let g:buffet_always_show_tabline = 0
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
+let g:indentLine_char = '⦙'
 
 " startify
 let g:startify_lists = [
@@ -244,5 +249,26 @@ for d in g:startify_bookmarks
     endfor
 endfor
 
+
 colorscheme sonokai
 call CustomColors()
+
+
+" nvim 0.5
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+-- Modules and its options go here
+highlight = { enable = true },
+incremental_selection = { enable = true },
+textobjects = { enable = true },
+}
+
+EOF
+lua << EOF
+require("lspconfig").pyls.setup{}
+EOF
+
+set completeopt-=preview
+
+" use omni completion provided by lsp
+autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc

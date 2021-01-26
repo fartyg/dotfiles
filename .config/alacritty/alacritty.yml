@@ -1,15 +1,12 @@
-
 window:
-
   dimensions:
     columns: 120
     lines: 80
-
   padding:
     x: 8
     y: 8
 
-background_opacity: 0.86
+background_opacity: 0.97
 unfocused_hollow: true
 
 dpi:
@@ -20,7 +17,6 @@ cursor:
   style:
     shape: Beam
     blinking: Always
-
   blink_interval: 680
 
 font:
