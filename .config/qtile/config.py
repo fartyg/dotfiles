@@ -112,7 +112,6 @@ for i in groups:
 dropdown_conf = {
     'opacity': 1,
     'warp_pointer': False,
-    'height': 0.5,
     'y': margin / (1080 - barheight - margin)
 }
 

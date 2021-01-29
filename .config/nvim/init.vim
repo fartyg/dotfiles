@@ -119,7 +119,6 @@ function! CustomColors()
     hi EndOfBuffer guibg=NONE
     hi NonText guibg=NONE
     hi StatusLine guibg=NONE
-    hi HighlightedyankRegion guibg=#506082
     set guicursor+=i:ver100-iCursor
     set guicursor+=v:block-vCursor
 endfunction
@@ -182,6 +181,10 @@ augroup donut
                 \   | call CustomColors()
 augroup END
 
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=350}
+augroup END
 
 call plug#begin()
     Plug 'neovim/nvim-lspconfig'
@@ -262,8 +265,8 @@ highlight = { enable = true },
 incremental_selection = { enable = true },
 textobjects = { enable = true },
 }
-
 EOF
+
 lua << EOF
 require("lspconfig").pyls.setup{}
 EOF
