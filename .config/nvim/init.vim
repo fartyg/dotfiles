@@ -64,6 +64,7 @@ nnoremap S :%s//gc<Left><Left><Left>
 inoremap jj <Esc>
 noremap <Leader>s :update<CR>
 noremap <silent><Leader>l :noh<CR>
+nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
 
 nnoremap <silent><leader>v   :vsplit<CR>
 nnoremap <silent><leader>h   :split<CR>

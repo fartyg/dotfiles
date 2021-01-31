@@ -28,8 +28,8 @@ white = 'e3e1e4'
 
 activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 14
-barheight = 22
+margin = 0
+barheight = 27
 borderwidth = 2
 
 terminal = 'alacritty'
@@ -112,7 +112,7 @@ for i in groups:
 dropdown_conf = {
     'opacity': 1,
     'warp_pointer': False,
-    'y': margin / (1080 - barheight - margin)
+    'height': 0.45,
 }
 
 groups.append(
@@ -313,7 +313,7 @@ screens = [
                 widget.CheckUpdates(
                     distro='Arch_checkupdates',
                     display_format='{updates}',
-                    execute=f'{terminal} -e yay',
+                    execute=f'{terminal} -e paru',
                     colour_have_updates=orange
                 ),
                 widget.Clock(
@@ -370,6 +370,7 @@ floating_layout = layout.Floating(
                         {'wmclass': 'maketag'},  # gitk
                         {'wname': 'branchdialog'},  # gitk
                         {'wname': 'pinentry'},  # GPG key password entry
+                        {'wname': 'gcolor2'},  # GPG key password entry
                         {'wmclass': 'ssh-askpass'},  # ssh-askpass
                     ]
 )
