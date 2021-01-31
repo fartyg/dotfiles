@@ -370,7 +370,7 @@ floating_layout = layout.Floating(
                         {'wmclass': 'maketag'},  # gitk
                         {'wname': 'branchdialog'},  # gitk
                         {'wname': 'pinentry'},  # GPG key password entry
-                        {'wname': 'gcolor2'},  # GPG key password entry
+                        {'wname': 'gcolor2'},
                         {'wmclass': 'ssh-askpass'},  # ssh-askpass
                     ]
 )
