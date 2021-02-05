@@ -64,7 +64,6 @@ nnoremap S :%s//gc<Left><Left><Left>
 inoremap jj <Esc>
 noremap <Leader>s :update<CR>
 noremap <silent><Leader>l :noh<CR>
-nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
 
 nnoremap <silent><leader>v   :vsplit<CR>
 nnoremap <silent><leader>h   :split<CR>
@@ -156,32 +155,18 @@ function! g:BuffetSetCustomColors()
   hi! BuffetModBuffer guibg=NONE guifg=#707070
 endfunction
 
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
+au VimLeave * set guicursor=a:ver100
 
-augroup donut
-    autocmd!
-        autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
-        autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-        autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-        autocmd BufWritePre * :call TrimWhitespace()
-        au VimLeave * set guicursor=a:ver100
-
-        autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
-        autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
-
-        autocmd! User GoyoEnter nested call <SID>goyo_enter()
-                \   | Limelight
-        autocmd! User GoyoLeave nested call <SID>goyo_leave()
-                \   | Limelight!
-                \   | call CustomColors()
-augroup END
-
+autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
+autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+        \   | Limelight
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+        \   | Limelight!
+        \   | call CustomColors()
 augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=350}

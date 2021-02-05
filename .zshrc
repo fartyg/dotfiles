@@ -65,9 +65,9 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 VIM_MODE_VICMD_KEY='jj'
+MODE_CURSOR_VICMD="#e3e1e4 block"
 MODE_CURSOR_VIINS="#e5c463 blinking bar"
 MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
-MODE_CURSOR_VICMD="#e3e1e4 block"
 MODE_CURSOR_SEARCH="#ff00ff steady underline"
 MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
 MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ab9df2"
@@ -75,8 +75,8 @@ MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ab9df2"
 plugins=(
     git
     fzf
-    zsh-autosuggestions
     zsh-syntax-highlighting
+    zsh-autosuggestions
     zsh-vim-mode
 )
 source $ZSH/oh-my-zsh.sh
@@ -123,7 +123,7 @@ alias fm='vifm'
 alias båt='newsboat'
 alias rto='rtorrent'
 alias nmc='nmcli con'
-alias play='devour umpv'
+alias play='devour mpv'
 alias que='umpv'
 alias note='nvim ~/Documents/notes.md'
 alias open='handlr open'

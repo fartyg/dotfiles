@@ -28,8 +28,8 @@ white = 'e3e1e4'
 
 activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 0
-barheight = 27
+margin = 5
+barheight = 25
 borderwidth = 2
 
 terminal = 'alacritty'
@@ -201,7 +201,7 @@ widget_defaults = {
         'font': font,
         'fontsize': fontsize,
         'padding': 12,
-        'foreground': yellow,
+        'foreground': gray,
         'background': bgcolor,
         'highlight_method': 'text'
 }
@@ -216,7 +216,6 @@ screens = [
             [
                 widget.TextBox(
                     fmt='~',
-                    foreground=gray,
                     font=boldfont,
                     mouse_callbacks={
                         'Button1': lambda qtile:
@@ -247,7 +246,6 @@ screens = [
                 widget.Spacer(),
                 widget.Mpris2(
                     name='spotify',
-                    foreground=gray,
                     stop_pause_text='▶',
                     objname='org.mpris.MediaPlayer2.spotify',
                     display_metadata=['xesam:artist', 'xesam:title'],
@@ -264,23 +262,19 @@ screens = [
                 widget.Spacer(),
                 widget.CPU(
                     format='{load_percent}%',
-                    foreground=gray,
                     mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} perfmon'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn(f'{droptoggle} sound'),
                         'Button3': lambda qtile:
-                        qtile.cmd_spawn(terminal)
+                        qtile.cmd_spawn(f'{droptoggle} sound')
                     }
                 ),
                 widget.ThermalSensor(
-                        foreground=gray,
                         foreground_alert=red,
+                        foreground=gray,
                         threshold=85
                 ),
                 widget.Memory(
-                    foreground=gray,
                     format='{MemUsed} MB',
                     mouse_callbacks={
                         'Button1': lambda qtile:
@@ -294,7 +288,6 @@ screens = [
                     warn_color=red,
                     warn_space=10,
                     format='{uf} {m}B',
-                    foreground=gray,
                     mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(f'{droptoggle} filemanager'),
@@ -318,6 +311,7 @@ screens = [
                 ),
                 widget.Clock(
                     font=boldfont,
+                    foreground=yellow,
                     fontsize=fontsize+1,
                     format='%H:%M',
                     mouse_callbacks={
