@@ -32,13 +32,13 @@
 }
 
 /* Hide blue stripe on active tab */
-.tab-line[selected="true"] {
-  opacity: 0 !important;
-}
+/* .tab-line[selected="true"] { */
+/*   opacity: 0 !important; */
+/* } */
 
-.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-bottom-line {
-height: 0 !important;
-}
+/* .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-bottom-line { */
+/* height: 0 !important; */
+/* } */
 
 /* #browser-panel:-moz-lwtheme:-moz-window-inactive #toolbar-menubar, */
 /* #browser-panel:-moz-lwtheme:-moz-window-inactive #toolbar-menubar { */
@@ -90,48 +90,76 @@ height: 0 !important;
   border: none !important;
 }
 
-/*tab border*/
-.tab-content[selected="true"]
-{
-  background-color: #52596B !important;
-  color : #e3e1e4 !important;
+/* *tab border */
+/* .tab-content[selected="true"] */
+/* { */
+/*   background-color: #52596B !important; */
+/*   color : #e3e1e4 !important; */
+/* } */
+
+/* .tab-content[selected="true"]:-moz-window-inactive */
+/* { */
+/*   background-color: #505050 !important; */
+/* } */
+
+/* tab */
+/* { */
+/*   background-color: #2c2e34 !important; */
+/*   color : #e3e1e4 !important; */
+/* } */
+
+/* #tabbrowser-tabs */
+/* { */
+/*   background-color: #2c2e34 !important; */
+/* } */
+
+/* .tabbrowser-tab{ opacity: 0.75 } */
+/* .tabbrowser-tab:hover{ opacity: 0.85 } */
+/* .tabbrowser-tab[selected]{ opacity: 1 } */
+
+/* tabs { */
+/*   counter-reset: tab-counter; */
+/* } */
+
+/* tab:nth-child(1) .tab-label::before, */
+/* tab:nth-child(2) .tab-label::before, */
+/* tab:nth-child(3) .tab-label::before, */
+/* tab:nth-child(4) .tab-label::before, */
+/* tab:nth-child(5) .tab-label::before, */
+/* tab:nth-child(6) .tab-label::before, */
+/* tab:nth-child(7) .tab-label::before, */
+/* tab:nth-child(8) .tab-label::before { */
+/*   counter-increment: tab-counter; */
+/*   content: counter(tab-counter) ""; */
+/*   position: relative; */
+/*   top: -0.38rem; */
+/*   font-weight: bold; */
+/* } */
+#TabsToolbar { visibility: collapse ! important; }
+/* Sidebar min and max width removal */
+#sidebar {
+    max-width: none !important;
+    min-width: 0px !important;
+}
+/* Hide splitter, when using Tree Style Tab. */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
+    display: none !important;
+}
+/* Hide sidebar header, when using Tree Style Tab. */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+    visibility: collapse;
 }
 
-.tab-content[selected="true"]:-moz-window-inactive
-{
-  background-color: #505050 !important;
+/* Shrink sidebar until hovered, when using Tree Style Tab. */
+:root {
+    --thin-tab-width: 32px;
+    --wide-tab-width: 200px;
 }
-
-tab
-{
-  background-color: #2c2e34 !important;
-  color : #e3e1e4 !important;
+#sidebar-box:not([sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]) {
+    min-width: var(--wide-tab-width) !important;
+    max-width: none !important;
 }
-
-#tabbrowser-tabs
-{
-  background-color: #2c2e34 !important;
-}
-
-.tabbrowser-tab{ opacity: 0.75 }
-.tabbrowser-tab:hover{ opacity: 0.85 }
-.tabbrowser-tab[selected]{ opacity: 1 }
-
-tabs {
-  counter-reset: tab-counter;
-}
-
-tab:nth-child(1) .tab-label::before,
-tab:nth-child(2) .tab-label::before,
-tab:nth-child(3) .tab-label::before,
-tab:nth-child(4) .tab-label::before,
-tab:nth-child(5) .tab-label::before,
-tab:nth-child(6) .tab-label::before,
-tab:nth-child(7) .tab-label::before,
-tab:nth-child(8) .tab-label::before {
-  counter-increment: tab-counter;
-  content: counter(tab-counter) "";
-  position: relative;
-  top: -0.38rem;
-  font-weight: bold;
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] {
+    min-width: var(--thin-tab-width) !important;
+    max-width: var(--thin-tab-width) !important;
 }

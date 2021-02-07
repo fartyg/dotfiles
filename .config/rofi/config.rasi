@@ -1,20 +1,20 @@
 configuration {
-modi: "window,combi,drun";
-width: 35;
-lines: 20;
+modi: "drun,window";
+/* width: 27; */
+/* lines: 14; */
 /*	columns: 1;*/
-font: "SFMono Nerd Font Mono 12";
-display-run: "";
-display-drun: "";
-display-window: "";
-display-combi: "";
+/* font: "Inter Medium 15"; */
+/* display-run: ""; */
+/* display-window: "⬒"; */
+/* display-drun: 					"☆"; */
+/* display-combi: ""; */
 /*	bw: 1;*/
 /*	location: 0;*/
-padding: 0;
+/* padding: 35; */
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
-show-icons: false;
+/* show-icons: true; */
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
@@ -23,17 +23,17 @@ show-icons: false;
 /*	run-shell-command: "{terminal} -e {cmd}";*/
 /*	window-command: "wmctrl -i -R {window}";*/
 /*	window-match-fields: "all";*/
-/*	icon-theme: ;*/
+/* icon-theme: "elementary"; */
 /*	drun-match-fields: "name,generic,exec,categories";*/
 /*	drun-show-actions: false;*/
-/*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+/* drun-display-format: "{name}"; */
 /*	disable-history: false;*/
 /*	ignored-prefixes: "";*/
 /*	sort: false;*/
 /*	sorting-method: ;*/
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
-/*	sidebar-mode: false;*/
+/* sidebar-mode: true; */
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
@@ -50,14 +50,14 @@ show-icons: false;
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/
-/*	threads: 0;*/
+/* threads: 4; */
 /*	scrollbar-width: 8;*/
 /*	scroll-method: 0;*/
 /*	fake-background: "screenshot";*/
-/*	window-format: "{w}    {c}   {t}";*/
+window-format: "{t}";
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-/*	theme: ;*/
+/* theme: "~/.config/rofi/themes/new.rasi"; */
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/
@@ -155,4 +155,4 @@ kb-mode-next: "Shift+Right,Control+Tab,Control+l";
 kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
 kb-remove-char-back: "BackSpace";
 }
-@import "/home/aj/.config/rofi/themes/ndsa.rasi"
+@import "/home/aj/.config/rofi/themes/new.rasi"

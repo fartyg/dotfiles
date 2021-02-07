@@ -6,7 +6,7 @@ window:
     x: 8
     y: 8
 
-background_opacity: 1
+background_opacity: 0.90
 unfocused_hollow: true
 
 dpi:
@@ -20,9 +20,9 @@ cursor:
 
 font:
   normal:
-    family: SFMono Nerd Font Mono
-    style: Medium
-  size: 6
+    family: Inconsolata
+    style: Semibold
+  size: 7.5
 
 colors:
   primary:

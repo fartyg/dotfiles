@@ -11,7 +11,6 @@ mod = 'mod1'  # alt
 
 fontsize = 14
 font = 'Inter'
-semiboldfont = f'{font} Semibold'
 boldfont = f'{font} Bold'
 font += ' Medium'
 
@@ -28,7 +27,8 @@ white = 'e3e1e4'
 
 activeborder = '52596B'
 inactiveborder = bgcolor
-margin = 5
+
+margin = 0
 barheight = 25
 borderwidth = 2
 
@@ -215,8 +215,10 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt='~',
+                    fmt='rofi',
+                    padding=None,
                     font=boldfont,
+                    fontsize=fontsize-4,
                     mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(rofi + ['drun', '-location', '1']),
@@ -227,8 +229,8 @@ screens = [
                     }
                 ),
                 widget.GroupBox(
-                    font=semiboldfont,
-                    fontsize=fontsize+2,
+                    font=boldfont,
+                    fontsize=fontsize+1,
                     borderwidth=0,
                     disable_drag=True,
                     active=gray,
@@ -306,7 +308,6 @@ screens = [
                 widget.CheckUpdates(
                     distro='Arch_checkupdates',
                     display_format='{updates}',
-                    execute=f'{terminal} -e paru',
                     colour_have_updates=orange
                 ),
                 widget.Clock(

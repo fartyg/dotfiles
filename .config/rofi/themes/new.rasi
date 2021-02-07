@@ -1,0 +1,147 @@
+configuration {
+	font:							"Inter Medium 15";
+    show-icons:                     true;
+	/* icon-theme: 					"Papirus"; */
+    
+    display-drun: 					"";
+    drun-display-format:            "{name}";
+    
+    /* disable-history:                false; */
+    /* fullscreen:                     false; */
+	/* hide-scrollbar: 				true; */
+	/* sidebar-mode: 					false; */
+
+    /* lines:							15; */
+    /* columns:						1; */
+    /* bw: 							0; */
+    /* location: 						1; */
+    /* padding: 						0; */
+    /* fixed-num-lines: 				true; */
+    /* separator-style: 				"none"; */
+    /* fake-transparency: 				false; */
+    /* scroll-method: 					0; */
+    /* window-format: 					"[{w}] ··· {c} ···   {t}"; */
+    /* click-to-exit: 					true; */
+    /* show-match: 					false; */
+    /* combi-hide-mode-prefix: 		false; */
+    display-window: 				"";
+    display-windowcd: 				"";
+    display-run: 					"";
+    display-ssh: 					"";
+    display-drun: 					"";
+    display-combi: 					"";
+}
+
+@import "colors.rasi"
+
+window {
+    /* transparency:                   "real"; */
+    background-color:               @background;
+    text-color:                     @foreground;
+	/* border:							0.25% 0.125% 0.25% 0.125%; */
+	border-color:					@border;
+    /* border-radius:                  0% 0% 0% 0%; */
+    height:                         38%;
+    width:                          23%;
+    /* location:                       center; */
+    /* x-offset:                       0; */
+    /* y-offset:                       0; */
+}
+
+prompt {
+    enabled: 						true;
+	padding: 						0% 1% 0% 0.5%;
+	background-color: 				@background;
+	text-color: 					@shade5;
+}
+
+entry {
+    background-color:               @background;
+    text-color:                     @shade6;
+    placeholder-color:              @shade5;
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "Search";
+    padding:                        0% 0% 0% 0%;
+    blink:                          true;
+}
+
+inputbar {
+	children: 						[ prompt, entry ];
+    background-color:               @background;
+    text-color:                     @foreground;
+    expand:                         false;
+	border:							0% 0% 0.3% 0%;
+    border-radius:                  0% 0% 0% 0%;
+	border-color:					@border;
+    margin:                         0% 0% 0% 0%;
+    padding:                        1% 0% 1% 0%;
+    position:                       center;
+}
+
+listview {
+    background-color:               @background;
+    msargin:                          0 0 -1px 0;
+    cycle:                          false;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @background;
+	border:							2px;
+	border-color:					@border-alt;
+    children:                       [ inputbar, listview ];
+    spacing:                       	1%;
+    padding:                        1% 1% 1% 1%;
+}
+
+element {
+    background-color:               @background;
+    text-color:                     @foreground;
+    orientation:                    horizontal;
+    border-radius:                  0%;
+    padding:                        1% 0% 1% 0%;
+}
+
+element-icon {
+    size:                           32px;
+    border:                         0px;
+    margin:                         0% 0% 0% 0.25%;
+}
+
+element-text {
+    expand:                         true;
+    horizontal-align:               0.0;
+    vertical-align:                 0.5;
+    margin:                         0% 1% 0% 1%;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:               @urgent;
+    text-color:                     @foreground;
+    /* border-radius:                  1%; */
+}
+
+element normal.active,
+element alternate.active {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+}
+
+element selected {
+    background-color:               @selected-background;
+    text-color:                     @foreground;
+	/* border:							0% 0% 0.2% 0%; */
+    /* border-radius:                  0% 0% 0% 0%; */
+}
+
+element selected.urgent {
+    background-color:               @urgent;
+    text-color:                     @foreground;
+}
+
+element selected.active {
+    background-color:               @background-alt;
+    color:                          @foreground;
+}

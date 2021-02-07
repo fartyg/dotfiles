@@ -58,7 +58,7 @@ highlight Selected cterm=bold ctermfg=magenta ctermbg=default
 highlight CurrLine cterm=bold ctermfg=yellow ctermbg=239
 highlight TopLine cterm=none ctermfg=default ctermbg=default
 highlight TopLineSel cterm=bold ctermfg=cyan ctermbg=default
-highlight StatusLine cterm=bold ctermfg=default ctermbg=default
+highlight StatusLine cterm=bold ctermfg=yellow ctermbg=default
 highlight WildMenu cterm=underline ctermfg=default ctermbg=default
 highlight CmdLine cterm=none ctermfg=default ctermbg=default
 highlight ErrorMsg cterm=none ctermfg=red ctermbg=default
