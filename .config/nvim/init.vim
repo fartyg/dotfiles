@@ -9,15 +9,11 @@ let g:startify_custom_header = [
  \ '',
  \]
 
-if has('termguicolors')
 set termguicolors
-endif
-
 let mapleader = " " " space is the leader key
 let maplocalleader=" "
 filetype on
 
-" sets
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
 set nu rnu
@@ -52,6 +48,7 @@ set noshowmode
 set cmdheight=1
 set noruler
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
+set fillchars+=vert:\ 
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
 set splitbelow
 set splitright

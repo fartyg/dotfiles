@@ -28,9 +28,9 @@ white = 'e3e1e4'
 activeborder = '52596B'
 inactiveborder = bgcolor
 
-margin = 0
+margin = 8
 barheight = 25
-borderwidth = 2
+borderwidth = 3
 
 terminal = 'alacritty'
 browser = 'env MOZ_X11_EGL=1 firefox'
@@ -193,7 +193,7 @@ layout_theme = {
     'ratio': 0.64,
     'single_border_width': 0,
     'min_secondary_size': 220,
-    'change_ratio': 0.015
+    'change_ratio': 0.0075
 }
 layouts = [layout.MonadTall(**layout_theme)]
 
@@ -216,9 +216,8 @@ screens = [
             [
                 widget.TextBox(
                     fmt='rofi',
-                    padding=None,
                     font=boldfont,
-                    fontsize=fontsize-4,
+                    fontsize=fontsize-3,
                     mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(rofi + ['drun', '-location', '1']),

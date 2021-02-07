@@ -6,7 +6,7 @@ window:
     x: 8
     y: 8
 
-background_opacity: 0.90
+background_opacity: 0.95
 unfocused_hollow: true
 
 dpi:
@@ -20,9 +20,9 @@ cursor:
 
 font:
   normal:
-    family: Inconsolata
-    style: Semibold
-  size: 7.5
+    family: Meslo LG M DZ
+    style: Medium
+  size: 7
 
 colors:
   primary:
