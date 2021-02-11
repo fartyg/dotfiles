@@ -215,7 +215,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt='rofi',
+                    fmt=' rofi ',
                     font=boldfont,
                     fontsize=fontsize-3,
                     mouse_callbacks={

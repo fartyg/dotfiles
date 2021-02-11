@@ -152,6 +152,7 @@ function! g:BuffetSetCustomColors()
   hi! BuffetModBuffer guibg=NONE guifg=#707070
 endfunction
 
+
 au VimLeave * set guicursor=a:ver100
 
 autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
@@ -159,15 +160,18 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
 autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
+
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
         \   | Limelight
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
         \   | Limelight!
         \   | call CustomColors()
+
 augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=350}
 augroup END
+
 
 call plug#begin()
     Plug 'neovim/nvim-lspconfig'
