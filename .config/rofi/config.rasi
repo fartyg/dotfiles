@@ -6,7 +6,7 @@ modi: "drun,window";
 /* font: "Inter Medium 15"; */
 /* display-run: ""; */
 /* display-window: "⬒"; */
-/* display-drun: 					"☆"; */
+/* display-drun: "☆"; */
 /* display-combi: ""; */
 /*	bw: 1;*/
 /*	location: 0;*/

@@ -3,7 +3,7 @@
 
   /* hide navigation bar when it is not focused; use Ctrl+L to get focus */
   #main-window:not([customizing]) #navigator-toolbox:not(:focus-within) {
-    margin-top: -32px;
+    margin-top: -34px;
   }
   #navigator-toolbox {
     transition: 0.05s margin-top ease-out;

@@ -16,6 +16,7 @@ font += ' Medium'
 
 # sonokai
 bgcolor = '2c2e34'
+altbg = '373a45'
 gray = '828282'
 yellow = 'e5c463'
 red = 'f85e84'
@@ -25,12 +26,12 @@ blue = '7accd7'
 orange = 'ef9062'
 white = 'e3e1e4'
 
-activeborder = '52596B'
-inactiveborder = bgcolor
+activeborder = gray
+inactiveborder = '505050'
 
-margin = 8
-barheight = 25
-borderwidth = 3
+margin = 6
+barheight = 24
+borderwidth = 2
 
 terminal = 'alacritty'
 browser = 'env MOZ_X11_EGL=1 firefox'
@@ -215,8 +216,9 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt=' rofi ',
+                    fmt=' rofi',
                     font=boldfont,
+                    padding=8,
                     fontsize=fontsize-3,
                     mouse_callbacks={
                         'Button1': lambda qtile:
@@ -298,9 +300,8 @@ screens = [
                         qtile.cmd_spawn(f'{terminal} -e vifm')
                     }
                 ),
-                widget.PulseVolume(foreground=magenta),
+                widget.PulseVolume(),
                 widget.Backlight(
-                    foreground=blue,
                     backlight_name='intel_backlight',
                     change_command='brightnessctl s {0}'
                 ),

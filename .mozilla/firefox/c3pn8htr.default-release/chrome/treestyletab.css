@@ -1,0 +1,40 @@
+/* Hide .twisty and adjust margins so favicons have 7px on left. */
+.tab .twisty {
+    visibility: hidden;
+    margin-left: -14px;
+}
+
+/* Hide 'new tab' button. */
+.newtab-button {
+    display: none;
+}
+
+/* Dark Theme */
+
+:root, #background {
+  background: #2c2e34;
+}
+
+.tab {
+  height: 38px;
+  border: none;
+  background: #2c2e34;
+}
+
+tab-item.active {
+    background: #52596B !important;
+}
+
+.contextual-identity-marker {
+  width: 0 !important;
+}
+
+:root .tab .highlighter::before {
+  width: 0 !important;
+}
+
+/* Change visuals tab icons */
+
+.tab:not(.active) {
+	filter: grayscale(100%) !important;
+}

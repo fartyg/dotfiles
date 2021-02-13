@@ -6,7 +6,7 @@ window:
     x: 8
     y: 8
 
-background_opacity: 0.95
+background_opacity: 1
 unfocused_hollow: true
 
 dpi:
@@ -20,9 +20,9 @@ cursor:
 
 font:
   normal:
-    family: Meslo LG M DZ
+    family: IBM Plex Mono
     style: Medium
-  size: 6
+  size: 6.5
 
 colors:
   primary:
