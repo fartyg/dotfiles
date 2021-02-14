@@ -57,7 +57,6 @@ modi: "drun,window";
 window-format: "{t}";
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-/* theme: "~/.config/rofi/themes/new.rasi"; */
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/

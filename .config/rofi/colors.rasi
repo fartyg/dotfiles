@@ -12,11 +12,11 @@ shade8: #B0BEC5;
 }
 
 * {
-    border:               			@shade1;
-    border-alt:               		@shade2;
+    border:                         @shade1;
+    border-alt:                     @shade2;
     background:                     @shade3;
     background-alt:                 @shade3;
-    selected:               		@shade4;
+    selected:                       @shade4;
     foreground:                     #F8F8F2;
     urgent:                         #DA4453;
     selected-background:            #373a45;
