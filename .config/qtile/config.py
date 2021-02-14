@@ -27,7 +27,7 @@ orange = 'ef9062'
 white = 'e3e1e4'
 
 activeborder = gray
-inactiveborder = '505050'
+inactiveborder = '404040'
 
 margin = 6
 barheight = 24
@@ -78,17 +78,17 @@ keys = [
     Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute 0 toggle')),
     Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
-
     Key([], 'Print', lazy.spawn(
             ['scrot', '-e', f'mv $f {home}/Pictures/screenshots']
+        )),
+    Key([mod], 'apostrophe', lazy.spawn(
+            f'{terminal} -e zsh -c \'. ~/.zshrc; nvim\''
         )),
     Key([], 'Super_L', lazy.spawn(rofi + ['drun'])),
     Key([mod], 'Super_L', lazy.spawn(rofi + ['window'])),
     Key([mod], 'b', lazy.spawn(browser)),
     Key([mod, 'control'], 'b', lazy.spawn(f'{browser} --private-window')),
-    Key([mod], 'apostrophe', lazy.spawn(
-            f'{terminal} -e zsh -c \'. ~/.zshrc; nvim\''
-        )),
+    Key([mod], 'v', lazy.spawn(f'{terminal} -e amfora')),
     Key([mod], 'odiaeresis', lazy.spawn('thunderbird')),  # thunderbörd
     Key([mod], 'section', lazy.spawn(f'{home}/.scripts/spotify.sh')),
 ]
@@ -216,10 +216,10 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                    fmt=' rofi',
+                    fmt='rofi',
                     font=boldfont,
-                    padding=8,
-                    fontsize=fontsize-3,
+                    padding=9,
+                    fontsize=fontsize-2,
                     mouse_callbacks={
                         'Button1': lambda qtile:
                         qtile.cmd_spawn(rofi + ['drun', '-location', '1']),

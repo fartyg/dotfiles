@@ -5,7 +5,7 @@ macro p set browser "umpv %u </dev/null &>/dev/null &"; open-in-browser ; set br
 #general stuff
 show-read-articles yes
 show-read-feeds yes
-#auto-reload yes
+auto-reload yes
 cleanup-on-quit no
 max-items 100 
 feed-sort-order title-desc
