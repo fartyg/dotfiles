@@ -36,12 +36,24 @@ tab-item.active {
 /* Change visuals tab icons */
 
 .tab:not(.active) {
-	filter: grayscale(100%) !important;
+  filter: grayscale(100%) !important;
 }
 
 tabbar {
-
-counter-reset: vtabs atabs tabs; /* vtabs tracks visible tabs, atabs tracks active tabs, tabs tracks all tabs */ } tab-item:not(.collapsed):not(.discarded) { counter-increment: vtabs atabs tabs; } tab-item:not(.collapsed) { counter-increment: vtabs tabs; } tab-item:not(.discarded) { counter-increment: atabs tabs; } tab-item { counter-increment: tabs; }
+  counter-reset: vtabs atabs tabs;
+}
+tab-item:not(.collapsed):not(.discarded) { 
+  counter-increment: vtabs atabs tabs;
+}
+tab-item:not(.collapsed) {
+  counter-increment: vtabs tabs;
+}
+tab-item:not(.discarded) {
+  counter-increment: atabs tabs;
+}
+tab-item {
+  counter-increment: tabs;
+}
 
 tab-item::before {
   color: HighlightText;
