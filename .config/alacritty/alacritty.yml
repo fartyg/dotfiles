@@ -20,9 +20,9 @@ cursor:
 
 font:
   normal:
-    family: IBM Plex Mono
-    style: Medium
-  size: 6.5
+    family: SFMono Nerd Font Mono
+    style: Regular
+  size: 6
 
 colors:
   primary:

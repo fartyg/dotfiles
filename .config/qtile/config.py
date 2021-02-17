@@ -9,9 +9,9 @@ from libqtile.config import ScratchPad, DropDown
 home = os.path.expanduser('~')
 mod = 'mod1'  # alt
 
-fontsize = 14
+fontsize = 13
 font = 'Inter'
-boldfont = f'{font} Bold'
+boldfont = f'{font} Semibold'
 font += ' Medium'
 
 # sonokai
@@ -29,8 +29,8 @@ white = 'e3e1e4'
 activeborder = gray
 inactiveborder = '404040'
 
-margin = 6
-barheight = 24
+margin = 14
+barheight = 22
 borderwidth = 2
 
 terminal = 'alacritty'

@@ -1,13 +1,9 @@
 :root {
     scrollbar-width: none;
 }
-
-@-moz-document url("about:home"),url(about:preferences),url("about:blank"),url("about:newtab"),url("about:privatebrowsing"){
-
-body {
-    --newtab-search-icon: transparent !important;
+@-moz-document url("about:newtab") {
+ body { background-color: #2c2e34 !important;}
 }
-
 #newtab-search-text {
 	background-color: #2c2e34 !important;
 	font-size: 18px !important;
