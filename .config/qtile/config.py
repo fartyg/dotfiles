@@ -125,7 +125,7 @@ groups.append(
             ),
             DropDown(
                 'perfmon',
-                f'{terminal} -e htop',
+                f'{terminal} -e {home}/.scripts/envfix.sh htop',
                 **dropdown_conf
             ),
             DropDown(
@@ -150,7 +150,7 @@ groups.append(
             ),
             DropDown(
                 'calendar',
-                f'{terminal} -e calcurse',
+                f'{terminal} -e {home}/.scripts/envfix.sh calcurse',
                 **dropdown_conf
             )
         ]
@@ -221,11 +221,11 @@ screens = [
                     padding=9,
                     fontsize=fontsize-2,
                     mouse_callbacks={
-                        'Button1': lambda qtile:
+                        'Button1': lambda:
                         qtile.cmd_spawn(rofi + ['drun', '-location', '1']),
-                        'Button2': lambda qtile:
+                        'Button2': lambda:
                         qtile.cmd_spawn(f'{home}/.scripts/power.sh'),
-                        'Button3': lambda qtile:
+                        'Button3': lambda:
                         qtile.cmd_spawn(rofi + ['window', '-location', '1']),
                     }
                 ),
@@ -254,11 +254,11 @@ screens = [
                     display_metadata=['xesam:artist', 'xesam:title'],
                     scroll_chars=None,
                     mouse_callbacks={
-                        'Button1': lambda qtile:
+                        'Button1': lambda:
                         qtile.cmd_spawn(f'{player_cmd}PlayPause'),
-                        'Button2': lambda qtile:
+                        'Button2': lambda:
                         qtile.cmd_spawn(f'{player_cmd}Previous'),
-                        'Button3': lambda qtile:
+                        'Button3': lambda:
                         qtile.cmd_spawn(f'{player_cmd}Next')
                     }
                 ),
@@ -266,9 +266,9 @@ screens = [
                 widget.CPU(
                     format='{load_percent}%',
                     mouse_callbacks={
-                        'Button1': lambda qtile:
+                        'Button1': lambda:
                         qtile.cmd_spawn(f'{droptoggle} perfmon'),
-                        'Button3': lambda qtile:
+                        'Button3': lambda:
                         qtile.cmd_spawn(f'{droptoggle} sound')
                     }
                 ),
@@ -280,9 +280,9 @@ screens = [
                 widget.Memory(
                     format='{MemUsed} MB',
                     mouse_callbacks={
-                        'Button1': lambda qtile:
+                        'Button1': lambda:
                         qtile.cmd_spawn(f'{droptoggle} irc'),
-                        'Button3': lambda qtile:
+                        'Button3': lambda:
                         qtile.cmd_spawn(f'{droptoggle} term')
                     }
                 ),
@@ -292,11 +292,11 @@ screens = [
                     warn_space=10,
                     format='{uf} {m}B',
                     mouse_callbacks={
-                        'Button1': lambda qtile:
+                        'Button1': lambda:
                         qtile.cmd_spawn(f'{droptoggle} filemanager'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn(f'{terminal} -e ncdu'),
-                        'Button3': lambda qtile:
+                        'Button2': lambda:
+                        qtile.cmd_spawn(f'{home}/.scripts/envfix.sh ncdu'),
+                        'Button3': lambda:
                         qtile.cmd_spawn(f'{terminal} -e vifm')
                     }
                 ),
@@ -316,11 +316,11 @@ screens = [
                     fontsize=fontsize+1,
                     format='%H:%M',
                     mouse_callbacks={
-                        'Button1': lambda qtile:
+                        'Button1': lambda:
                         qtile.cmd_spawn(f'{droptoggle} rss'),
-                        'Button2': lambda qtile:
+                        'Button2': lambda:
                         qtile.cmd_hide_show_bar(),
-                        'Button3': lambda qtile:
+                        'Button3': lambda:
                         qtile.cmd_spawn(f'{droptoggle} calendar')
                     }
                 )

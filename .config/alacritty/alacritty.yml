@@ -174,9 +174,9 @@ key_bindings:
 # mouse_bindings:
         #  - { mouse: Middle, action: PasteSelection }
 
-mouse:
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
+# mouse:
+#   double_click: { threshold: 300 }
+#   triple_click: { threshold: 300 }
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"

@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 import sys
-from libqtile.command_client import InteractiveCommandClient
+from libqtile.command.client import InteractiveCommandClient
 c = InteractiveCommandClient()
 
 w = sys.argv[1]
