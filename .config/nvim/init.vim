@@ -223,7 +223,7 @@ let g:startify_bookmarks = [
         \ {'x': '~/Documents/notes.md'},
         \ {'z': '~/.zshrc'},
         \ {'a': '~/.config/alacritty/alacritty.yml'},
-        \ {'c': '~/.config/qtile/config.py'},
+        \ {'c': '~/.config/i3/config'},
         \ {'n': '~/.config/nvim/init.vim'},
         \ {'m': '~/.config/mpv/mpv.conf'},
         \ {'p': '~/.config/picom.conf'},

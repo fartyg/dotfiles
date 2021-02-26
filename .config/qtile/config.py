@@ -2,7 +2,7 @@ from libqtile import qtile
 import os
 import subprocess
 from libqtile import bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Screen
+from libqtile.config import Click, Drag, Group, Key, Screen, Match
 from libqtile.lazy import lazy
 from libqtile.config import ScratchPad, DropDown
 
@@ -29,7 +29,7 @@ white = 'e3e1e4'
 activeborder = gray
 inactiveborder = '404040'
 
-margin = 14
+margin = 10
 barheight = 22
 borderwidth = 2
 
@@ -66,7 +66,7 @@ keys = [
     Key([mod, 'control'], 'l', lazy.spawn(f'{home}/.scripts/lock.sh')),
     Key([mod, 'control'], 'g', lazy.hide_show_bar()),
     Key([mod, 'control'], 'space', lazy.screen.next_group()),
-    Key([mod, 'shift'], 'r', lazy.spawncmd()),
+    Key([mod, 'control'], 'Return', lazy.spawncmd()),
     Key([mod, 'shift'], 'f', lazy.window.toggle_floating()),
     Key([mod, 'shift'], 'b', lazy.window.bring_to_front()),
 
@@ -140,7 +140,7 @@ groups.append(
             ),
             DropDown(
                 'rss',
-                f'{terminal} -e newsboat',
+                f'{terminal} -e {home}/.scripts/envfix.sh newsboat',
                 **dropdown_conf
             ),
             DropDown(
@@ -191,7 +191,7 @@ layout_theme = {
     'border_focus': activeborder,
     'border_normal': inactiveborder,
     'margin': margin,
-    'ratio': 0.64,
+    'ratio': 0.62,
     'single_border_width': 0,
     'min_secondary_size': 220,
     'change_ratio': 0.0075
@@ -301,10 +301,6 @@ screens = [
                     }
                 ),
                 widget.PulseVolume(),
-                widget.Backlight(
-                    backlight_name='intel_backlight',
-                    change_command='brightnessctl s {0}'
-                ),
                 widget.CheckUpdates(
                     distro='Arch_checkupdates',
                     display_format='{updates}',
@@ -352,21 +348,9 @@ follow_mouse_focus = False
 floating_layout = layout.Floating(
                     **layout_theme,
                     float_rules=[
-                        {'wmclass': 'confirm'},
-                        {'wmclass': 'dialog'},
-                        {'wmclass': 'download'},
-                        {'wmclass': 'error'},
-                        {'wmclass': 'file_progress'},
-                        {'wmclass': 'notification'},
-                        {'wmclass': 'splash'},
-                        {'wmclass': 'toolbar'},
-                        {'wmclass': 'confirmreset'},  # gitk
-                        {'wmclass': 'makebranch'},  # gitk
-                        {'wmclass': 'maketag'},  # gitk
-                        {'wname': 'branchdialog'},  # gitk
-                        {'wname': 'pinentry'},  # GPG key password entry
-                        {'wname': 'gcolor2'},
-                        {'wmclass': 'ssh-askpass'},  # ssh-askpass
+                        Match(title="Picture-in-Picture"),
+                        Match(wm_class="gcolor2"),
+                        Match(wm_class="gimp")
                     ]
 )
 

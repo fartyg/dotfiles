@@ -3,10 +3,10 @@ window:
     columns: 120
     lines: 80
   padding:
-    x: 8
-    y: 8
+    x: 14
+    y: 14
 
-background_opacity: 1
+background_opacity: 0.97
 unfocused_hollow: true
 
 dpi:
@@ -22,7 +22,7 @@ font:
   normal:
     family: SFMono Nerd Font Mono
     style: Regular
-  size: 6
+  size: 11
 
 colors:
   primary:

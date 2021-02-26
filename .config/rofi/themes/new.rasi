@@ -132,8 +132,6 @@ element alternate.active {
 element selected {
     background-color:               @selected-background;
     text-color:                     @foreground;
-	/* border:							0% 0% 0.2% 0%; */
-    /* border-radius:                  0% 0% 0% 0%; */
 }
 
 element selected.urgent {
@@ -142,6 +140,6 @@ element selected.urgent {
 }
 
 element selected.active {
-    background-color:               @background-alt;
+    background-color:               @selected-background;
     color:                          @foreground;
 }

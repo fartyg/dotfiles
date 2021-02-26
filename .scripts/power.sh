@@ -16,7 +16,7 @@ chosen=$(echo -e "[Cancel]\nLogout\nLock\nShutdown\nReboot\nSuspend\nHibernate\n
 # https://www.freedesktop.org/software/systemd/man/systemd-sleep.conf.html#Description
 
 if [[ $chosen = "Logout" ]]; then
-	qtile-cmd -o cmd -f shutdown
+	i3-msg exit
 elif [[ $chosen = "Lock" ]]; then
 	/home/aj/.scripts/lock.sh
 elif [[ $chosen = "Shutdown" ]]; then
