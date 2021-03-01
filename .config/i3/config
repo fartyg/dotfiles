@@ -76,8 +76,7 @@ bindsym $mod+Control+Up move up
 bindsym $mod+Control+Right move right
 
 # split in horizontal orientation
-#bindsym $mod+| split h
-bindsym $mod+t split h
+bindsym $mod+| split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -128,6 +127,9 @@ bindsym $mod+Control+i move container to workspace $workspace6
 
 assign [class="Firefox"]    $workspace1
 for_window [class="Firefox"] focus
+
+assign [class="chromium"]    $workspace6
+for_window [class="chromium"] focus
 
 for_window [class="Spotify"] move container to workspace $workspace2
 
@@ -186,24 +188,26 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 bindsym $mod+Control+g bar mode toggle
 bindsym Pause exec playerctl play-pause
+bindsym $mod+Shift+h exec playerctl previous
+bindsym $mod+Shift+l exec playerctl next
 # bindsym Pause exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    position top
-    modifier none
-    strip_workspace_numbers yes
-    colors {
-        background $bg_color
-        separator #757575
-        #                  border             background         text
-        focused_workspace  $bg_color          $bg_color          $focus_text_color
-        inactive_workspace $bg_color $bg_color          $inactive_text_color
-        urgent_workspace   $bg_color   $urgent_bg_color   $text_color
-    }
-    status_command i3status
-    font xft:Inter Medium 11
-}
+# bar {
+#     position top
+#     modifier none
+#     strip_workspace_numbers yes
+#     colors {
+#         background $bg_color
+#         separator #757575
+#         #                  border             background         text
+#         focused_workspace  $bg_color          $bg_color          $focus_text_color
+#         inactive_workspace $bg_color $bg_color          $inactive_text_color
+#         urgent_workspace   $bg_color   $urgent_bg_color   $text_color
+#     }
+#     status_command i3status
+#     font xft:Inter Medium 11
+# }
 
 bindsym $mod+b exec --no-startup-id ~/.scripts/firefox_toggle.sh
 bindsym $mod+section exec --no-startup-id ~/.scripts/spotify_toggle.sh
@@ -214,6 +218,7 @@ exec --no-startup-id "nitrogen --restore"
 exec --no-startup-id "picom -b --experimental-backends"
 exec --no-startup-id "redshift"
 exec --no-startup-id "rofi -show drun"
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
@@ -223,6 +228,10 @@ bindsym XF86MonBrightnessUp exec brightnessctl s +100 # increase screen brightne
 bindsym XF86MonBrightnessDown exec brightnessctl s 100- # decrease screen brightness
 
 bindsym $mod+Shift+Pause exec systemctl poweroff -i
+bindsym $mod+apostrophe exec --no-startup-id "alacritty -e zsh -c \\". ~/.zshrc; nvim\\""
+bindsym $mod+odiaeresis exec --no-startup-id thunderbird
+bindsym $mod+adiaeresis exec --no-startup-id pavucontrol
+bindsym $mod+t exec --no-startup-id thunar
 
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
