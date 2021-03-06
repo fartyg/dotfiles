@@ -63,9 +63,9 @@ noremap <Leader>s :update<CR>
 noremap <silent><Leader>l :noh<CR>
 
 nnoremap <cr> <c-w>w
-nnoremap <silent><leader>v   :vsplit<CR>
-nnoremap <silent><leader>h   :split<CR>
-noremap <silent><Leader>q :bd<CR>
+nnoremap <silent><leader>v       :vsplit<CR>
+nnoremap <silent><leader>h       :split<CR>
+noremap <silent><Leader>q        :bd<CR>
 noremap <silent><Leader><Leader> :bn<CR>
 
 nmap <leader>c <Plug>Commentary
