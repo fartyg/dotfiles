@@ -88,6 +88,7 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 export LANG=sv_SE.UTF-8
+export LC_MESSAGES=C
 
 setopt HIST_IGNORE_ALL_DUPS
 HISTFILE=~/.zsh_history

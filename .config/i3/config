@@ -25,28 +25,29 @@ set $inactive_bg_color   #373a45
 set $focus_text_color    #e5c464
 set $text_color          #e3e1e4
 
-set $Locker i3lock && sleep 1
-set $mode_system (l)ock, lo(g)out, (s)uspend, (h)ibernate, (r)eboot, (S)hutdown
+# set $Locker ~/.scripts/lock.sh
+# bindsym $mod+Control+l $Locker
+# set $mode_system (l)ock, lo(g)out, (s)uspend, (h)ibernate, (r)eboot, (S)hutdown
 
-# window colors
-#                       border               background         text                 indicator
-client.focused          $focus_color         $focus_color          $text_color          $focus_color
-client.unfocused        $bg_color  $bg_color $inactive_text_color $bg_color
-client.focused_inactive $bg_color  $bg_color $inactive_text_color $bg_color
-client.urgent           $urgent_bg_color     $urgent_bg_color   $text_color          $bg_color
+#                       border           background       text                 indicator
+client.focused          $focus_color     $focus_color     $text_color          $focus_color
+client.unfocused        $bg_color        $bg_color        $inactive_text_color $bg_color
+client.focused_inactive $bg_color        $bg_color        $inactive_text_color $bg_color
+client.urgent           $urgent_bg_color $urgent_bg_color $text_color          $bg_color
 
 for_window [class="^.*"] border pixel 2
-# gaps inner 5
 smart_borders on
+
+# gaps inner 5
 # smart_gaps on
 
 floating_modifier $mod
 
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+q kill
-
 bindsym Super_L exec rofi -show
 bindsym $mod+space exec ~/.scripts/i3_cycle_focus
+bindsym $mod+Control+space workspace next
 bindsym $mod+Tab exec "wmfocus -f \\"Inter Medium\\":100 --textcolor \\"#e5c463\\""
 
 bindsym $mod+j focus down
@@ -70,14 +71,12 @@ bindsym $mod+Control+Down  move down
 bindsym $mod+Control+Up    move up
 bindsym $mod+Control+Right move right
 
-exec --no-startup-id ~/.scripts/i3_alternate_split.py
 # split in horizontal orientation
 bindsym $mod+less split h
 
 # split in vertical orientation
 bindsym $mod+v split v
 
-# enter fullscreen mode for the focused container
 bindsym $mod+g fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
@@ -90,12 +89,6 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 # bindsym $mod+tab focus mode_toggle
-
-# focus the parent container
-# bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+a workspace $workspace1
@@ -181,18 +174,17 @@ exec --no-startup-id "nitrogen --restore"
 exec --no-startup-id "picom -b --experimental-backends"
 exec --no-startup-id "redshift"
 exec --no-startup-id "rofi -show drun"
+exec --no-startup-id ~/.scripts/i3_alternate_split.py
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+bindsym Print exec scrot -e 'mv $f ~/Pictures/screenshots'
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
-bindsym Print exec scrot -e 'mv $f ~/Pictures/screenshots'
 bindsym XF86MonBrightnessUp exec brightnessctl s +100 # increase screen brightness
 bindsym XF86MonBrightnessDown exec brightnessctl s 100- # decrease screen brightness
 
-bindsym $mod+Shift+Pause exec systemctl poweroff -i
 bindsym $mod+apostrophe exec --no-startup-id "alacritty -e zsh -c \\". ~/.zshrc; nvim\\""
-
 bindsym $mod+odiaeresis exec --no-startup-id thunderbird
 bindsym $mod+adiaeresis exec --no-startup-id pavucontrol
 bindsym $mod+t exec --no-startup-id thunar

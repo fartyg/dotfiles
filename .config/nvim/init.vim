@@ -16,7 +16,7 @@ filetype on
 
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
-set nu rnu
+set nu rnu " relative line numbers
 set tabstop=4 " four spaces tab
 set expandtab " convert tabs to spaces
 set shiftwidth=4 " indents of four spaces
@@ -92,8 +92,8 @@ nnoremap <silent><leader>f   :Lines<CR>
 nnoremap <silent><leader>b   :Buffers<CR>
 nnoremap <silent><leader>r   :History<CR>
 
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gh     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
