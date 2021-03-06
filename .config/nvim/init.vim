@@ -150,7 +150,6 @@ function! g:BuffetSetCustomColors()
   hi! BuffetModBuffer guibg=NONE guifg=#707070
 endfunction
 
-
 au VimLeave * set guicursor=a:ver100
 
 autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>

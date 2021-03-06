@@ -6,7 +6,7 @@ window:
     x: 14
     y: 14
 
-background_opacity: 0.90
+background_opacity: 0.93
 unfocused_hollow: true
 
 dpi:
@@ -22,7 +22,7 @@ font:
   normal:
     family: SFMono Nerd Font Mono
     style: Regular
-  size: 11
+  size: 12
 
 colors:
   primary:

@@ -7,6 +7,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
+export PATH=/home/aj/bin:$PATH
 export PATH="${PATH}:${HOME}/.scripts"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -64,20 +65,20 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-VIM_MODE_VICMD_KEY='jj'
-MODE_CURSOR_VICMD="#e3e1e4 block"
-MODE_CURSOR_VIINS="#e5c463 blinking bar"
-MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
-MODE_CURSOR_SEARCH="#ff00ff steady underline"
-MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
-MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ab9df2"
+# VIM_MODE_VICMD_KEY='jj'
+# MODE_CURSOR_VICMD="#e3e1e4 block"
+# MODE_CURSOR_VIINS="#e5c463 blinking bar"
+# MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
+# MODE_CURSOR_SEARCH="#ff00ff steady underline"
+# MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+# MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ab9df2"
 
 plugins=(
     git
     fzf
     zsh-syntax-highlighting
     zsh-autosuggestions
-    zsh-vim-mode
+    # zsh-vim-mode
 )
 source $ZSH/oh-my-zsh.sh
 

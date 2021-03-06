@@ -19,64 +19,60 @@ set $workspace4 "4:f"
 set $workspace5 "5:u"
 set $workspace6 "6:i"
 
-set $focus_color         #373a45
+set $focus_color         #828282
 set $bg_color 	         #2c2e34
 set $inactive_bg_color   #373a45
 set $focus_text_color    #e5c464
 set $text_color          #e3e1e4
-set $inactive_text_color #828282
-set $urgent_bg_color     #f85e84
 
 set $Locker i3lock && sleep 1
 set $mode_system (l)ock, lo(g)out, (s)uspend, (h)ibernate, (r)eboot, (S)hutdown
 
 # window colors
-#                       border              background         text                 indicator
-client.focused          $bg_color           $bg_color          $text_color          #00ff00
-client.unfocused        $inactive_bg_color  $inactive_bg_color $inactive_text_color #00ff00
-client.focused_inactive $inactive_bg_color  $inactive_bg_color $inactive_text_color #00ff00
-client.urgent           $urgent_bg_color    $urgent_bg_color   $text_color          #00ff00
+#                       border               background         text                 indicator
+client.focused          $focus_color         $focus_color          $text_color          $focus_color
+client.unfocused        $bg_color  $bg_color $inactive_text_color $bg_color
+client.focused_inactive $bg_color  $bg_color $inactive_text_color $bg_color
+client.urgent           $urgent_bg_color     $urgent_bg_color   $text_color          $bg_color
 
-for_window [class="^.*"] border none
+for_window [class="^.*"] border pixel 2
+# gaps inner 5
+smart_borders on
+# smart_gaps on
 
-# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty
-
-# kill focused window
 bindsym $mod+q kill
 
 bindsym Super_L exec rofi -show
-bindsym $mod+space exec rofi -show window
+bindsym $mod+space exec ~/.scripts/i3_cycle_focus
+bindsym $mod+Tab exec "wmfocus -f \\"Inter Medium\\":100 --textcolor \\"#e5c463\\""
 
-# change focus
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+h focus left
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
 bindsym $mod+Right focus right
 
-# move focused window
 bindsym $mod+Control+j move down
 bindsym $mod+Control+k move up
 bindsym $mod+Control+l move right
 bindsym $mod+Control+h move left
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Control+Left move left
-bindsym $mod+Control+Down move down
-bindsym $mod+Control+Up move up
+bindsym $mod+Control+Left  move left
+bindsym $mod+Control+Down  move down
+bindsym $mod+Control+Up    move up
 bindsym $mod+Control+Right move right
 
+exec --no-startup-id ~/.scripts/i3_alternate_split.py
 # split in horizontal orientation
-bindsym $mod+| split h
+bindsym $mod+less split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -93,7 +89,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+tab focus mode_toggle
+# bindsym $mod+tab focus mode_toggle
 
 # focus the parent container
 # bindsym $mod+a focus parent
@@ -108,10 +104,6 @@ bindsym $mod+d workspace $workspace3
 bindsym $mod+f workspace $workspace4
 bindsym $mod+u workspace $workspace5
 bindsym $mod+i workspace $workspace6
-# bindsym $mod+7 workspace $workspace7
-# bindsym $mod+8 workspace $workspace8
-# bindsym $mod+9 workspace $workspace9
-# bindsym $mod+0 workspace $workspace0
 
 # move focused container to workspace
 bindsym $mod+Control+a move container to workspace $workspace1
@@ -120,16 +112,13 @@ bindsym $mod+Control+d move container to workspace $workspace3
 bindsym $mod+Control+f move container to workspace $workspace4
 bindsym $mod+Control+u move container to workspace $workspace5
 bindsym $mod+Control+i move container to workspace $workspace6
-# bindsym $mod+Control+7 move container to workspace $workspace7
-# bindsym $mod+Control+8 move container to workspace $workspace8
-# bindsym $mod+Control+9 move container to workspace $workspace9
-# bindsym $mod+Control+0 move container to workspace $workspace0
 
+# programs on the right workspace
 assign [class="Firefox"]    $workspace1
 for_window [class="Firefox"] focus
 
-assign [class="chromium"]    $workspace6
-for_window [class="chromium"] focus
+assign [class="Chromium"]    $workspace6
+for_window [class="Chromium"] focus
 
 for_window [class="Spotify"] move container to workspace $workspace2
 
@@ -145,30 +134,21 @@ for_window [class="Inkscape"] focus
 assign [class="Gimp"]       $workspace6
 for_window [class="Gimp"] focus
 
-# assign [class="Pavucontrol"]              $workspace9
 
 bindsym $mod+p sticky toggle
 bindsym $mod+Control+minus move scratchpad
 bindsym $mod+minus scratchpad show
+
 exec --no-startup-id alacritty --class alacritty_sp
 for_window [instance="alacritty_sp"] floating enable, move to scratchpad, move absolute position 0 0, resize set 100 ppt 50 ppt
 bindsym VoidSymbol [instance="alacritty_sp"] scratchpad show
-# reload the configuration file
+
 bindsym $mod+Control+r reload
-bindsym $mod+Control+q exec "/home/aj/.scripts/power.sh"
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-# bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
+bindsym $mod+Control+q exec "~/.scripts/power.sh"
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym l resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym j resize shrink height 10 px or 10 ppt
@@ -180,40 +160,23 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
+        # back to normal: Enter or Escape or unmapped caps lock
         bindsym Return mode "default"
+        bindsym VoidSymbol mode "default"
         bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
-bindsym $mod+Control+g bar mode toggle
+
+bindsym $mod+Control+g exec "polybar-msg cmd toggle"
 bindsym Pause exec playerctl play-pause
 bindsym $mod+Shift+h exec playerctl previous
 bindsym $mod+Shift+l exec playerctl next
-# bindsym Pause exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#     position top
-#     modifier none
-#     strip_workspace_numbers yes
-#     colors {
-#         background $bg_color
-#         separator #757575
-#         #                  border             background         text
-#         focused_workspace  $bg_color          $bg_color          $focus_text_color
-#         inactive_workspace $bg_color $bg_color          $inactive_text_color
-#         urgent_workspace   $bg_color   $urgent_bg_color   $text_color
-#     }
-#     status_command i3status
-#     font xft:Inter Medium 11
-# }
 
 bindsym $mod+b exec --no-startup-id ~/.scripts/firefox_toggle.sh
 bindsym $mod+section exec --no-startup-id ~/.scripts/spotify_toggle.sh
 bindsym $mod+m exec --no-startup-id ~/.scripts/mpv_toggle.sh
 
-# run pulseaudio
 exec --no-startup-id "nitrogen --restore"
 exec --no-startup-id "picom -b --experimental-backends"
 exec --no-startup-id "redshift"
@@ -229,6 +192,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 100- # decrease screen bright
 
 bindsym $mod+Shift+Pause exec systemctl poweroff -i
 bindsym $mod+apostrophe exec --no-startup-id "alacritty -e zsh -c \\". ~/.zshrc; nvim\\""
+
 bindsym $mod+odiaeresis exec --no-startup-id thunderbird
 bindsym $mod+adiaeresis exec --no-startup-id pavucontrol
 bindsym $mod+t exec --no-startup-id thunar
@@ -243,6 +207,7 @@ mode "$mode_system" {
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
+    bindsym VoidSymbol mode "default"
     bindsym Escape mode "default"
 }
 
