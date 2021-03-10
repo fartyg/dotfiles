@@ -13,14 +13,16 @@ set termguicolors
 let mapleader = " " " space is the leader key
 let maplocalleader=" "
 filetype on
+filetype plugin indent on
 
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
 set nu rnu " relative line numbers
-set tabstop=4 " four spaces tab
+" set tabstop=4 " four spaces tab
 set expandtab " convert tabs to spaces
 set shiftwidth=4 " indents of four spaces
 set softtabstop=4 " backspace will remove tabs instead of space
+set autoindent
 set nowrap " no wrap lines
 set mouse=a " enable use of the mouse
 set showmatch " highlight matching brackets
@@ -36,8 +38,7 @@ set scrolloff=6
 set nowritebackup
 set nohlsearch
 set hidden
-set autoindent
-set smartindent
+" set smartindent
 set cursorline "highlight current line
 set updatetime=50
 set clipboard+=unnamedplus
@@ -46,7 +47,7 @@ set laststatus=0
 set noshowcmd
 set noshowmode
 set cmdheight=1
-set noruler
+" set noruler
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set fillchars+=vert:\ 
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
@@ -185,7 +186,7 @@ call plug#begin()
     Plug 'Yggdroot/indentLine'
     Plug 'justinmk/vim-sneak'
     Plug 'mhinz/vim-startify'
-    Plug 'lervag/vimtex'
+    " Plug 'lervag/vimtex'
     Plug 'preservim/tagbar'
     Plug 'bagrat/vim-buffet'
 call plug#end()
@@ -196,12 +197,12 @@ let g:sneak#use_ic_scs = 1
 let g:sneak#s_next = 1
 
 " vimtex
-set nocompatible
-let &rtp = '~/.vim/bundle/vimtex,' . &rtp
-filetype plugin indent on
-set iskeyword+=:
-let g:tex_flavor = "latex"
-let g:vimtex_view_method = 'zathura'
+" set nocompatible
+" let &rtp = '~/.vim/bundle/vimtex,' . &rtp
+" filetype plugin indent on
+" set iskeyword+=:
+" let g:tex_flavor = "latex"
+" let g:vimtex_view_method = 'zathura'
 
 " other
 let g:python_highlight_all = 1

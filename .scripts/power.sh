@@ -18,7 +18,7 @@ chosen=$(echo -e "[Cancel]\nLogout\nLock\nShutdown\nReboot\nSuspend\nHibernate\n
 if [[ $chosen = "Logout" ]]; then
 	i3-msg exit
 elif [[ $chosen = "Lock" ]]; then
-	/home/aj/.scripts/lock.sh
+	~/.scripts/lock.sh
 elif [[ $chosen = "Shutdown" ]]; then
 	systemctl poweroff
 elif [[ $chosen = "Reboot" ]]; then

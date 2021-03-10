@@ -1,5 +1,5 @@
-:root {
-    scrollbar-width: none;
+* {
+    scrollbar-width: none !important;
 }
 @-moz-document url("about:newtab") {
  body { background-color: #2c2e34 !important;}

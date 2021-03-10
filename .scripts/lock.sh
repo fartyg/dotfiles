@@ -19,7 +19,7 @@ i3lock --nofork                 \
     --clock			            \
     --timecolor=e3e1e4	        \
     --timestr="%H:%M"	        \
-    --time-font="Noto Sans" 	\
+    --time-font="Inter Medium" 	\
     --timesize=80		        \
     --timepos="1425:900"		\
     --timecolor=e3e1e4	        \
@@ -27,7 +27,7 @@ i3lock --nofork                 \
     --datecolor=e3e1e4	        \
     --datestr="%A, %d %B"	    \
     --datecolor=e3e1e4	        \
-    --date-font="Noto Sans" 	\
+    --date-font="Inter Medium" 	\
     --datesize=60	            \
     --datepos="tx:1000:400"	    \
     \
@@ -36,5 +36,4 @@ i3lock --nofork                 \
     \
     --indicator                 \
     \
-    --image=/home/aj/Pictures/wp_rotation/lock.png
-
+    --image="/home/aj/Pictures/wp_rotation/lock.jpg"

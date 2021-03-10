@@ -1,4 +1,4 @@
-# vim: filetype=i3config 
+#vim: filetype=i3config 
 set $mod Mod1
 font pango:Inter Medium 10
 
@@ -9,7 +9,9 @@ set $workspace4 "4:f"
 set $workspace5 "5:u"
 set $workspace6 "6:i"
 
-set $focus_color         #828282
+workspace_auto_back_and_forth yes
+
+set $focus_color         #656565
 set $bg_color 	         #2c2e34
 set $inactive_bg_color   #373a45
 set $focus_text_color    #e5c464
@@ -25,7 +27,7 @@ client.unfocused        $bg_color        $bg_color        $inactive_text_color $
 client.focused_inactive $bg_color        $bg_color        $inactive_text_color $bg_color
 client.urgent           $urgent_bg_color $urgent_bg_color $text_color          $bg_color
 
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 smart_borders on
 
 # gaps inner 5
@@ -57,8 +59,8 @@ bindsym $mod+Control+h move left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Control+Left  move left
-bindsym $mod+Control+Down  move down
-bindsym $mod+Control+Up    move up
+bindsym $mod+Control+Down  move down 35px
+bindsym $mod+Control+Up    move up 35px
 bindsym $mod+Control+Right move right
 
 # split in horizontal orientation
@@ -107,6 +109,9 @@ for_window [class="Spotify"] move container to workspace $workspace2
 assign [class="Thunar"]     $workspace3
 for_window [class="Thunar"] focus
 
+assign [class="Nitrogen"]     $workspace3
+for_window [class="Nitrogen"] focus; floating enable; resize set 600 400; move window to position 50 50
+
 assign [class="Thunderbird"]   $workspace5
 for_window [class="Thunderbird"] focus
 
@@ -116,8 +121,15 @@ for_window [class="Inkscape"] focus
 assign [class="Gimp"]       $workspace6
 for_window [class="Gimp"] focus
 
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
 
 bindsym $mod+p sticky toggle
+bindsym $mod+y fullscreen disable; floating enable; resize set 600 400; sticky enable; move window to position 1000 54
 bindsym $mod+Control+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
@@ -151,7 +163,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bindsym $mod+Control+g exec "polybar-msg cmd toggle"
-bindsym Pause exec playerctl play-pause
+bindsym Pause exec "playerctl --player=spotify,%any play-pause"
 bindsym $mod+Shift+h exec playerctl previous
 bindsym $mod+Shift+l exec playerctl next
 
