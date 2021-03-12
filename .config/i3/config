@@ -27,7 +27,7 @@ client.unfocused        $bg_color        $bg_color        $inactive_text_color $
 client.focused_inactive $bg_color        $bg_color        $inactive_text_color $bg_color
 client.urgent           $urgent_bg_color $urgent_bg_color $text_color          $bg_color
 
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 smart_borders on
 
 # gaps inner 5
@@ -104,7 +104,7 @@ for_window [class="Firefox"] focus
 assign [class="Chromium"]    $workspace6
 for_window [class="Chromium"] focus
 
-for_window [class="Spotify"] move container to workspace $workspace2
+# for_window [class="Spotify"] move container to workspace $workspace2
 
 assign [class="Thunar"]     $workspace3
 for_window [class="Thunar"] focus
@@ -175,7 +175,8 @@ exec --no-startup-id "nitrogen --restore"
 exec --no-startup-id "picom -b --experimental-backends"
 exec --no-startup-id "redshift"
 exec --no-startup-id "rofi -show drun"
-exec --no-startup-id ~/.scripts/i3_alternate_split.py
+exec --no-startup-id ~/.scripts/i3_alternate_split
+exec --no-startup-id ~/.scripts/i3_switch_workspace_if_empty
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 bindsym Print exec scrot -e 'mv $f ~/Pictures/screenshots'
