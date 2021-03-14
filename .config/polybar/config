@@ -48,10 +48,11 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Inter,Inter Medium:style=Medium,Regular:pixelsize=10;3
+font-0 = Inter,Inter Medium:style=Medium,Regular:pixelsize=10;2
 font-1 = Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular
 font-2 = siji:pixelsize=10;1
-font-3 = Inter:style=Bold:pixelsize=12;2
+font-3 = Inter:style=Bold:pixelsize=13;3
+font-4 = Inter:style=Bold:pixelsize=12;2
 
 modules-left = i3
 modules-center = 
@@ -99,7 +100,7 @@ strip-wsnumbers = true
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 3
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
@@ -109,23 +110,23 @@ label-focused-background = ${colors.background-alt}
 label-focused-foreground = #e5c463
 label-focused-underline= ${colors.primary}
 label-focused-padding = 3
-label-focused-font = 4
+label-focused-font = 5
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %name%
 label-unfocused-padding = 3
-label-unfocused-font = 4
+label-unfocused-font = 5
 ; visible = Active workspace on unfocused monitor
 label-visible = %name%
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
-label-visible-font = 4
+label-visible-font = 5
 ; urgent = Workspace with urgency hint set
 label-urgent = %name%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 3
-label-urgent-font = 4
+label-urgent-font = 5
 ; Separator in between workspaces
 ; label-separator = |
 ; [module/spotify]

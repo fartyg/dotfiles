@@ -1,20 +1,15 @@
-/* Hide .twisty and adjust margins so favicons have 7px on left. */
 .tab .twisty {
     visibility: hidden;
 }
+
 tab-item tab-twisty {
   margin-right: -1em;
   opacity: 0 !important;
-  position: relative;
-  z-index: 10000;
 }
 
-/* Hide 'new tab' button. */
 .newtab-button {
     display: none;
 }
-
-/* Dark Theme */
 
 :root, #background {
   background: #2c2e34;
@@ -23,7 +18,6 @@ tab-item tab-twisty {
 .tab {
   height: 32px;
   border: none;
-  font: none;
   background: #2c2e34;  
 }
 
@@ -45,6 +39,7 @@ tab-item.active {
 .label-content {
   display: none;
 }
+
 .contextual-identity-marker {
   width: 0 !important;
 }
