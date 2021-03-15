@@ -3,28 +3,28 @@
 set $alt Mod1
 font pango:Inter Medium 10
 
-set $workspace1 "1:a"
-set $workspace2 "2:s"
-set $workspace3 "3:d"
-set $workspace4 "4:f"
-set $workspace5 "5:u"
-set $workspace6 "6:i"
+set $ws1 "1:a"
+set $ws2 "2:s"
+set $ws3 "3:d"
+set $ws4 "4:f"
+set $ws5 "5:u"
+set $ws6 "6:i"
 
-bindsym $alt+a workspace $workspace1
-bindsym $alt+s workspace $workspace2
-bindsym $alt+d workspace $workspace3
-bindsym $alt+f workspace $workspace4
-bindsym $alt+u workspace $workspace5
-bindsym $alt+i workspace $workspace6
+bindsym $alt+a workspace $ws1
+bindsym $alt+s workspace $ws2
+bindsym $alt+d workspace $ws3
+bindsym $alt+f workspace $ws4
+bindsym $alt+u workspace $ws5
+bindsym $alt+i workspace $ws6
 
 workspace_auto_back_and_forth yes
 
-bindsym $alt+Control+a move container to workspace $workspace1
-bindsym $alt+Control+s move container to workspace $workspace2
-bindsym $alt+Control+d move container to workspace $workspace3
-bindsym $alt+Control+f move container to workspace $workspace4
-bindsym $alt+Control+u move container to workspace $workspace5
-bindsym $alt+Control+i move container to workspace $workspace6
+bindsym $alt+Control+a move container to workspace $ws1
+bindsym $alt+Control+s move container to workspace $ws2
+bindsym $alt+Control+d move container to workspace $ws3
+bindsym $alt+Control+f move container to workspace $ws4
+bindsym $alt+Control+u move container to workspace $ws5
+bindsym $alt+Control+i move container to workspace $ws6
 
 set $focus_color         #3D9995
 set $unfocused_color     #52596B
@@ -35,8 +35,8 @@ set $text_color          #e3e1e4
 
 #                       border           background       text                 indicator
 client.focused          $focus_color     $focus_color     $text_color          $focus_color
-client.unfocused        $unfocused_color $bg_color        $inactive_text_color $unfocused_color
-client.focused_inactive $unfocused_color $bg_color        $inactive_text_color $unfocused_color
+client.unfocused        $unfocused_color $unfocused_color $inactive_text_color $unfocused_color
+client.focused_inactive $unfocused_color $unfocused_color $inactive_text_color $unfocused_color
 client.urgent           $urgent_bg_color $urgent_bg_color $text_color          $bg_color
 
 for_window [class="^.*"] border pixel 2
@@ -45,13 +45,13 @@ smart_borders on
 smart_gaps on
 gaps inner 8
 
-bindsym $alt+Return exec --no-startup-id alacritty
 bindsym $alt+q kill
-bindsym Super_L exec rofi -show
+bindsym $alt+Return exec --no-startup-id alacritty
+bindsym Super_L exec --no-startup-id rofi -show
 
-bindsym $alt+space exec ~/.scripts/i3_cycle_focus
+bindsym $alt+space exec --no-startup-id ~/.scripts/i3_cycle_focus
 bindsym $alt+Control+space workspace next
-bindsym $alt+Tab exec "wmfocus -f \\"Inter Medium\\":100 --textcolor \\"#e5c463\\""
+bindsym $alt+Tab exec --no-startup-id "wmfocus -f \\"Inter Medium\\":100 --textcolor \\"#e5c463\\""
 
 bindsym $alt+j focus down
 bindsym $alt+k focus up
@@ -79,9 +79,7 @@ bindsym $alt+v split v
 bindsym $alt+g fullscreen toggle
 
 floating_modifier $alt
-
-# toggle tiling / floating
-bindsym $alt+Shift+space floating toggle
+bindsym $alt+o floating toggle
 
 # change focus between tiling / floating windows
 # bindsym $alt+Control+tab focus mode_toggle
@@ -89,15 +87,14 @@ bindsym $alt+Shift+space floating toggle
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $alt+s layout stacking
 # bindsym $alt+w layout tabbed
-# bindsym $alt+e layout toggle split
+# bindsym $alt+e layout toggle
 
-assign [class="Firefox"]       $workspace1
-assign [class=Thunar|Nitrogen] $workspace3
-assign [class="Chromium"]      $workspace4
-assign [class="Thunderbird"]   $workspace5
-assign [class=Inkscape|Gimp]   $workspace6
+assign [class="Firefox"]       $ws1
+assign [class=Thunar|Nitrogen] $ws3
+assign [class="Chromium"]      $ws4
+assign [class="Thunderbird"]   $ws5
+assign [class=Inkscape|Gimp]   $ws6
 
-for_window [class="Spotify"] move container to workspace $workspace2
 for_window [class="Nitrogen"] focus; floating enable; resize set 600 400; move window to position 50 50
 
 for_window [class=Firefox|Chromium|Thunar|Thunderbird|Inkscape|Gimp] focus
@@ -105,6 +102,7 @@ for_window [window_role=pop-up|bubble|task_dialog|Preferences|dialog|menu] float
 
 bindsym $alt+p sticky toggle
 bindsym $alt+y fullscreen disable; floating enable; resize set 800 400; sticky enable; move window to position 1000 54
+
 bindsym $alt+Control+minus move scratchpad
 bindsym $alt+minus scratchpad show
 
@@ -114,7 +112,6 @@ bindsym VoidSymbol [instance="alacritty_sp"] scratchpad show
 
 bindsym $alt+Control+r reload
 bindsym $alt+Control+q exec "~/.scripts/power.sh"
-bindsym $alt+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 mode "resize" {
         bindsym l resize shrink width 5 px or 5 ppt

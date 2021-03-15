@@ -19,7 +19,6 @@ filetype plugin indent on
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
 set nu rnu " relative line numbers
-" set tabstop=4 " four spaces tab
 set expandtab " convert tabs to spaces
 set shiftwidth=4 " indents of four spaces
 set softtabstop=4 " backspace will remove tabs instead of space
@@ -39,7 +38,6 @@ set scrolloff=8
 set nowritebackup
 set nohlsearch
 set hidden
-" set smartindent
 set cursorline "highlight current line
 set updatetime=50
 set clipboard+=unnamedplus
@@ -48,13 +46,16 @@ set laststatus=0
 set noshowcmd
 set noshowmode
 set cmdheight=1
-" set noruler
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set fillchars+=vert:\ 
 set formatoptions-=c formatoptions-=r formatoptions-=o " new line is not commented out
 set splitbelow
 set splitright
-
+set guicursor+=i:ver100-iCursor
+set guicursor+=v:block-vCursor
+" set noruler
+" set smartindent
+" set tabstop=4 " four spaces tab
 
 " ctrl + backspace removes word
 inoremap <C-H> <C-W>
@@ -116,8 +117,6 @@ function! CustomColors()
     hi EndOfBuffer guibg=NONE
     hi NonText guibg=NONE
     hi StatusLine guibg=NONE
-    set guicursor+=i:ver100-iCursor
-    set guicursor+=v:block-vCursor
 endfunction
 
 " Goyo and Limelight
