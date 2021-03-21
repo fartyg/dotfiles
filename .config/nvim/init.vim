@@ -148,19 +148,21 @@ function! g:BuffetSetCustomColors()
   hi! BuffetModBuffer guibg=NONE guifg=#707070
 endfunction
 
-autocmd VimLeave * set guicursor=a:ver100
+augroup donut
+    autocmd VimLeave * set guicursor=a:ver100
 
-autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
-autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
+    autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
+    autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-        \   | Limelight
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-        \   | Limelight!
-        \   | call CustomColors()
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+            \   | Limelight
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+            \   | Limelight!
+            \   | call CustomColors()
+augroup END
 
 augroup highlight_yank
     autocmd!
@@ -179,7 +181,7 @@ call plug#begin()
     Plug 'tpope/vim-commentary'
     Plug 'svermeulen/vim-cutlass'
     Plug 'sainnhe/sonokai'
-    Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+    Plug 'Yggdroot/indentLine'
     Plug 'justinmk/vim-sneak'
     Plug 'mhinz/vim-startify'
     Plug 'romainl/flattened'
@@ -221,7 +223,7 @@ let g:startify_bookmarks = [
         \ {'z': '~/.zshrc'},
         \ {'a': '~/.config/alacritty/alacritty.yml'},
         \ {'c': '~/.config/i3/config'},
-        \ {'n': '~/.config/nvim/init.vim$'},
+        \ {'n': '~/.config/nvim/init.vim'},
         \ {'m': '~/.config/mpv/mpv.conf'},
         \ {'p': '~/.config/picom.conf'},
         \ {'r': '~/.config/rofi/config.rasi'},

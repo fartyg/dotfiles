@@ -162,6 +162,3 @@ bindsym $alt+adiaeresis exec --no-startup-id pavucontrol
 bindsym $alt+t exec --no-startup-id thunar
 
 bindsym XF86PowerOff exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the power button. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# # 'Source' Xresources at startup
-# exec --no-startup-id "xrdb -merge ~/.Xresources"
