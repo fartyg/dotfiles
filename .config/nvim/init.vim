@@ -55,11 +55,10 @@ set guicursor+=i:ver100-iCursor
 set guicursor+=v:block-vCursor
 " set noruler
 " set smartindent
-" set tabstop=4 " four spaces tab
+" set tabstop=4
 
 " ctrl + backspace removes word
 inoremap <C-H> <C-W>
-
 nnoremap S :%s//gc<Left><Left><Left>
 inoremap jj <Esc>
 noremap <Leader>s :update<CR>
@@ -109,9 +108,7 @@ function! CustomColors()
     hi vCursor guibg=#ab9df2
     hi CursorLine guibg=#373a45
     hi CursorLineNr guibg=NONE guifg=#e3e1e4 gui=bold
-    hi LineNr guibg=NONE guifg=#707070
     hi SignColumn guibg=NONE
-    hi Comment guifg=#707070
     hi Normal guibg=NONE
     hi Visual guibg=#543a59
     hi EndOfBuffer guibg=NONE
@@ -151,7 +148,7 @@ function! g:BuffetSetCustomColors()
   hi! BuffetModBuffer guibg=NONE guifg=#707070
 endfunction
 
-au VimLeave * set guicursor=a:ver100
+autocmd VimLeave * set guicursor=a:ver100
 
 autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
@@ -178,14 +175,14 @@ call plug#begin()
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
-    Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-commentary'
     Plug 'svermeulen/vim-cutlass'
     Plug 'sainnhe/sonokai'
-    Plug 'Yggdroot/indentLine'
+    Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
     Plug 'justinmk/vim-sneak'
     Plug 'mhinz/vim-startify'
+    Plug 'romainl/flattened'
     " Plug 'lervag/vimtex'
     Plug 'preservim/tagbar'
     Plug 'bagrat/vim-buffet'
@@ -212,11 +209,11 @@ let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:tagbar_autoclose = 1
 let g:indentLine_char = '⦙'
+let g:sonokai_better_performance = 1
 
 " startify
 let g:startify_lists = [
         \ { 'type': 'bookmarks', 'header': ['   Bookmarks']},
-        \ { 'type': 'files',     'header': ['   MRU']},
 \ ]
 
 let g:startify_bookmarks = [
@@ -224,19 +221,11 @@ let g:startify_bookmarks = [
         \ {'z': '~/.zshrc'},
         \ {'a': '~/.config/alacritty/alacritty.yml'},
         \ {'c': '~/.config/i3/config'},
-        \ {'n': '~/.config/nvim/init.vim'},
+        \ {'n': '~/.config/nvim/init.vim$'},
         \ {'m': '~/.config/mpv/mpv.conf'},
         \ {'p': '~/.config/picom.conf'},
         \ {'r': '~/.config/rofi/config.rasi'},
 \ ]
-
-let g:startify_skiplist = ['^/tmp']
-for d in g:startify_bookmarks
-    for v in values(d)
-        call add(g:startify_skiplist, v)
-    endfor
-endfor
-
 
 colorscheme sonokai
 call CustomColors()

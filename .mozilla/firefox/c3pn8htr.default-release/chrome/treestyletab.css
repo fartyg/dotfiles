@@ -44,6 +44,33 @@ tab-item.active {
   width: 0 !important;
 }
 
+tabbar {
+  counter-reset: vtabs atabs tabs;
+}
+tab-item:not(.collapsed):not(.discarded) { 
+  counter-increment: vtabs atabs tabs;
+}
+tab-item:not(.collapsed) {
+  counter-increment: vtabs tabs;
+}
+tab-item:not(.discarded) {
+  counter-increment: atabs tabs;
+}
+tab-item {
+  counter-increment: tabs;
+}
+
+tab-item:nth-child(-n+8):before {
+  font-size: 7px;
+  content: counter(vtabs);
+  pointer-events: none;
+  position: relative;
+  font-family: Terminus;
+  top: -0.50rem;
+  left: 0.07rem;
+  margin-left: -0.32rem;
+}
+
 :root .tab .highlighter::before {
   width: 0 !important;
 }
