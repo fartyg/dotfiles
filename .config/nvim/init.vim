@@ -15,7 +15,6 @@ let mapleader = " " " space is the leader key
 let maplocalleader=" "
 filetype on
 filetype plugin indent on
-
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
 set nu rnu " relative line numbers
@@ -53,11 +52,7 @@ set splitbelow
 set splitright
 set guicursor+=i:ver100-iCursor
 set guicursor+=v:block-vCursor
-" set noruler
-" set smartindent
-" set tabstop=4
 
-" ctrl + backspace removes word
 inoremap <C-H> <C-W>
 nnoremap S :%s//gc<Left><Left><Left>
 inoremap jj <Esc>
@@ -75,18 +70,14 @@ xmap <leader>c <Plug>Commentary
 omap <leader>c <Plug>Commentary
 nmap <leader>cc <Plug>CommentaryLine
 
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
-
 " move (vim-cutlass)
-noremap <Leader>m m
-nnoremap m d
-xnoremap m d
-nnoremap mm dd
-nnoremap M D
+" noremap <Leader>m m
+" nnoremap m d
+" xnoremap m d
+" nnoremap mm dd
+" nnoremap M D
 
-nmap <silent><F6> :TagbarToggle<CR>
-nnoremap <silent><Leader>g :Goyo<CR>
+" nnoremap <silent><Leader>g :Goyo<CR>
 
 noremap <silent><leader>git  :GFiles<CR>
 nnoremap <silent><leader>t   :Files<CR>
@@ -116,26 +107,26 @@ function! CustomColors()
     hi StatusLine guibg=NONE
 endfunction
 
-" Goyo and Limelight
-function! s:goyo_enter()
-  if has('gui_running')
-    set fullscreen
-    set background=light
-    set linespace=7
-  elseif exists('$TMUX')
-    silent !tmux set status off
-  endif
-endfunction
+" " Goyo and Limelight
+" function! s:goyo_enter()
+"   if has('gui_running')
+"     set fullscreen
+"     set background=light
+"     set linespace=7
+"   elseif exists('$TMUX')
+"     silent !tmux set status off
+"   endif
+" endfunction
 
-function! s:goyo_leave()
-  if has('gui_running')
-    set nofullscreen
-    set background=dark
-    set linespace=0
-  elseif exists('$TMUX')
-    silent !tmux set status on
-  endif
-endfunction
+" function! s:goyo_leave()
+"   if has('gui_running')
+"     set nofullscreen
+"     set background=dark
+"     set linespace=0
+"   elseif exists('$TMUX')
+"     silent !tmux set status on
+"   endif
+" endfunction
 
 function! g:BuffetSetCustomColors()
   hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
@@ -154,14 +145,14 @@ augroup donut
     autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-    autocmd InsertEnter * hi CursorLineNr guifg=#e5c463 | hi CursorLine guibg=#3c3c3c
+    autocmd InsertEnter * hi CursorLineNr guifg=#e5c07b | hi CursorLine guibg=#3c3c3c
     autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
 
-    autocmd! User GoyoEnter nested call <SID>goyo_enter()
-            \   | Limelight
-    autocmd! User GoyoLeave nested call <SID>goyo_leave()
-            \   | Limelight!
-            \   | call CustomColors()
+    " autocmd! User GoyoEnter nested call <SID>goyo_enter()
+    "         \   | Limelight
+    " autocmd! User GoyoLeave nested call <SID>goyo_leave()
+    "         \   | Limelight!
+    "         \   | call CustomColors()
 augroup END
 
 augroup highlight_yank
@@ -174,26 +165,19 @@ call plug#begin()
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'junegunn/fzf.vim'
-    Plug 'junegunn/goyo.vim'
-    Plug 'junegunn/limelight.vim'
-    Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
-    Plug 'tpope/vim-repeat'
+    " Plug 'junegunn/goyo.vim'
+    " Plug 'junegunn/limelight.vim'
+    " Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
+    " Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-commentary'
-    Plug 'svermeulen/vim-cutlass'
-    Plug 'sainnhe/sonokai'
+    " Plug 'svermeulen/vim-cutlass'
+    Plug 'joshdick/onedark.vim'
+    " Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
-    Plug 'justinmk/vim-sneak'
     Plug 'mhinz/vim-startify'
-    Plug 'romainl/flattened'
     " Plug 'lervag/vimtex'
-    Plug 'preservim/tagbar'
     Plug 'bagrat/vim-buffet'
 call plug#end()
-
-" sneak
-let g:sneak#label = 1
-let g:sneak#use_ic_scs = 1
-let g:sneak#s_next = 1
 
 " vimtex
 " set nocompatible
@@ -204,12 +188,10 @@ let g:sneak#s_next = 1
 " let g:vimtex_view_method = 'zathura'
 
 " other
-let g:python_highlight_all = 1
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:fzf_preview_window = []
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
-let g:tagbar_autoclose = 1
 let g:indentLine_char = '⦙'
 let g:sonokai_better_performance = 1
 
@@ -229,7 +211,7 @@ let g:startify_bookmarks = [
         \ {'r': '~/.config/rofi/config.rasi'},
 \ ]
 
-colorscheme sonokai
+colorscheme onedark
 call CustomColors()
 
 

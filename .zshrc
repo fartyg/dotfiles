@@ -9,11 +9,13 @@ export TERMINAL="alacritty"
 export BROWSER="firefox"
 export PATH=${HOME}/.bin:$PATH
 export PATH="${PATH}:${HOME}/.scripts"
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="simple"
+ZSH_THEME="minimal"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -130,9 +132,8 @@ alias que='umpv'
 alias note='nvim ~/Documents/notes.md'
 alias open='handlr open'
 alias ls='exa --group-directories-first --icons '
-alias lsr='exa --icons --group-directories-first --long -s=date -r'
+alias lsr='exa --icons --group-directories-first --long -s=date -r' # ls recent
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias sudo='sudo '
-alias nhl='hockey.py'
 alias jf='journalctl -f'
 alias yay='paru'

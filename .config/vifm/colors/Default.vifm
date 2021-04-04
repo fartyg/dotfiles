@@ -47,6 +47,7 @@
 highlight clear
 
 highlight Win cterm=none ctermfg=default ctermbg=default
+highlight {*.mkv} cterm=none ctermbg=none ctermfg=141
 highlight Directory cterm=bold ctermfg=blue ctermbg=default
 highlight Link cterm=bold ctermfg=cyan ctermbg=default
 highlight BrokenLink cterm=bold ctermfg=red ctermbg=default

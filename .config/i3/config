@@ -26,7 +26,7 @@ bindsym $alt+Control+f move container to workspace $ws4
 bindsym $alt+Control+u move container to workspace $ws5
 bindsym $alt+Control+i move container to workspace $ws6
 
-set $focus_color         #3D9995
+set $focus_color         #e5c07b
 set $unfocused_color     #52596B
 set $bg_color 	         #2c2e34
 set $inactive_bg_color   #373a45
@@ -39,11 +39,14 @@ client.unfocused        $unfocused_color $unfocused_color $inactive_text_color $
 client.focused_inactive $unfocused_color $unfocused_color $inactive_text_color $unfocused_color
 client.urgent           $urgent_bg_color $urgent_bg_color $text_color          $bg_color
 
-for_window [class="^.*"] border pixel 2
-smart_borders on
+for_window [class="^.*"] border pixel 1
 
-smart_gaps on
+smart_borders on
+# smart_gaps on
+
 gaps inner 8
+gaps outer 15
+bindsym $alt+n exec ~/.scripts/toggle_gaps toggle
 
 bindsym $alt+q kill
 bindsym $alt+Return exec --no-startup-id alacritty
@@ -79,7 +82,7 @@ bindsym $alt+v split v
 bindsym $alt+g fullscreen toggle
 
 floating_modifier $alt
-bindsym $alt+o floating toggle
+bindsym $alt+o floating toggle, resize set 1000 600, move to position 450 200
 
 # change focus between tiling / floating windows
 # bindsym $alt+Control+tab focus mode_toggle
@@ -101,13 +104,13 @@ for_window [class=Firefox|Chromium|Thunar|Thunderbird|Inkscape|Gimp] focus
 for_window [window_role=pop-up|bubble|task_dialog|Preferences|dialog|menu] floating enable
 
 bindsym $alt+p sticky toggle
-bindsym $alt+y fullscreen disable; floating enable; resize set 800 400; sticky enable; move window to position 1000 54
+bindsym $alt+y fullscreen disable; floating enable; resize set 800 400; sticky enable; move window to position 1120 628
 
 bindsym $alt+Control+minus move scratchpad
 bindsym $alt+minus scratchpad show
 
 exec --no-startup-id alacritty --class alacritty_sp
-for_window [instance="alacritty_sp"] floating enable, move to scratchpad, move absolute position 0 0, resize set 100 ppt 50 ppt
+for_window [instance="alacritty_sp"] floating enable, move to scratchpad, move absolute position 0 0, resize set 100 ppt 35 ppt
 bindsym VoidSymbol [instance="alacritty_sp"] scratchpad show
 
 bindsym $alt+Control+r reload
@@ -161,4 +164,4 @@ bindsym $alt+odiaeresis exec --no-startup-id thunderbird
 bindsym $alt+adiaeresis exec --no-startup-id pavucontrol
 bindsym $alt+t exec --no-startup-id thunar
 
-bindsym XF86PowerOff exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the power button. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym XF86PowerOff exec "i3-nagbar -f 'pango:Inter Medium 12' -t warning -m 'Do you really want to exit i3? This will end your X-session.' -B 'Yes, exit i3' 'i3-msg exit'"
