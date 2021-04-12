@@ -10,7 +10,7 @@ window:
 
   dynamic_padding: true
 
-background_opacity: 1
+background_opacity: 0.96
 unfocused_hollow: true
 
 dpi:
@@ -24,9 +24,9 @@ cursor:
 
 font:
   normal:
-    family: LiterationMono Nerd Font
+    family: SFMono Nerd Font Mono
     style: Medium
-  size: 11
+  size: 12
 
 # Base16 OneDark - alacritty color config
 # Lalit Magant (http://github.com/tilal6991)

@@ -296,6 +296,8 @@ filetype *.rar
        \ mpv %f > /dev/null 2>&1 &,
        \ {extract with aunpack}
        \ aunpack %f,
+       \ {play in vlc}
+       \ vlc %f > /dev/null 2>&1 &,
 fileviewer *.rar umpv %f > /dev/null 2>&1 &
 
 " IsoMount

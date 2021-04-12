@@ -10,11 +10,13 @@ let g:startify_custom_header = [
     \''
 \]
 
-set termguicolors
 let mapleader = " " " space is the leader key
 let maplocalleader=" "
+
 filetype on
 filetype plugin indent on
+
+set termguicolors
 set encoding=utf-8
 set wildmenu " autocompletion for commandmenu
 set nu rnu " relative line numbers
@@ -70,15 +72,6 @@ xmap <leader>c <Plug>Commentary
 omap <leader>c <Plug>Commentary
 nmap <leader>cc <Plug>CommentaryLine
 
-" move (vim-cutlass)
-" noremap <Leader>m m
-" nnoremap m d
-" xnoremap m d
-" nnoremap mm dd
-" nnoremap M D
-
-" nnoremap <silent><Leader>g :Goyo<CR>
-
 noremap <silent><leader>git  :GFiles<CR>
 nnoremap <silent><leader>t   :Files<CR>
 nnoremap <silent><leader>f   :Lines<CR>
@@ -107,27 +100,6 @@ function! CustomColors()
     hi StatusLine guibg=NONE
 endfunction
 
-" " Goyo and Limelight
-" function! s:goyo_enter()
-"   if has('gui_running')
-"     set fullscreen
-"     set background=light
-"     set linespace=7
-"   elseif exists('$TMUX')
-"     silent !tmux set status off
-"   endif
-" endfunction
-
-" function! s:goyo_leave()
-"   if has('gui_running')
-"     set nofullscreen
-"     set background=dark
-"     set linespace=0
-"   elseif exists('$TMUX')
-"     silent !tmux set status on
-"   endif
-" endfunction
-
 function! g:BuffetSetCustomColors()
   hi! BuffetCurrentBuffer guibg=NONE guifg=#e3e1e4 gui=bold
   hi! BuffetModCurrentBuffer guibg=NONE guifg=#e5c463
@@ -147,12 +119,6 @@ augroup donut
 
     autocmd InsertEnter * hi CursorLineNr guifg=#e5c07b | hi CursorLine guibg=#3c3c3c
     autocmd InsertLeave * hi CursorLineNr guifg=#e3e1e4 | hi CursorLine guibg=#373a45
-
-    " autocmd! User GoyoEnter nested call <SID>goyo_enter()
-    "         \   | Limelight
-    " autocmd! User GoyoLeave nested call <SID>goyo_leave()
-    "         \   | Limelight!
-    "         \   | call CustomColors()
 augroup END
 
 augroup highlight_yank
@@ -165,27 +131,13 @@ call plug#begin()
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'junegunn/fzf.vim'
-    " Plug 'junegunn/goyo.vim'
-    " Plug 'junegunn/limelight.vim'
-    " Plug 'tpope/vim-fugitive' | Plug 'junegunn/gv.vim'
-    " Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-commentary'
-    " Plug 'svermeulen/vim-cutlass'
     Plug 'joshdick/onedark.vim'
     " Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
     Plug 'mhinz/vim-startify'
-    " Plug 'lervag/vimtex'
     Plug 'bagrat/vim-buffet'
 call plug#end()
-
-" vimtex
-" set nocompatible
-" let &rtp = '~/.vim/bundle/vimtex,' . &rtp
-" filetype plugin indent on
-" set iskeyword+=:
-" let g:tex_flavor = "latex"
-" let g:vimtex_view_method = 'zathura'
 
 " other
 let g:limelight_conceal_guifg = 'DarkGray'

@@ -26,8 +26,8 @@ bindsym $alt+Control+f move container to workspace $ws4
 bindsym $alt+Control+u move container to workspace $ws5
 bindsym $alt+Control+i move container to workspace $ws6
 
-set $focus_color         #e5c07b
-set $unfocused_color     #52596B
+set $focus_color         #808080
+set $unfocused_color     #282c34
 set $bg_color 	         #2c2e34
 set $inactive_bg_color   #373a45
 set $focus_text_color    #e5c464
@@ -39,7 +39,7 @@ client.unfocused        $unfocused_color $unfocused_color $inactive_text_color $
 client.focused_inactive $unfocused_color $unfocused_color $inactive_text_color $unfocused_color
 client.urgent           $urgent_bg_color $urgent_bg_color $text_color          $bg_color
 
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2
 
 smart_borders on
 # smart_gaps on

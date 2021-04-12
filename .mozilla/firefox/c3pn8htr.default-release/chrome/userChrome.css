@@ -39,6 +39,7 @@
 
 #urlbar-input-container{
     border: none !important;
+    font-size: 22px !important;
     background-color: #282c34 !important;
  }
 #urlbar-background {
