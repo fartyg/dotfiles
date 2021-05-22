@@ -158,28 +158,8 @@ let g:startify_bookmarks = [
         \ {'b': '~/.config/polybar/config'},
 \ ]
 
-let g:nord_cursor_line_number_background = 1
-
-" Uniform status line
-let g:nord_uniform_status_lines = 1
-
-" Vsplit line
-let g:nord_bold_vertical_split_line = 1
-
-"Uniform backgroung highlighting
-let g:nord_uniform_diff_background = 1
-
-" Include bold style for specified syntax
-let g:nord_bold = 0
-
-" Include italic style for specified syntax
-let g:nord_italic = 0
-
-" Include underline style for specified syntax
-let g:nord_underline = 0
 colorscheme sonokai
 call CustomColors()
-
 
 " nvim 0.5
 lua <<EOF
