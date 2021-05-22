@@ -12,12 +12,12 @@
 }
 
 #nav-bar-customization-target {
-	background-color: #282c34 !important;
+	background-color: #2c2e34 !important;
 }
 
 #navigator-toolbox { --tabs-border-color: transparent !important; }
 .toolbarbutton-1 {
-    background-color: #282c34 !important;
+    background-color: #2c2e34 !important;
 }
 
 #nav-bar {
@@ -40,10 +40,10 @@
 #urlbar-input-container{
     border: none !important;
     font-size: 22px !important;
-    background-color: #282c34 !important;
+    background-color: #2c2e34 !important;
  }
 #urlbar-background {
-    background: #282c34 !important;
+    background: #2c2e34 !important;
 }
 
 #urlbar[breakout][breakout-extend] > #urlbar-input-container {

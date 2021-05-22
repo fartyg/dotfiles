@@ -26,8 +26,8 @@ bindsym $alt+Control+f move container to workspace $ws4
 bindsym $alt+Control+u move container to workspace $ws5
 bindsym $alt+Control+i move container to workspace $ws6
 
-set $focus_color         #808080
-set $unfocused_color     #282c34
+set $focus_color         #3D9995
+set $unfocused_color     #52596B
 set $bg_color 	         #2c2e34
 set $inactive_bg_color   #373a45
 set $focus_text_color    #e5c464
@@ -93,14 +93,14 @@ bindsym $alt+o floating toggle, resize set 1000 600, move to position 450 200
 # bindsym $alt+e layout toggle
 
 assign [class="Firefox"]       $ws1
-assign [class=Thunar|Nitrogen] $ws3
-assign [class="Chromium"]      $ws4
+assign [class=Thunar|Nitrogen|vlc|Chromium] $ws3
+assign [class="Steam"]         $ws4
 assign [class="Thunderbird"]   $ws5
 assign [class=Inkscape|Gimp]   $ws6
 
 for_window [class="Nitrogen"] focus; floating enable; resize set 600 400; move window to position 50 50
 
-for_window [class=Firefox|Chromium|Thunar|Thunderbird|Inkscape|Gimp] focus
+for_window [class=Firefox|Chromium|Thunar|Thunderbird|Inkscape|Gimp|vlc] focus
 for_window [window_role=pop-up|bubble|task_dialog|Preferences|dialog|menu] floating enable
 
 bindsym $alt+p sticky toggle
@@ -137,6 +137,7 @@ bindsym $alt+Control+g exec "polybar-msg cmd toggle"
 bindsym Pause exec "playerctl --player=spotify,%any play-pause"
 bindsym $alt+Shift+h exec playerctl previous
 bindsym $alt+Shift+l exec playerctl next
+bindsym $alt+period exec "playerctl --player=vlc,%any position 94+"
 
 bindsym $alt+b exec --no-startup-id ~/.scripts/firefox_toggle.sh
 bindsym $alt+section exec --no-startup-id ~/.scripts/spotify_toggle.sh
@@ -162,6 +163,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 100-
 bindsym $alt+apostrophe exec --no-startup-id "alacritty -e zsh -c \\". ~/.zshrc; nvim\\""
 bindsym $alt+odiaeresis exec --no-startup-id thunderbird
 bindsym $alt+adiaeresis exec --no-startup-id pavucontrol
+bindsym $alt+aring exec --no-startup-id "alacritty -e zsh -c \\". ~/.zshrc; newsboat\\""
 bindsym $alt+t exec --no-startup-id thunar
 
 bindsym XF86PowerOff exec "i3-nagbar -f 'pango:Inter Medium 12' -t warning -m 'Do you really want to exit i3? This will end your X-session.' -B 'Yes, exit i3' 'i3-msg exit'"

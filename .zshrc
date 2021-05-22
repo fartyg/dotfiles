@@ -122,7 +122,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
 
 alias vim='nvim'
-alias fm='vifm'
+alias fm='vifmrun'
 alias båt='newsboat'
 alias rto='rtorrent'
 alias nmc='nmcli con'

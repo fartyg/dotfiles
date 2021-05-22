@@ -28,7 +28,6 @@ set nowrap " no wrap lines
 set mouse=a " enable use of the mouse
 set showmatch " highlight matching brackets
 set incsearch " search as characters are entered
-set cpoptions+=x " stay at seach item when <esc>
 set hlsearch " highlight all text matching current search pattern
 set ignorecase " case insensitive search
 set smartcase " case sensitive when uppercase
@@ -37,15 +36,13 @@ set noswapfile " swap files won't be created
 set nobackup " no backup
 set scrolloff=8
 set nowritebackup
-set nohlsearch
 set hidden
 set cursorline "highlight current line
 set updatetime=50
 set clipboard+=unnamedplus
 set conceallevel=0
 set laststatus=0
-set noshowcmd
-set noshowmode
+" set noshowmode
 set cmdheight=1
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:> " show whitespace chars
 set fillchars+=vert:\ 
@@ -132,20 +129,17 @@ call plug#begin()
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'junegunn/fzf.vim'
     Plug 'tpope/vim-commentary'
-    Plug 'joshdick/onedark.vim'
-    " Plug 'sainnhe/sonokai'
+    Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
     Plug 'mhinz/vim-startify'
     Plug 'bagrat/vim-buffet'
 call plug#end()
 
 " other
-let g:limelight_conceal_guifg = 'DarkGray'
 let g:fzf_preview_window = []
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:indentLine_char = '⦙'
-let g:sonokai_better_performance = 1
 
 " startify
 let g:startify_lists = [
@@ -161,9 +155,29 @@ let g:startify_bookmarks = [
         \ {'m': '~/.config/mpv/mpv.conf'},
         \ {'p': '~/.config/picom.conf'},
         \ {'r': '~/.config/rofi/config.rasi'},
+        \ {'b': '~/.config/polybar/config'},
 \ ]
 
-colorscheme onedark
+let g:nord_cursor_line_number_background = 1
+
+" Uniform status line
+let g:nord_uniform_status_lines = 1
+
+" Vsplit line
+let g:nord_bold_vertical_split_line = 1
+
+"Uniform backgroung highlighting
+let g:nord_uniform_diff_background = 1
+
+" Include bold style for specified syntax
+let g:nord_bold = 0
+
+" Include italic style for specified syntax
+let g:nord_italic = 0
+
+" Include underline style for specified syntax
+let g:nord_underline = 0
+colorscheme sonokai
 call CustomColors()
 
 
