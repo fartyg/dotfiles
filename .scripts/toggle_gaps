@@ -3,8 +3,8 @@
 # toggle_gaps [on|off|toggle]
  
 INNER=8
-OUTER=15
- 
+OUTER=8
+
 mode=$1
  
 if [[ -z "$mode" || "$mode" == "toggle" ]]; then

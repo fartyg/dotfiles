@@ -10,7 +10,7 @@ window:
 
   dynamic_padding: true
 
-background_opacity: 0.96
+background_opacity: 0.92
 unfocused_hollow: true
 
 dpi:
@@ -24,7 +24,7 @@ cursor:
 
 font:
   normal:
-    family: SFMono Nerd Font Mono
+    family: LiterationMono Nerd Font
     style: Medium
   size: 12
 

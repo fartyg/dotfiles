@@ -3,7 +3,12 @@
 }
 
 @-moz-document url("about:newtab") {
-    body { background-color: #2c2e34 !important;}
+    body { background-color: #2c2e34 !important; }
+    .personalize-button { display: none !important; }
+}
+
+.personalize-button {
+    display: none !important;
 }
 
 #newtab-search-text {

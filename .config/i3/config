@@ -45,8 +45,8 @@ smart_borders on
 # smart_gaps on
 
 gaps inner 8
-gaps outer 15
-bindsym $alt+n exec ~/.scripts/toggle_gaps toggle
+gaps outer 8
+bindsym $alt+n exec --no-startup-id ~/.scripts/toggle_gaps toggle
 
 bindsym $alt+q kill
 bindsym $alt+Return exec --no-startup-id alacritty
@@ -88,9 +88,9 @@ bindsym $alt+o floating toggle, resize set 1000 600, move to position 450 200
 # bindsym $alt+Control+tab focus mode_toggle
 
 # change container layout (stacked, tabbed, toggle split)
-# bindsym $alt+s layout stacking
-# bindsym $alt+w layout tabbed
-# bindsym $alt+e layout toggle
+bindsym $alt+x layout stacking
+#bindsym $alt+w layout tabbed
+bindsym $alt+e layout toggle
 
 assign [class="Firefox"]       $ws1
 assign [class=Thunar|Nitrogen|vlc|Chromium] $ws3

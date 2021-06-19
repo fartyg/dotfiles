@@ -51,6 +51,8 @@ set splitbelow
 set splitright
 set guicursor+=i:ver100-iCursor
 set guicursor+=v:block-vCursor
+set undodir=~/.vim/undodir
+set undofile
 
 inoremap <C-H> <C-W>
 nnoremap S :%s//gc<Left><Left><Left>
@@ -129,6 +131,7 @@ call plug#begin()
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'junegunn/fzf.vim'
     Plug 'tpope/vim-commentary'
+    Plug 'jnurmine/Zenburn'
     Plug 'sainnhe/sonokai'
     Plug 'Yggdroot/indentLine'
     Plug 'mhinz/vim-startify'
@@ -140,6 +143,7 @@ let g:fzf_preview_window = []
 let g:buffet_tab_icon = ''
 let g:buffet_separator = ''
 let g:indentLine_char = '⦙'
+let g:sonokai_better_performance = 1
 
 " startify
 let g:startify_lists = [
@@ -156,6 +160,7 @@ let g:startify_bookmarks = [
         \ {'p': '~/.config/picom.conf'},
         \ {'r': '~/.config/rofi/config.rasi'},
         \ {'b': '~/.config/polybar/config'},
+        \ {'u': '~/Documents/useful_cmds.md'},
 \ ]
 
 colorscheme sonokai
